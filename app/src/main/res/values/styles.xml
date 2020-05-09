@@ -1,0 +1,121 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="QMUI.Compat">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="main_tab_d_view">
+        <item name="android:background">@color/d_rule</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+    <style name="main_tab_v_view">
+        <item name="android:background">@color/d_rule</item>
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="login_edit">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:textColor">@color/addcredit_value</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="login_password_edit" parent="login_edit">
+        <item name="android:background">@null</item>
+        <item name="android:password">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:digits">1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+        </item>
+    </style>
+
+    <style name="home_tool_layout">
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="home_tool_text">
+        <item name="android:textColor">@color/color_gray_tool</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:layout_marginLeft">3dp</item>
+    </style>
+
+    <style name="home_tool_im">
+        <item name="android:layout_width">35dp</item>
+        <item name="android:layout_height">35dp</item>
+    </style>
+
+    <style name="home_tool_text_sum">
+        <item name="android:textColor">@color/red_primary_color</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="home_rw_fa_layout">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+    <style name="home_rw_ch_layout">
+
+    </style>
+
+    <style name="home_rw_tit">
+        <item name="android:textColor">@color/demo_title</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="home_rw_funt">
+        <item name="android:textColor">@color/color_gray_light_open</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:layout_marginTop">3dp</item>
+    </style>
+
+    <style name="ll_file_base">
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingRight">3dp</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="ll_base">
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingRight">3dp</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="edit_ll">
+        <item name="android:weightSum">1</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
+
+    <style name="edit_title">
+        <item name="android:layout_weight">0.3</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">0dp</item>
+    </style>
+    <style name="base_edit_value">
+        <item name="android:layout_weight">0.6</item>
+        <item name="android:layout_height">match_parent</item>
+        <!--<item name="android:gravity">center</item>-->
+        <item name="android:layout_width">0dp</item>
+    </style>
+    <style name="edit_view_edit" parent="base_edit_value">
+        <item name="android:background">@drawable/edit_style</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+</resources>
