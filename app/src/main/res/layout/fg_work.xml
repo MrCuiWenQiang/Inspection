@@ -16,10 +16,19 @@
             android:layout_height="wrap_content"
             android:text="上班打卡" />
 
-        <RelativeLayout
-            android:layout_gravity="center"
+        <TextView
+            android:id="@+id/tv_up_hint"
+            style="@style/dd_hint"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="xxxx时间打卡成功" />
+
+        <RelativeLayout
+            android:id="@+id/ll_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:background="@drawable/back_round_dd"
             android:gravity="center">
 
@@ -37,10 +46,19 @@
             android:layout_height="wrap_content"
             android:text="下班打卡" />
 
-        <RelativeLayout
-            android:layout_gravity="center"
+        <TextView
+            android:id="@+id/tv_down_hint"
+            style="@style/dd_hint"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="xxxx时间打卡成功" />
+
+        <RelativeLayout
+            android:id="@+id/ll_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:background="@drawable/back_round_dd"
             android:gravity="center">
 

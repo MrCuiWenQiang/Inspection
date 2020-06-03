@@ -62,7 +62,9 @@ public class LoginPresenter extends BaseMVPPresenter<LoginContract.View> impleme
                 LoginBean resultEntity = JsonUtil.convertJsonToObject(data, LoginBean.class);
                 if (getView() != null) {
                     if (resultEntity != null) {
-                        loginModel.saveUser(dataForm.getUserid(), dataForm.getPassword(), resultEntity);
+                        if (checked){
+                            loginModel.saveUser(dataForm.getUserid(), dataForm.getPassword(), resultEntity);
+                        }
                         MyApplication.loginUser = resultEntity;
                         getView().login_Success();
                     }else {

@@ -10,7 +10,7 @@ public class WorkFragmentContract {
 
         void AddCLOCKIN_fail(String message);
 
-        void AddCLOCKIN_success(int status, String v);
+        void AddCLOCKIN_success(String OUTTIME,int status, String v);
     }
 
     public interface Presenter {

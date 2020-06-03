@@ -3,6 +3,7 @@ package com.zt.inspection.view;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.qmuiteam.qmui.widget.QMUITabSegment;
@@ -23,7 +24,7 @@ import cn.faker.repaymodel.widget.viewgroup.CurrentViewPager;
  */
 public class WorkActivity extends BaseMVPAcivity<WorkContract.View, WorkPresenter> implements WorkContract.View, View.OnClickListener {
 
-    private CurrentViewPager mContentViewPager;
+    private ViewPager mContentViewPager;
     private QMUITabSegment mTabSegment;
 
     @Override

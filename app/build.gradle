@@ -26,12 +26,36 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
     }
+
+    signingConfigs {
+        debug {
+            storeFile file("map.jks")
+            storePassword "123456"
+            keyAlias "map"
+            keyPassword "123456"
+        }
+
+        release {
+            storeFile file("map.jks")
+            storePassword "123456"
+            keyAlias "map"
+            keyPassword "123456"
+        }
+    }
+
+    sourceSets{
+        main{
+            jniLibs.srcDir 'libs'
+            jni.srcDirs = []    //disable automatic ndk-build
+        }
+    }
 }
 repositories {
     flatDir {
         dirs 'libs'
     }
 }
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
@@ -40,8 +64,8 @@ dependencies {
     implementation project(':fakerti')
     implementation(name: 'arcgis-android-10.2.9', ext: 'aar')
     implementation 'cjt.library.wheel:camera:1.1.9'
-
     implementation('com.github.gzu-liyujiang.AndroidPicker:WheelPicker:latest.release') {
         exclude group: 'com.android.support'
     }
+    implementation files('libs/BaiduLBS_Android.jar')
 }

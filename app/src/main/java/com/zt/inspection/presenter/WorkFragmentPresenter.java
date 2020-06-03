@@ -75,7 +75,7 @@ public class WorkFragmentPresenter extends BaseMVPPresenter<WorkFragmentContract
                             v = "正常";
                         }
                     }
-                    getView().AddCLOCKIN_success(status,v);
+                    getView().AddCLOCKIN_success( OUTTIME,status,v);
                 } else if ("失败".equals(statusValue)) {
                     getView().AddCLOCKIN_fail("打卡失败");
                 }

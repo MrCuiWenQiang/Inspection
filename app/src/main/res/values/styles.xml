@@ -172,8 +172,15 @@
 
     <style name="dd_t">
         <item name="android:textColor">@color/xm_dlg_color_4</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginLeft">6dp</item>
+    </style>
+
+    <style name="dd_hint">
+        <item name="android:textColor">@color/xm_dlg_color_4</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginLeft">12dp</item>
     </style>
 </resources>

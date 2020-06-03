@@ -87,8 +87,7 @@ public class LoginActivity extends BaseMVPAcivity<LoginContract.View, LoginPrese
         switch (v.getId()) {
             case R.id.bt_login: {
                 showLoading();
-                login_Success();
-//                mPresenter.login(getValue(et_name), getValue(et_password), cb_pw.isChecked());
+                mPresenter.login(getValue(et_name), getValue(et_password), cb_pw.isChecked());
                 break;
             }
         }
