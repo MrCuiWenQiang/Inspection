@@ -32,7 +32,7 @@ public class MainActivity extends BaseMVPAcivity<MainContract.View, MainPresente
     @Override
     protected void initContentView() {
         isShowToolView(false);
-
+        setStatusBar(R.color.select_color);
         mContentViewPager = findViewById(R.id.contentViewPager);
         mTabSegment = findViewById(R.id.tabs);
 

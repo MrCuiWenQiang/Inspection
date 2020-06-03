@@ -2,6 +2,7 @@ package com.zt.inspection.model;
 
 import android.text.TextUtils;
 
+import com.zt.inspection.MyApplication;
 import com.zt.inspection.contract.LoginContract;
 import com.zt.inspection.model.entity.db.UserDBEntity;
 import com.zt.inspection.model.entity.response.LoginBean;
@@ -23,6 +24,7 @@ public class LoginModel implements LoginContract.Model{
         DBThreadHelper.startThreadInPool(new DBThreadHelper.ThreadCallback() {
             @Override
             protected Object jobContent() throws Exception {
+                //小范围APP人群，不再进行密码加密存储了 没必要
                 UserDBEntity entity = new UserDBEntity();
                 entity.setName(userName);
                 entity.setPassword(pw);
@@ -33,6 +35,7 @@ public class LoginModel implements LoginContract.Model{
                 } else {
                     entity.save();
                 }
+                entity.setPassword(null);
                 return null;
             }
 

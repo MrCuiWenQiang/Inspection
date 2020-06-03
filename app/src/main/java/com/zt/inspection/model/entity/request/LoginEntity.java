@@ -1,23 +1,23 @@
 package com.zt.inspection.model.entity.request;
 
 public class LoginEntity {
-    private String name;
+    private String userid;
     private String password;
 
     public LoginEntity() {
     }
 
-    public LoginEntity(String name, String password) {
-        this.name = name;
+    public LoginEntity(String userid, String password) {
+        this.userid = userid;
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public String getPassword() {

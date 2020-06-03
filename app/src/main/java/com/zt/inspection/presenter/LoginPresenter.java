@@ -4,6 +4,7 @@ package com.zt.inspection.presenter;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
+import com.zt.inspection.MyApplication;
 import com.zt.inspection.R;
 import com.zt.inspection.Urls;
 import com.zt.inspection.contract.LoginContract;
@@ -61,7 +62,8 @@ public class LoginPresenter extends BaseMVPPresenter<LoginContract.View> impleme
                 LoginBean resultEntity = JsonUtil.convertJsonToObject(data, LoginBean.class);
                 if (getView() != null) {
                     if (resultEntity != null) {
-                        loginModel.saveUser(dataForm.getName(), dataForm.getPassword(), resultEntity);
+                        loginModel.saveUser(dataForm.getUserid(), dataForm.getPassword(), resultEntity);
+                        MyApplication.loginUser = resultEntity;
                         getView().login_Success();
                     }else {
                         getView().login_Fail("数据解析失败");

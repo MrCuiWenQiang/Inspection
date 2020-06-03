@@ -2,6 +2,7 @@ package com.zt.inspection.view.fragment;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.esri.android.map.GraphicsLayer;
 import com.esri.android.map.MapView;
@@ -10,6 +11,8 @@ import com.zt.inspection.R;
 import com.zt.inspection.Urls;
 import com.zt.inspection.contract.HomeFragmentContract;
 import com.zt.inspection.presenter.HomeFragmentPresenter;
+import com.zt.inspection.view.NoticeActivity;
+import com.zt.inspection.view.WorkActivity;
 
 import cn.faker.repaymodel.mvp.BaseMVPFragment;
 
@@ -28,9 +31,20 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
     private MapView mapview;
     private GraphicsLayer hiddenSegmentsLayer;
 
+    private LinearLayout ll_notice;
+    private LinearLayout ll_work;
+
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.ll_notice: {
+                toAcitvity(NoticeActivity.class);
+                break;
+            }case R.id.ll_work: {
+                toAcitvity(WorkActivity.class);
+                break;
+            }
+        }
     }
 
     @Override
@@ -41,6 +55,15 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
     @Override
     public void initview(View v) {
         mapview = findViewById(R.id.mapview);
+        ll_notice = findViewById(R.id.ll_notice);
+        ll_work = findViewById(R.id.ll_work);
+    }
+
+    @Override
+    protected void initListener() {
+        super.initListener();
+        ll_notice.setOnClickListener(this);
+        ll_work.setOnClickListener(this);
     }
 
     @Override

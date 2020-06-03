@@ -202,7 +202,9 @@ public abstract class BaseToolBarActivity extends BaseActivity {
         if (titlecolor != -1) {
             btnRight.setTextColor(getResources().getColor(titlecolor));
         }
-        btnRight.setOnClickListener(l);
+        if (l!=null){
+            btnRight.setOnClickListener(l);
+        }
     }
 
     protected void setToolBarBackgroundColor(@DrawableRes int color) {

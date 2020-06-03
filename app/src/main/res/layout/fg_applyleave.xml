@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        style="@style/ll_base"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout style="@style/edit_ll">
+
+            <TextView
+                style="@style/edit_title"
+                android:text="请假类型" />
+
+            <TextView
+                android:id="@+id/tv_type"
+                style="@style/edit_view_edit" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/edit_ll">
+
+            <TextView
+                style="@style/edit_title"
+                android:text="开始日期" />
+
+            <TextView
+                android:id="@+id/tv_start_date"
+                style="@style/edit_view_edit" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/edit_ll">
+
+            <TextView
+                style="@style/edit_title"
+                android:text="终止日期" />
+
+            <TextView
+                android:id="@+id/tv_end_date"
+                style="@style/edit_view_edit" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/edit_ll">
+
+            <TextView
+                style="@style/edit_title"
+                android:text="请假原因" />
+
+            <EditText
+                android:id="@+id/tv_reason"
+                style="@style/edit_view_edit" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp">
+            <Button
+                android:id="@+id/bt_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/basebutton"
+                android:text="提交申请"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

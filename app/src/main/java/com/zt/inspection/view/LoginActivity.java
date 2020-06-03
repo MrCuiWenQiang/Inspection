@@ -53,6 +53,8 @@ public class LoginActivity extends BaseMVPAcivity<LoginContract.View, LoginPrese
 
     @Override
     protected void initContentView() {
+        isShowToolView(false);
+
         et_name = findViewById(R.id.et_name);
         et_password = findViewById(R.id.et_password);
         cb_pw = findViewById(R.id.cb_pw);
@@ -84,7 +86,9 @@ public class LoginActivity extends BaseMVPAcivity<LoginContract.View, LoginPrese
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_login: {
-                mPresenter.login(getValue(et_name), getValue(et_password), cb_pw.isChecked());
+                showLoading();
+                login_Success();
+//                mPresenter.login(getValue(et_name), getValue(et_password), cb_pw.isChecked());
                 break;
             }
         }

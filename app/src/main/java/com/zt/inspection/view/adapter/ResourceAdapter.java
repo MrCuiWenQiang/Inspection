@@ -55,9 +55,9 @@ public class ResourceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int type) {
         RecyclerView.ViewHolder viewHolder = null;
-        switch (getItemViewType(i)) {
+        switch (type) {
             case TYPE_ADD: {
                 viewHolder = new AddViewHolder(new LinearLayout(viewGroup.getContext()));
                 break;
@@ -91,7 +91,7 @@ public class ResourceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 @Override
                 public void onClick(View v) {
                     if (onPhotoListener!=null){
-                        onPhotoListener.onClick(TYPE_ADD,i,photoPaths.get(i));
+                        onPhotoListener.onClick(TYPE_PHOTO,i,photoPaths.get(i));
                     }
                 }
             });

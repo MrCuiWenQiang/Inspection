@@ -40,4 +40,8 @@ dependencies {
     implementation project(':fakerti')
     implementation(name: 'arcgis-android-10.2.9', ext: 'aar')
     implementation 'cjt.library.wheel:camera:1.1.9'
+
+    implementation('com.github.gzu-liyujiang.AndroidPicker:WheelPicker:latest.release') {
+        exclude group: 'com.android.support'
+    }
 }

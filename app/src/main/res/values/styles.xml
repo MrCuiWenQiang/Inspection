@@ -87,6 +87,7 @@
         <item name="android:paddingRight">3dp</item>
         <item name="android:background">@color/white</item>
     </style>
+
     <style name="ll_base">
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
@@ -94,6 +95,7 @@
         <item name="android:paddingRight">3dp</item>
         <item name="android:background">@color/white</item>
     </style>
+
     <style name="edit_ll">
         <item name="android:weightSum">1</item>
         <item name="android:orientation">horizontal</item>
@@ -108,14 +110,70 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_width">0dp</item>
     </style>
+
     <style name="base_edit_value">
         <item name="android:layout_weight">0.6</item>
         <item name="android:layout_height">match_parent</item>
         <!--<item name="android:gravity">center</item>-->
         <item name="android:layout_width">0dp</item>
     </style>
+
     <style name="edit_view_edit" parent="base_edit_value">
         <item name="android:background">@drawable/edit_style</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="basebutton">
+        <item name="android:background">@drawable/bt_base_backage</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="list_ll_base">
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingRight">3dp</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="text_color">
+        <item name="android:textColor">@color/color_gray_tool</item>
+    </style>
+
+    <style name="list_ll_title" parent="text_color">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="list_ll_content" parent="text_color">
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
+
+    <style name="list_ll_other" parent="text_color">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
+    <style name="tab_w_view">
+        <item name="android:background">@color/d_rule</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+    <style name="bt">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+    <style name="dd_t">
+        <item name="android:textColor">@color/xm_dlg_color_4</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginLeft">6dp</item>
     </style>
 </resources>

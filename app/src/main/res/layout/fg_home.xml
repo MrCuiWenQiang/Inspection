@@ -21,6 +21,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/ll_work"
                 style="@style/home_tool_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -67,6 +68,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_notice"
                 style="@style/home_tool_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
