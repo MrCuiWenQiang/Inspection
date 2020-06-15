@@ -6,15 +6,15 @@ package com.zt.inspection.model.entity.request;
 public class AddClockinEntity {
     private String USERID;
     private String SIGNDESC;
-    private String OUTTIME;
+    private String TYPENAME;
 
     public AddClockinEntity() {
     }
 
-    public AddClockinEntity(String USERID, String SIGNDESC, String OUTTIME) {
+    public AddClockinEntity(String USERID, String SIGNDESC, String TYPENAME) {
         this.USERID = USERID;
         this.SIGNDESC = SIGNDESC;
-        this.OUTTIME = OUTTIME;
+        this.TYPENAME = TYPENAME;
     }
 
     public String getUSERID() {
@@ -33,11 +33,11 @@ public class AddClockinEntity {
         this.SIGNDESC = SIGNDESC;
     }
 
-    public String getOUTTIME() {
-        return OUTTIME;
+    public String getTYPENAME() {
+        return TYPENAME;
     }
 
-    public void setOUTTIME(String OUTTIME) {
-        this.OUTTIME = OUTTIME;
+    public void setTYPENAME(String TYPENAME) {
+        this.TYPENAME = TYPENAME;
     }
 }

@@ -68,4 +68,5 @@ dependencies {
         exclude group: 'com.android.support'
     }
     implementation files('libs/BaiduLBS_Android.jar')
+    implementation 'com.brucetoo.pickview:library:1.2.3'
 }

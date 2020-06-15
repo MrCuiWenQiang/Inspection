@@ -28,7 +28,7 @@ public class LeaveFragmentPresenter extends BaseMVPPresenter<LeaveFragmentContra
         LeaveEntity entity = new LeaveEntity();
         entity.setStart(start);
         entity.setEnd(end);
-        entity.setUserId(MyApplication.loginUser.getUserId());
+        entity.setUserId(MyApplication.loginUser.getPATROLCODE());
         HttpHelper.post(Urls.GETLEAVELIST, entity, new HttpResponseCallback() {
             @Override
             public void onSuccess(String data) {

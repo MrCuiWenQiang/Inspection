@@ -114,16 +114,16 @@ public class HttpHelper {
         callback.setOnFailedAll(onFailedAll);
 
         String json = JsonUtil.convertObjectToJson(object);
-        byte[] data = null;
-        try {
+        byte[] data =  json.getBytes();
+/*        try {
             data = RSAUtils.encryptByPublicKey(json.getBytes("utf-8"), RSAKeys.publicClientKey);
             String result = Base64.encode(data);
             data = result.getBytes();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 //        String base64data= Base64.encode(data);
-        RequestBody body = RequestBody.create(MediaType.parse(contentType), json.getBytes());
+        RequestBody body = RequestBody.create(MediaType.parse(contentType), data);
 
         Request request = new Request.Builder().url(path)
                 .addHeader("Content-Length", String.valueOf(data.length))

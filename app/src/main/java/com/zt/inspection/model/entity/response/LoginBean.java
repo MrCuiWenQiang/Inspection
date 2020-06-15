@@ -27,11 +27,11 @@ public class LoginBean {
     /// <summary>
     /// 创建时间
     /// </summary>
-    private Date CREATETIME;
+    private String CREATETIME;
     /// <summary>
     /// 修改时间
     /// </summary>
-    private Date MODIYTIME;
+    private String MODIYTIME;
 
     /// <summary>
     /// 主键
@@ -108,10 +108,10 @@ public class LoginBean {
     /// <summary>
     /// 用户Id(原来用户id)
     /// </summary>
-    private String UserId;
+//    private String UserId;
 
     /// <summary>
-    /// 角色id
+    /// 角色id 1:管理员 2:部门领导 3:巡检人员信息 4:施工人员
     /// </summary>
     private String RoleId;
 
@@ -155,19 +155,19 @@ public class LoginBean {
         this.CREATEUSER = CREATEUSER;
     }
 
-    public Date getCREATETIME() {
+    public String getCREATETIME() {
         return CREATETIME;
     }
 
-    public void setCREATETIME(Date CREATETIME) {
+    public void setCREATETIME(String CREATETIME) {
         this.CREATETIME = CREATETIME;
     }
 
-    public Date getMODIYTIME() {
+    public String getMODIYTIME() {
         return MODIYTIME;
     }
 
-    public void setMODIYTIME(Date MODIYTIME) {
+    public void setMODIYTIME(String MODIYTIME) {
         this.MODIYTIME = MODIYTIME;
     }
 
@@ -307,13 +307,13 @@ public class LoginBean {
         this.ADDRESS = ADDRESS;
     }
 
-    public String getUserId() {
-        return UserId;
-    }
-
-    public void setUserId(String userId) {
-        UserId = userId;
-    }
+//    public String getUserId() {
+//        return UserId;
+//    }
+//
+//    public void setUserId(String userId) {
+//        UserId = userId;
+//    }
 
     public String getRoleId() {
         return RoleId;

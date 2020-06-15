@@ -30,6 +30,12 @@ public class DateUtils {
         return datestr;
     }
 
+    public static String getCurrentDate(String format) {
+        String datestr = null;
+        SimpleDateFormat df = new SimpleDateFormat(format);
+        datestr = df.format(new Date());
+        return datestr;
+    }
     /**
      * 获取年
      * @return

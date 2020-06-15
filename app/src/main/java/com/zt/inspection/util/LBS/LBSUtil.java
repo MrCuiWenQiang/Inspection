@@ -4,18 +4,26 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.zt.inspection.MyApplication;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LBSUtil {
     public static LocationClient mLocationClient = null;
-    private static BDLocationListener myListener = new BDLocationListener();
+    private static BDLocationListener myListener;
 
-    public static void init(){
+    private static List<LocationListener> locationListeners;
+
+    public static void init() {
         mLocationClient = new LocationClient(MyApplication.getContext());
+        myListener = new BDLocationListener();
+        locationListeners = new ArrayList<>();
+        myListener.setListeners(locationListeners);
         //声明LocationClient类
         mLocationClient.registerLocationListener(myListener);
         option();
     }
 
-    private static void option(){
+    private static void option() {
         LocationClientOption option = new LocationClientOption();
 
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
@@ -24,7 +32,7 @@ public class LBSUtil {
 //LocationMode. Battery_Saving：低功耗；
 //LocationMode. Device_Sensors：仅使用设备；
 
-        option.setCoorType("bd09ll");
+        option.setCoorType("GCJ02");
 //可选，设置返回经纬度坐标类型，默认GCJ02
 //GCJ02：国测局坐标；
 //BD09ll：百度经纬度坐标；
@@ -50,7 +58,7 @@ public class LBSUtil {
         option.SetIgnoreCacheException(false);
 //可选，设置是否收集Crash信息，默认收集，即参数为false
 
-        option.setWifiCacheTimeOut(5*60*1000);
+        option.setWifiCacheTimeOut(5 * 60 * 1000);
 //可选，V7.2版本新增能力
 //如果设置了该接口，首次启动定位时，会先判断当前Wi-Fi是否超出有效期，若超出有效期，会先重新扫描Wi-Fi，然后定位
 
@@ -62,8 +70,24 @@ public class LBSUtil {
         mLocationClient.setLocOption(option);
     }
 
+    /**
+     * 新增监听
+     * @param listener
+     */
+    public static void addListener(LocationListener listener) {
+        if (listener != null && locationListeners != null) {
+            locationListeners.add(listener);
+        }
+    }
 
-    public static void start(){
+    public static void removeListener(LocationListener listener) {
+        if (listener != null && locationListeners != null) {
+            locationListeners.remove(listener);
+        }
+    }
+
+    public static void start() {
         mLocationClient.start();
     }
+
 }

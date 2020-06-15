@@ -1,5 +1,6 @@
 package cn.faker.repaymodel.util;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 /**
@@ -10,7 +11,7 @@ public class LogUtil {
     public static boolean isShow = false;
 
     public static void e(String tag, String msg) {
-        if (isShow) {
+        if (isShow&&!TextUtils.isEmpty(msg)) {
             Log.e(tag, msg);
         }
     }

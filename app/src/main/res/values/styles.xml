@@ -136,6 +136,13 @@
         <item name="android:paddingRight">3dp</item>
         <item name="android:background">@color/white</item>
     </style>
+    <style name="list_ll_item_base">
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:background">@color/white</item>
+    </style>
 
     <style name="text_color">
         <item name="android:textColor">@color/color_gray_tool</item>
@@ -183,4 +190,5 @@
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginLeft">12dp</item>
     </style>
+
 </resources>

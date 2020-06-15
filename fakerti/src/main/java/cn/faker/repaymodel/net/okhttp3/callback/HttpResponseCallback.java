@@ -167,7 +167,7 @@ public abstract class HttpResponseCallback extends BasicCallback {
     }
 
 
-    public abstract void onSuccess(String data);
+    public abstract void onSuccess(String datajson);
     public  void onMessage(String msg){
 
     }
