@@ -85,7 +85,7 @@ public class WorkFragmentPresenter extends BaseMVPPresenter<WorkFragmentContract
     public void todayInfo() {
 //        UserIdEntity querydata = new UserIdEntity(MyApplication.loginUser.getUserId());
         HashMap<String, Object> params = new HashMap<>();
-        params.put("userId", MyApplication.loginUser.getDEPARTID());
+        params.put("userId", MyApplication.loginUser.getPATROLCODE());
         HttpHelper.get(Urls.GETUSERSTATE, params, new HttpResponseCallback() {
             @Override
             public void onSuccess(String data) {

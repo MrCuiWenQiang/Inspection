@@ -32,14 +32,14 @@ public class LBSUtil {
 //LocationMode. Battery_Saving：低功耗；
 //LocationMode. Device_Sensors：仅使用设备；
 
-        option.setCoorType("GCJ02");
+        option.setCoorType("BD09");
 //可选，设置返回经纬度坐标类型，默认GCJ02
 //GCJ02：国测局坐标；
 //BD09ll：百度经纬度坐标；
 //BD09：百度墨卡托坐标；
 //海外地区定位，无需设置坐标类型，统一返回WGS84类型坐标
 
-        option.setScanSpan(1000);
+        option.setScanSpan(5000);
 //可选，设置发起定位请求的间隔，int类型，单位ms
 //如果设置为0，则代表单次定位，即仅定位一次，默认为0
 //如果设置非0，需设置1000ms以上才有效
@@ -87,7 +87,9 @@ public class LBSUtil {
     }
 
     public static void start() {
-        mLocationClient.start();
+        if (!mLocationClient.isStarted()){
+            mLocationClient.start();
+        }
     }
 
 }

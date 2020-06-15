@@ -1,7 +1,7 @@
 package com.zt.inspection;
 
 public class Urls {
-    private static final String baseUrl = "http://192.168.1.8:6080/";
+    private static final String baseUrl = "http://192.168.2.15:6080";
 
     public static final String mapUrl = baseUrl+"/arcgis/rest/services/lixiamap1/MapServer";//LYG测试
 
@@ -19,5 +19,8 @@ public class Urls {
     public static final String GETUSERSTATE = URL + "ManualSignApi/GetUserState";
     public static final String GETSIGNTJ = URL + "ManualSignApi/GetSignTJ";
     public static final String DEPTSIGN = URL + "ManualSignApi/DeptSign";
+    public static final String ADDPATROLSECTION = URL + "PatrolApi/AddPatrolSection";
+    public static final String EDITPATROLSECTION = URL + "PatrolApi/EditPatrolSection";
+    public static final String ADDPATROLROUTE = URL + "PatrolApi/AddPatrolRoute";
 
 }

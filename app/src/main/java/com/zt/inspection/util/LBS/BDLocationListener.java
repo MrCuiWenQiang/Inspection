@@ -28,7 +28,8 @@ public class BDLocationListener extends BDAbstractLocationListener {
         //获取定位类型、定位错误返回码，具体信息可参照类参考中BDLocation类中的说明
         LogUtil.e("d*******", errorCode + "--" + latitude + "==" + latitude);
         TransGPS.Location l = new TransGPS.Location(location.getLatitude(), location.getLongitude());
-        TransGPS.Location nowl = transGPS.transformFromGCJToWGS(l); //转换gcj - >wgs
+        TransGPS.Location nowl = transGPS.bd_decrypt(l);
+        nowl = transGPS.transformFromGCJToWGS(nowl);//方法是BD先转成GCJ再转成WGS
         for (LocationListener listener : locationListeners) {//或许用while ->set
             listener.onReceiveLocation(location, errorCode, nowl.getLat(), nowl.getLng());
         }
