@@ -1,14 +1,13 @@
-package com.zt.inspection.view.fragment;
+package com.zt.inspection.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.zt.inspection.R;
-import com.zt.inspection.contract.UploadFragmentContract;
+import com.zt.inspection.contract.UploadActivityContract;
 import com.zt.inspection.presenter.UploadPresenter;
 import com.zt.inspection.view.CameraActivity;
 import com.zt.inspection.view.adapter.ResourceAdapter;
@@ -17,6 +16,7 @@ import com.zt.inspection.view.dialog.VideoDialog;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.faker.repaymodel.mvp.BaseMVPAcivity;
 import cn.faker.repaymodel.mvp.BaseMVPFragment;
 
 import static com.zt.inspection.view.adapter.ResourceAdapter.ADAPTER_TYPR_SHOW_PHOTO;
@@ -27,14 +27,9 @@ import static com.zt.inspection.view.adapter.ResourceAdapter.TYPE_PHOTO;
 /**
  * 案件上报
  */
-public class UploadFragment extends BaseMVPFragment<UploadFragmentContract.View, UploadPresenter> implements UploadFragmentContract.View, View.OnClickListener {
+public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, UploadPresenter> implements UploadActivityContract.View, View.OnClickListener {
 
-    public static UploadFragment newInstance() {
-        Bundle args = new Bundle();
-        UploadFragment fragment = new UploadFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     private RecyclerView rv_photo;
     private RecyclerView rv_video;
@@ -48,13 +43,15 @@ public class UploadFragment extends BaseMVPFragment<UploadFragmentContract.View,
 
     }
 
+
+
     @Override
-    public int getLayoutId() {
+    protected int getLayoutContentId() {
         return R.layout.fg_upload;
     }
 
     @Override
-    public void initview(View v) {
+    protected void initContentView() {
         rv_photo = findViewById(R.id.rv_photo);
         rv_video = findViewById(R.id.rv_video);
 
@@ -68,9 +65,11 @@ public class UploadFragment extends BaseMVPFragment<UploadFragmentContract.View,
         rv_video.setAdapter(adapter_video);
     }
 
+
+
     @Override
     public void initData(Bundle savedInstanceState) {
-
+mPresenter.uploadFile("/storage/sdcard0/excel/leave.png");
     }
 
     private final int REQUESTCODE = 52;
@@ -102,7 +101,7 @@ public class UploadFragment extends BaseMVPFragment<UploadFragmentContract.View,
                     String videoPaths = video_paths.get(postoin);
                     VideoDialog videoDialog = new VideoDialog();
                     videoDialog.setUrl(videoPaths);
-                    videoDialog.show(getFragmentManager(),"s");
+                    videoDialog.show(getSupportFragmentManager(),"s");
                 }
             }
         });

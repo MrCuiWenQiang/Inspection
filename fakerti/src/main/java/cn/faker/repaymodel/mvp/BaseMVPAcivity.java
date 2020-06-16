@@ -1,5 +1,6 @@
 package cn.faker.repaymodel.mvp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -36,7 +37,9 @@ public abstract class BaseMVPAcivity<V, T extends BaseMVPPresenter<V>> extends B
             mPresenter.onStart();
         }
     }
-
+    public Context getContext(){
+        return this;
+    }
     @Override
     public void onResume() {
         super.onResume();

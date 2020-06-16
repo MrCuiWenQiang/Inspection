@@ -114,7 +114,7 @@ public class HttpHelper {
         callback.setOnFailedAll(onFailedAll);
 
         String json = JsonUtil.convertObjectToJson(object);
-        byte[] data =  json.getBytes();
+        byte[] data = json.getBytes();
 /*        try {
             data = RSAUtils.encryptByPublicKey(json.getBytes("utf-8"), RSAKeys.publicClientKey);
             String result = Base64.encode(data);
@@ -181,10 +181,35 @@ public class HttpHelper {
      * 带参数文件上传
      *
      * @param path
-     * @param params
-     * @param files
      * @param callback
      */
+    public static void post_file(String path,
+                                 String filepath, Callback callback) {
+
+        MultipartBody.Builder multipartBuider = new MultipartBody.Builder();
+        multipartBuider.setType(MultipartBody.FORM);
+
+        String itpath = filepath;
+        File file = new File(itpath);
+        int endname = itpath.lastIndexOf(".") + 1;
+        String type = itpath.substring(endname, itpath.length()).toLowerCase();//获取后缀转为小写
+// TODO: 2020/6/15 后缀名问题
+        RequestBody fileBody = RequestBody.create(MediaType.parse("image/" + type), file);
+        multipartBuider.addFormDataPart("file", file.getName(), fileBody);
+
+        Request request = new Request.Builder().url(path).post(multipartBuider.build()).header("Connection", "Keep-Alive")
+                .build();
+
+
+        if (httpHelper == null) {
+            httpHelper = new HttpHelper();
+        }
+        Call call = okHttpClient.newCall(request);
+
+        call.enqueue(callback);
+
+    }
+
     public static void post_file(String path,
                                  HashMap<String, Object> params, HashMap<String, String> files, Callback callback) {
 
@@ -198,8 +223,12 @@ public class HttpHelper {
 
         if (files != null && files.size() > 0) {
             for (Map.Entry<String, String> entry : files.entrySet()) {
-                File file = new File(entry.getValue());
-                RequestBody fileBody = RequestBody.create(MediaType.parse("image/png"), file);
+                String itpath = entry.getValue();
+                File file = new File(itpath);
+                int endname = itpath.lastIndexOf(".") + 1;
+                String type = itpath.substring(endname, contentType.length()).toLowerCase();//获取后缀转为小写
+// TODO: 2020/6/15 后缀名问题
+                RequestBody fileBody = RequestBody.create(MediaType.parse("image/" + type), file);
                 multipartBuider.addFormDataPart(String.valueOf(entry.getKey()), file.getName(), fileBody);
             }
         }
@@ -215,6 +244,7 @@ public class HttpHelper {
         call.enqueue(callback);
 
     }
+
 
     /**
      * 带参数文件上传  不加密
@@ -265,11 +295,11 @@ public class HttpHelper {
         call.enqueue(callback);
     }
 
-    public static void get(@NonNull String url,HashMap<String,Object> params, @NonNull HttpResponseCallback callback) {
-        if (params!=null&&params.size()>0){
+    public static void get(@NonNull String url, HashMap<String, Object> params, @NonNull HttpResponseCallback callback) {
+        if (params != null && params.size() > 0) {
             String paramData = getRequestData(params);
-            if (!TextUtils.isEmpty(paramData)){
-                url=url+"?"+paramData;
+            if (!TextUtils.isEmpty(paramData)) {
+                url = url + "?" + paramData;
             }
         }
         callback.setOnFailedAll(onFailedAll);
@@ -326,7 +356,6 @@ public class HttpHelper {
         }
         return null;
     }
-
 
 
     public static void setOnFailedAll(HttpResponseCallback.OnFailedAll onFailedAll) {

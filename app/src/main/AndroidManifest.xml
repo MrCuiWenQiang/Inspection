@@ -73,6 +73,7 @@
         <activity android:name=".view.LeaveActivity"/>
         <activity android:name=".view.LeaveInfoActivity"/>
         <activity android:name=".view.WorkActivity"/>
+        <activity android:name=".view.UploadActivity"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.zt.inspection.fileprovider"

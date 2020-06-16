@@ -6,10 +6,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -24,6 +21,7 @@ import com.zt.inspection.Urls;
 import com.zt.inspection.contract.MapFragmentContract;
 import com.zt.inspection.model.entity.response.PatrolSectionBean;
 import com.zt.inspection.presenter.MapFragmentPresenter;
+import com.zt.inspection.view.UploadActivity;
 import com.zt.inspection.view.dialog.RoleDialog;
 
 import cn.faker.repaymodel.mvp.BaseMVPFragment;
@@ -87,7 +85,7 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        end();
+//        end();
     }
 
     private void initMap() {
@@ -172,6 +170,7 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
                 break;
             }
             case R.id.tv_update: {
+                toAcitvity(UploadActivity.class);
                 break;
             }
             case R.id.tv_end: {
