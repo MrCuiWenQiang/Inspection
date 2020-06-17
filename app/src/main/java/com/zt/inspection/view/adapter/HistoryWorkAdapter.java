@@ -36,6 +36,7 @@ public class HistoryWorkAdapter extends RecyclerView.Adapter<HistoryWorkAdapter.
         viewHolder.tvHandleendtime.setText(data.getHANDLEENDTIME());
         viewHolder.tvFeedbacktime.setText(data.getFEEDBACKTIME());
         viewHolder.tvClosetime.setText(data.getCLOSETIME());
+        viewHolder.tvCaddress.setText(data.getCADDRESS());
         viewHolder.tvFeedbackcontent.setText(data.getFEEDBACKCONTENT());
     }
 
@@ -69,11 +70,13 @@ public class HistoryWorkAdapter extends RecyclerView.Adapter<HistoryWorkAdapter.
         private TextView tvFeedbacktime;
         private TextView tvClosetime;
         private TextView tvFeedbackcontent;
+        private TextView tvCaddress;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTitle = itemView.findViewById(R.id.tv_title);
+            tvCaddress = itemView.findViewById(R.id.tv_caddress);
             tvCtid = itemView.findViewById(R.id.tv_ctid);
             tvCtype = itemView.findViewById(R.id.tv_ctype);
             tvUpuid = itemView.findViewById(R.id.tv_upuid);
