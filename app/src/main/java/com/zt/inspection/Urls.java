@@ -23,5 +23,8 @@ public class Urls {
     public static final String EDITPATROLSECTION = URL + "PatrolApi/EditPatrolSection";
     public static final String ADDPATROLROUTE = URL + "PatrolApi/AddPatrolRoute";
     public static final String UPLOAD = URL + "UploadApi/Upload";
+    public static final String GETCASEINFOLIST = URL + "CaseInfoApi/GetCaseInfoList";
+    public static final String GETPATROLSECTION = URL + "PatrolApi/GetPatrolSection";
+    public static final String GETPATROLROUTE = URL + "PatrolApi/GetPatrolRoute";
 
 }

@@ -85,7 +85,7 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
 
     @Override
     public void initData(Bundle savedInstanceState) {
-//        end();
+        end();
     }
 
     private void initMap() {
@@ -212,18 +212,7 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        mMapView.pause();
-    }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mMapView.destroyDrawingCache();
-        locationDisplayManager.stop();
-    }
 
     String roleId = null;
 
@@ -254,5 +243,23 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
         show();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        mMapView.pause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMapView.unpause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mMapView.destroyDrawingCache();
+        locationDisplayManager.stop();
+    }
 
 }

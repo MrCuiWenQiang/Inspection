@@ -42,6 +42,8 @@ public class LoginBean {
     /// 用户Id
     /// </summary>
     private String PATROLCODE;
+    //是否是部门领导
+    private String DEPARTLEADER;
     /// <summary>
     /// 用户名称
     /// </summary>
@@ -114,6 +116,23 @@ public class LoginBean {
     /// 角色id 1:管理员 2:部门领导 3:巡检人员信息 4:施工人员
     /// </summary>
     private String RoleId;
+    private String roleids;
+
+    public String getRoleids() {
+        return roleids;
+    }
+
+    public void setRoleids(String roleids) {
+        this.roleids = roleids;
+    }
+
+    public String getDEPARTLEADER() {
+        return DEPARTLEADER;
+    }
+
+    public void setDEPARTLEADER(String DEPARTLEADER) {
+        this.DEPARTLEADER = DEPARTLEADER;
+    }
 
     public String getID() {
         return ID;
