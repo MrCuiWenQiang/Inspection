@@ -18,6 +18,7 @@ import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import com.zt.inspection.R;
 import com.zt.inspection.contract.MyFragmentContract;
 import com.zt.inspection.presenter.MyFragmentPresenter;
+import com.zt.inspection.view.BranchModelActivity;
 import com.zt.inspection.view.LeaveActivity;
 import com.zt.inspection.view.UserInfoActivity;
 
@@ -37,17 +38,17 @@ public class MyFragment extends BaseMVPFragment<MyFragmentContract.View, MyFragm
         return fragment;
     }
 
-    private String[] item_one_name = new String[]{"用户信息", "修改密码"};
-    private int[] one_ids = new int[]{R.id.one_1, R.id.one_2};
+    private String[] item_one_name = new String[]{"用户信息", "修改密码","通讯录"};
+    private int[] one_ids = new int[]{R.id.one_1, R.id.one_2, R.id.one_3};
     private String[] item_two_name = new String[]{"版本更新"};
     private int[] two_ids = new int[]{R.id.two_1};
     private String[] item_three_name = new String[]{"意见反馈", "使用说明"};
     private int[] three_ids = new int[]{R.id.three_1, R.id.three_2};
 
 
-    private String[] top_name = new String[]{"请假"};
-    private int[] top_ids = new int[]{R.id.top_1};
-    private int[] top_images = new int[]{R.mipmap.leave};
+//    private String[] top_name = new String[]{"请假"};
+//    private int[] top_ids = new int[]{R.id.top_1};
+//    private int[] top_images = new int[]{R.mipmap.leave};
 
     private QMUIGroupListView qmui_gl;
     private QMUIFloatLayout mFloatLayout;
@@ -63,6 +64,9 @@ public class MyFragment extends BaseMVPFragment<MyFragmentContract.View, MyFragm
                 break;
             }
             case R.id.one_2: {
+                break;
+            } case R.id.one_3: {
+                toAcitvity(BranchModelActivity.class);
                 break;
             }
             case R.id.two_1: {
@@ -106,9 +110,9 @@ public class MyFragment extends BaseMVPFragment<MyFragmentContract.View, MyFragm
     public void initData(Bundle savedInstanceState) {
         tvSize = QMUIDisplayHelper.sp2px(getContext(), 4);
 //        imSize =  QMUIDisplayHelper.dp2px(getContext(), 45);
-        for (int i = 0; i < top_name.length; i++) {
+/*        for (int i = 0; i < top_name.length; i++) {
             setTOP(top_name[i], top_images[i], top_ids[i]);
-        }
+        }*/
         settingGroup("用户相关", QMUICommonListItemView.HORIZONTAL, QMUICommonListItemView.ACCESSORY_TYPE_NONE, item_one_name, null, one_ids);
         settingGroup("资源管理", QMUICommonListItemView.VERTICAL, QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON, item_two_name, null, two_ids);
         settingGroup("帮助相关", QMUICommonListItemView.VERTICAL, QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON, item_three_name, null, three_ids);

@@ -84,16 +84,17 @@ public class HistoryRouteFragment extends BaseMVPFragment<HistoryRouteFragmentCo
     }
 
 
-    @Override
+/*    @Override
     public boolean requestData() {
         showLoading();
         loadData();
         return false;
-    }
+    }*/
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        showLoading();
+        loadData();
     }
 
     private void loadData() {

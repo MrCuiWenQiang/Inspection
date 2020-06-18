@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Json工具类
@@ -42,7 +43,7 @@ public class JsonUtil {
      * @param <T>
      * @return
      */
-    public static <T> ArrayList<T> fromList(String jsonString, Class<T> t) {
+    public static <T> List<T> fromList(String jsonString, Class<T> t) {
         ArrayList<T> list = null;
         try {
             list = new ArrayList<>();

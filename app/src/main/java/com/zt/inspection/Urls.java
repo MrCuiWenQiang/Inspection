@@ -29,5 +29,6 @@ public class Urls {
     public static final String GETPATROLROUTE = URL + "PatrolApi/GetPatrolRoute";
     public static final String GETLEIXIN = URL + "CaseInfoApi/GetLeiXin";
     public static final String ADDINFO = URL + "CaseInfoApi/AddInfo";
+    public static final String GETBRANCHLIST = URL + "UserApi/GetBranchList";
 
 }

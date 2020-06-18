@@ -75,6 +75,8 @@
         <activity android:name=".view.WorkActivity"/>
         <activity android:name=".view.UploadActivity"/>
         <activity android:name=".view.PatrolRouteActivity"/>
+        <activity android:name=".view.WorkStatusActivity"/>
+        <activity android:name=".view.BranchModelActivity"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.zt.inspection.fileprovider"
