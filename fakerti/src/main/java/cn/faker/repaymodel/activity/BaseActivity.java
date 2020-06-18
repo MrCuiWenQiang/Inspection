@@ -119,7 +119,13 @@ public abstract class BaseActivity extends BaseManagerActivity implements BasicA
             return text.toString();
         }
     }
+    protected String getValue(TextView text) {
+        if (text==null||  TextUtils.isEmpty(text.getText())){
+            return null;
 
+        }
+        return text.getText().toString();
+    }
     protected String getValue(Object text) {
         if (text==null||  !(text instanceof String)){
             return null;
