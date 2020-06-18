@@ -141,9 +141,11 @@ public class PatrolRouteActivity extends BaseMVPAcivity<PatrolRouteContract.View
         for (int i = 0; i < datas.size(); i++) {
             PatrikRouteBean item = datas.get(i);
             if (i == 0) {
-                polyline.startPath(Double.valueOf(item.getX()), Double.valueOf(item.getY()));
+//                polyline.startPath(Double.valueOf(item.getX()), Double.valueOf(item.getY()));
+                polyline.startPath(Double.valueOf(item.getY()), Double.valueOf(item.getX()));
             } else {
-                polyline.lineTo(Double.valueOf(item.getX()), Double.valueOf(item.getY()));
+//                polyline.lineTo(Double.valueOf(item.getX()), Double.valueOf(item.getY()));
+                polyline.lineTo(Double.valueOf(item.getY()), Double.valueOf(item.getX()));
             }
         }
         mMapView.setExtent(polyline);
@@ -183,6 +185,7 @@ public class PatrolRouteActivity extends BaseMVPAcivity<PatrolRouteContract.View
                         }
                     });
                     PatrikRouteBean data = datas.get(index);
+//                    toPoint(Double.valueOf(data.getY()), Double.valueOf(data.getX()));
                     toPoint(Double.valueOf(data.getX()), Double.valueOf(data.getY()));
                     ++index;
                 }

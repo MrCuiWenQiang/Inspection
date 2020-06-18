@@ -212,8 +212,11 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
         data.setWORKLEVEL(getValue(tvWorklevel));
         data.setCADDRESS(getValue(tvCaddress));
         data.setFeedbackContent(getValue(tvFeedbackcontent));
-        data.setX(String.valueOf(x));
-        data.setY(String.valueOf(y));
+/*        data.setX(String.valueOf(x));
+        data.setY(String.valueOf(y));*/
+// TODO: 2020/6/18 因为后台数据库将坐标 x y倒置问题 故反过来
+        data.setX(String.valueOf(y));
+        data.setY(String.valueOf(x));
         data.setPID(id);
 
         mPresenter.uploadFile(data, photo_paths, video_paths);
@@ -224,7 +227,7 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
         typeIds = ids;
         typeNames = names;
 
-        mPresenter.queryAddress(x,y);
+        mPresenter.queryAddress(x, y);
     }
 
     @Override

@@ -72,7 +72,10 @@ public class MapFragmentPresenter extends BaseMVPPresenter<MapFragmentContract.V
 
     @Override
     public void uploadLocal(double lat, double lon, String id) {
-        UploadLocalBean requestBean = new UploadLocalBean(String.valueOf(lat), String.valueOf(lon), id, MyApplication.loginUser.getPATROLCODE());
+        // TODO: 2020/6/18 因为后台数据库将坐标 x y倒置问题 故反过来
+
+//        UploadLocalBean requestBean = new UploadLocalBean(String.valueOf(lat), String.valueOf(lon), id, MyApplication.loginUser.getPATROLCODE());
+        UploadLocalBean requestBean = new UploadLocalBean(String.valueOf(lon), String.valueOf(lat), id, MyApplication.loginUser.getPATROLCODE());
            HttpHelper.post(Urls.ADDPATROLROUTE, requestBean, new HttpResponseCallback() {
             @Override
             public void onSuccess(String datajson) {
