@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -30,12 +31,36 @@
                     android:gravity="center_vertical">
 
                     <TextView
+                        android:id="@+id/tv_ctype"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/edit_style"
                         android:gravity="center_vertical"
-                        android:hint="请选择事件类型"
+                        android:hint="点击选择事件类型"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout style="@style/edit_ll">
+
+                <TextView
+                    style="@style/edit_title"
+                    android:text="事件标题:" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="0.6"
+                    android:gravity="center_vertical">
+
+                    <EditText
+                        android:id="@+id/et_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_style"
+                        android:gravity="center_vertical"
+                        android:hint="请填写事件标题"
                         android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -44,7 +69,7 @@
 
                 <TextView
                     style="@style/edit_title"
-                    android:text="事件时间:" />
+                    android:text="事件等级:" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -53,18 +78,15 @@
                     android:gravity="center_vertical">
 
                     <TextView
+                        android:id="@+id/tv_worklevel"
+                        android:hint="点击选择事件等级"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/edit_style"
                         android:textSize="18sp" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:src="@mipmap/upload_date" />
-                </LinearLayout>
+                      </LinearLayout>
             </LinearLayout>
 
             <LinearLayout style="@style/edit_ll">
@@ -79,7 +101,8 @@
                     android:layout_weight="0.6"
                     android:gravity="center_vertical">
 
-                    <TextView
+                    <EditText
+                        android:id="@+id/et_caddress"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -87,6 +110,7 @@
                         android:textSize="18sp" />
 
                     <ImageView
+                        android:id="@+id/im_caddress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -108,7 +132,7 @@
                     android:gravity="center_vertical">
 
                     <EditText
-                        android:id="@+id/tv_gjdm"
+                        android:id="@+id/tv_feedbackcontent"
                         android:layout_width="match_parent"
                         android:layout_height="125dp"
                         android:background="@drawable/edit_style" />
@@ -152,6 +176,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"/>
         </LinearLayout>
+        <Button
+            android:id="@+id/bt_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bt_login_backage"
+            android:text="提交"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

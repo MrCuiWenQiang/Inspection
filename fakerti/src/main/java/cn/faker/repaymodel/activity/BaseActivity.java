@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
@@ -126,12 +127,18 @@ public abstract class BaseActivity extends BaseManagerActivity implements BasicA
         }
         return text.toString();
     }
-
     protected void showLoading() {
+        showLoading(null);
+    }
+    protected void showLoading(String message) {
         dimiss();
         tipDialog = new QMUITipDialog.CustomBuilder(this)
                 .setContent(R.layout.dialog_loading)
                 .create();
+        if (message!=null){
+            TextView tv = tipDialog.findViewById(R.id.tv_content);
+            tv.setText(message);
+        }
         tipDialog.setCancelable(false);
         tipDialog.show();
     }

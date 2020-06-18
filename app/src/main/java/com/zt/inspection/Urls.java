@@ -4,6 +4,7 @@ public class Urls {
     private static final String baseUrl = "http://192.168.2.15:6080";
 
     public static final String mapUrl = baseUrl+"/arcgis/rest/services/lixiamap1/MapServer";//LYG测试
+    public static final String addressURL = baseUrl+"/arcgis/rest/services/社区卫生院_CreateAddressLocator/GeocodeServer";//地理编码
 
 
     private static final String URL = "http://192.168.2.7:8087/";
@@ -26,5 +27,7 @@ public class Urls {
     public static final String GETCASEINFOLIST = URL + "CaseInfoApi/GetCaseInfoList";
     public static final String GETPATROLSECTION = URL + "PatrolApi/GetPatrolSection";
     public static final String GETPATROLROUTE = URL + "PatrolApi/GetPatrolRoute";
+    public static final String GETLEIXIN = URL + "CaseInfoApi/GetLeiXin";
+    public static final String ADDINFO = URL + "CaseInfoApi/AddInfo";
 
 }

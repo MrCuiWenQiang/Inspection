@@ -1,6 +1,7 @@
 package com.zt.inspection.view.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -45,6 +46,8 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
     private LocationDisplayManager locationDisplayManager;
 
     private boolean isUpload = false;//是否上传坐标
+    private double lat;
+    private double lon;
 
     public static MapFragment newInstance() {
         Bundle args = new Bundle();
@@ -101,14 +104,12 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
         locationDisplayManager.setLocationListener(new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-
                 String bdlat = location.getLatitude() + "";
                 String bdlon = location.getLongitude() + "";
                 if (bdlat.indexOf("E") == -1 || bdlon.indexOf("E") == -1) {
                     //这里做个判断是因为，可能因为gps信号问题，定位出来的经纬度不正常。
-                    double lat = location.getLatitude();//纬度
-                    double lon = location.getLongitude();//经度
-
+                    lat = location.getLatitude();//纬度
+                    lon = location.getLongitude();//经度
 
                     if (isUpload) {
                         mPresenter.uploadLocal(lat, lon, roleId);
@@ -148,13 +149,14 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
         tv_update.setVisibility(View.GONE);
         tv_end.setVisibility(View.GONE);
     }
+
     private RoleDialog rdialog;
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_start: {
-                rdialog =  new RoleDialog().setRegisListener(new RoleDialog.onRegisListener() {
+                rdialog = new RoleDialog().setRegisListener(new RoleDialog.onRegisListener() {
                     @Override
                     public void onRegistInfo(String info) {
                         if (TextUtils.isEmpty(info)) {
@@ -170,7 +172,8 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
                 break;
             }
             case R.id.tv_update: {
-                toAcitvity(UploadActivity.class);
+                Intent intent = UploadActivity.toIntent(getContext(), roleId, lat, lon);
+                startActivity(intent);
                 break;
             }
             case R.id.tv_end: {
@@ -211,7 +214,6 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
             }
         }
     }
-
 
 
     String roleId = null;
