@@ -1,7 +1,11 @@
 package com.zt.inspection.model.entity.response;
 
-public class NoticeBean {
-    ///公告id
+import java.io.Serializable;
+
+public class NoticeBean implements Serializable {
+      /// <summary>
+    /// 公告id
+    /// </summary>
     private String NID;
 
     /// <summary>
@@ -28,6 +32,17 @@ public class NoticeBean {
     /// 发布人姓名
     /// </summary>
     private String USERNAME;
+
+    /// <summary>
+    /// 类型：1.通知公告2.美篇图文3.工作消息
+    /// </summary>
+    private String TYPE;
+
+    /// <summary>
+    /// 类型文字
+    /// </summary>
+    private String TYPEs;
+
 
     public String getNID() {
         return NID;
@@ -75,5 +90,21 @@ public class NoticeBean {
 
     public void setUSERNAME(String USERNAME) {
         this.USERNAME = USERNAME;
+    }
+
+    public String getTYPE() {
+        return TYPE;
+    }
+
+    public void setTYPE(String TYPE) {
+        this.TYPE = TYPE;
+    }
+
+    public String getTYPEs() {
+        return TYPEs;
+    }
+
+    public void setTYPEs(String TYPEs) {
+        this.TYPEs = TYPEs;
     }
 }

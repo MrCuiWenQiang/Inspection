@@ -16,9 +16,7 @@ import com.zt.inspection.model.entity.response.NoticeBean;
 import java.util.List;
 
 
-/**
- * 图片and 视频第一帧展示
- */
+
 public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeHolder> {
 
     private List<NoticeBean> data;
@@ -36,7 +34,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeHold
     @NonNull
     @Override
     public NoticeHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_notice, null, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_notice, viewGroup, false);
         return new NoticeHolder(v);
     }
 
@@ -47,6 +45,12 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeHold
         noticeHolder.tv_content.setText(item.getCONTENT());
         noticeHolder.tv_man.setText("由" + item.getUSERNAME() + "发布");
         noticeHolder.tv_date.setText("发布于" + item.getCREATEDATE());
+        noticeHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(i,item);
+            }
+        });
     }
 
     @Override

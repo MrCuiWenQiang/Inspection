@@ -4,23 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
+    <com.qmuiteam.qmui.widget.QMUITabSegment
+        android:id="@+id/tabs"
+        android:textSize="12sp"
+        android:background="?attr/qmui_list_item_bg_with_border_top"
+        app:qmui_tab_icon_position="top"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srlAccentColor="#00000000"
-        app:srlEnablePreviewInEditMode="true"
-        app:srlPrimaryColor="#00000000">
-
-        <com.scwang.smartrefresh.layout.header.ClassicsHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        android:layout_height="50dp"/>
+    <cn.faker.repaymodel.widget.viewgroup.CurrentViewPager
+        android:id="@+id/contentViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fitsSystemWindows="true" />
 
 </LinearLayout>

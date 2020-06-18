@@ -17,28 +17,4 @@ import cn.faker.repaymodel.net.okhttp3.callback.HttpResponseCallback;
 
 public class NoticePresenter extends BaseMVPPresenter<NoticeContract.View> implements NoticeContract.Presenter {
 
-    @Override
-    public void loadData(String txt_search, String start, String end) {
-        if (TextUtils.isEmpty(txt_search)&&(TextUtils.isEmpty(start)||TextUtils.isEmpty(end))){
-            getView().loadData_Fail("缺少必要参数");
-            return;
-        }
-        NoticeEntity noticeEntity = new NoticeEntity(txt_search,start,end);
-        HttpHelper.post(Urls.GETNOTICELIST, noticeEntity, new HttpResponseCallback() {
-            @Override
-            public void onSuccess(String data) {
-                List<NoticeBean> noticeBeans = JsonUtil.fromList(data,NoticeBean.class);
-                if (noticeBeans!=null&&noticeBeans.size()>0){
-                    getView().loadData_Success(noticeBeans);
-                }else {
-                    getView().loadData_Fail("暂无数据");
-                }
-            }
-
-            @Override
-            public void onFailed(int status, String message) {
-                getView().loadData_Fail(message);
-            }
-        });
-    }
 }

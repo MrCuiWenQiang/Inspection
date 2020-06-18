@@ -5,40 +5,40 @@ public class NoticeEntity {
     /// <param name="start">开始时间</param>
     /// <param name="end">结束时间</param>
 
-    private String txt_search;
-    private String start;
-    private String end;
+    private String TYPE;
+    private int page;
+    private int limit;
 
     public NoticeEntity() {
     }
 
-    public NoticeEntity(String txt_search, String start, String end) {
-        this.txt_search = txt_search;
-        this.start = start;
-        this.end = end;
+    public NoticeEntity(String TYPE, int page, int limit) {
+        this.TYPE = TYPE;
+        this.page = page;
+        this.limit = limit;
     }
 
-    public String getTxt_search() {
-        return txt_search;
+    public String getTYPE() {
+        return TYPE;
     }
 
-    public void setTxt_search(String txt_search) {
-        this.txt_search = txt_search;
+    public void setTYPE(String TYPE) {
+        this.TYPE = TYPE;
     }
 
-    public String getStart() {
-        return start;
+    public int getPage() {
+        return page;
     }
 
-    public void setStart(String start) {
-        this.start = start;
+    public void setPage(int page) {
+        this.page = page;
     }
 
-    public String getEnd() {
-        return end;
+    public int getLimit() {
+        return limit;
     }
 
-    public void setEnd(String end) {
-        this.end = end;
+    public void setLimit(int limit) {
+        this.limit = limit;
     }
 }
