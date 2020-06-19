@@ -31,5 +31,6 @@ public class Urls {
     public static final String GETLEIXIN = URL + "CaseInfoApi/GetLeiXin";
     public static final String ADDINFO = URL + "CaseInfoApi/AddInfo";
     public static final String GETBRANCHLIST = URL + "UserApi/GetBranchList";
+    public static final String GETQUERYINFO = URL + "CaseInfoApi/GetQueryInfo";
 
 }

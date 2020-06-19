@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -19,6 +20,7 @@ import java.util.List;
 
 import cn.faker.repaymodel.mvp.BaseMVPAcivity;
 import cn.faker.repaymodel.util.ToastUtility;
+import cn.faker.repaymodel.widget.view.BaseRecycleView;
 
 /**
  * 不同案件状态列表
@@ -84,6 +86,13 @@ public class WorkStatusActivity extends BaseMVPAcivity<WorkStatusContract.View, 
             public void onLoadmore(RefreshLayout refreshlayout) {
                 ++page;
                 loadData();
+            }
+        });
+        adapter.setOnItemClickListener(new BaseRecycleView.OnItemClickListener<CaseInfoBean>() {
+            @Override
+            public void onItemClick(View view, CaseInfoBean data, int position) {
+                Intent intent = WorkInfoActivity.newInstance(getContext(),data.getCID());
+                startActivity(intent);
             }
         });
     }

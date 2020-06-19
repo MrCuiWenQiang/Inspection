@@ -1,5 +1,6 @@
 package com.zt.inspection.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,12 +13,14 @@ import com.zt.inspection.R;
 import com.zt.inspection.contract.HistoryWorkFragmentContract;
 import com.zt.inspection.model.entity.response.CaseInfoBean;
 import com.zt.inspection.presenter.HistoryWorkFragmentPresenter;
+import com.zt.inspection.view.WorkInfoActivity;
 import com.zt.inspection.view.adapter.HistoryWorkAdapter;
 
 import java.util.List;
 
 import cn.faker.repaymodel.mvp.BaseMVPFragment;
 import cn.faker.repaymodel.util.ToastUtility;
+import cn.faker.repaymodel.widget.view.BaseRecycleView;
 
 /**
  * 案件历史
@@ -67,6 +70,13 @@ public class HistoryWorkFragment extends BaseMVPFragment<HistoryWorkFragmentCont
             public void onLoadmore(RefreshLayout refreshlayout) {
                 ++page;
                 loadData();
+            }
+        });
+        adapter.setOnItemClickListener(new BaseRecycleView.OnItemClickListener<CaseInfoBean>() {
+            @Override
+            public void onItemClick(View view, CaseInfoBean data, int position) {
+                Intent intent = WorkInfoActivity.newInstance(getContext(),data.getCID());
+                startActivity(intent);
             }
         });
     }

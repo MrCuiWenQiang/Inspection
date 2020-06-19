@@ -12,8 +12,15 @@ import com.zt.inspection.model.entity.response.CaseInfoBean;
 
 import java.util.List;
 
+import cn.faker.repaymodel.widget.view.BaseRecycleView;
+
 public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.ViewHolder> {
     private List<CaseInfoBean> datas;
+    private BaseRecycleView.OnItemClickListener<CaseInfoBean> onItemClickListener;
+
+    public void setOnItemClickListener(BaseRecycleView.OnItemClickListener<CaseInfoBean> onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     @NonNull
     @Override
@@ -38,6 +45,12 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.ViewHolder> {
         viewHolder.tvClosetime.setText(data.getCLOSETIME());
         viewHolder.tvCaddress.setText(data.getCADDRESS());
         viewHolder.tvFeedbackcontent.setText(data.getFEEDBACKCONTENT());
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemClick(v,data,i);
+            }
+        });
     }
 
     @Override
