@@ -10,6 +10,10 @@ public class WorkStatusContract {
         void loadSuccess(List<CaseInfoBean> datas);
 
         void loadFail(String message);
+
+        void deleteSuccess();
+
+        void deleteFail(String message);
     }
 
     public interface Presenter {
@@ -20,6 +24,7 @@ public class WorkStatusContract {
          */
         void loaddata(int page, String bumenid, String status);
 
+        void delete(String cid);
     }
 
     public interface Model {

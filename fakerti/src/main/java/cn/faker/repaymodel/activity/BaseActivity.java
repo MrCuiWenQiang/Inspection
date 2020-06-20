@@ -1,5 +1,6 @@
 package cn.faker.repaymodel.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,8 +33,8 @@ public abstract class BaseActivity extends BaseManagerActivity implements BasicA
         initWindow();
         setContentView(getLayoutId());
         initView();
-        initListener();
         initData(savedInstanceState);
+        initListener();
     }
     protected void initWindow(){
 
@@ -68,7 +69,11 @@ public abstract class BaseActivity extends BaseManagerActivity implements BasicA
         Intent intent = new Intent(this, cls);
         startActivity(intent);
     }
-
+    protected void showListDialog(String title, String[] items, DialogInterface.OnClickListener listener) {
+        new QMUIDialog.CheckableDialogBuilder(this).setTitle(title)
+                .addItems(items, listener)
+                .show();
+    }
     protected void showDialog(String title,String msg) {
         new QMUIDialog.MessageDialogBuilder(this).setTitle(title).setMessage(msg).addAction("确定", new QMUIDialogAction.ActionListener() {
             @Override

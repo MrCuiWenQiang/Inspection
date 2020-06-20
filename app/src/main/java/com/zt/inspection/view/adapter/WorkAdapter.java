@@ -17,9 +17,14 @@ import cn.faker.repaymodel.widget.view.BaseRecycleView;
 public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.ViewHolder> {
     private List<CaseInfoBean> datas;
     private BaseRecycleView.OnItemClickListener<CaseInfoBean> onItemClickListener;
+    private OnLongListener<CaseInfoBean> onLongListener;
 
     public void setOnItemClickListener(BaseRecycleView.OnItemClickListener<CaseInfoBean> onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+    }
+
+    public void setOnLongListener(OnLongListener<CaseInfoBean> onLongListener) {
+        this.onLongListener = onLongListener;
     }
 
     @NonNull
@@ -48,7 +53,17 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.ViewHolder> {
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onItemClickListener.onItemClick(v,data,i);
+                onItemClickListener.onItemClick(v, data, i);
+            }
+        });
+
+        viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (onLongListener != null) {
+                    onLongListener.onlongListerer(i, data);
+                }
+                return true;
             }
         });
     }

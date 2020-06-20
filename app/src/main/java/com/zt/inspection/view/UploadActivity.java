@@ -24,7 +24,6 @@ import com.zt.inspection.contract.UploadActivityContract;
 import com.zt.inspection.model.entity.request.WorkUpdateBean;
 import com.zt.inspection.model.entity.response.CtypeBean;
 import com.zt.inspection.presenter.UploadPresenter;
-import com.zt.inspection.view.CameraActivity;
 import com.zt.inspection.view.adapter.ResourceAdapter;
 import com.zt.inspection.view.dialog.VideoDialog;
 
@@ -33,7 +32,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import cn.faker.repaymodel.mvp.BaseMVPAcivity;
-import cn.faker.repaymodel.mvp.BaseMVPFragment;
 import cn.faker.repaymodel.util.ToastUtility;
 
 import static com.zt.inspection.view.adapter.ResourceAdapter.ADAPTER_TYPR_SHOW_PHOTO;
@@ -90,7 +88,7 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
 
     @Override
     protected int getLayoutContentId() {
-        return R.layout.fg_upload;
+        return R.layout.ac_upload;
     }
 
     @Override

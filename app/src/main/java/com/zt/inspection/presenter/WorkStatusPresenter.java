@@ -53,4 +53,21 @@ public class WorkStatusPresenter extends BaseMVPPresenter<WorkStatusContract.Vie
             }
         });
     }
+
+    @Override
+    public void delete(String cid) {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("ids", cid);
+        HttpHelper.get(Urls.UPDATEDELTYPE, params, new HttpResponseCallback() {
+            @Override
+            public void onSuccess(String datajson) {
+                getView().deleteSuccess();
+            }
+
+            @Override
+            public void onFailed(int status, String message) {
+                getView().deleteFail(message);
+            }
+        });
+    }
 }

@@ -15,6 +15,7 @@ import com.zt.inspection.model.entity.response.CaseInfoBean;
 import com.zt.inspection.presenter.HistoryWorkFragmentPresenter;
 import com.zt.inspection.view.WorkInfoActivity;
 import com.zt.inspection.view.adapter.HistoryWorkAdapter;
+import com.zt.inspection.view.adapter.OnLongListener;
 
 import java.util.List;
 
@@ -75,10 +76,16 @@ public class HistoryWorkFragment extends BaseMVPFragment<HistoryWorkFragmentCont
         adapter.setOnItemClickListener(new BaseRecycleView.OnItemClickListener<CaseInfoBean>() {
             @Override
             public void onItemClick(View view, CaseInfoBean data, int position) {
-                Intent intent = WorkInfoActivity.newInstance(getContext(),data.getCID());
+                Intent intent = WorkInfoActivity.newInstance(getContext(),data.getCID(),data.getCSTATE());
                 startActivity(intent);
             }
         });
+     /*   adapter.setOnLongListener(new OnLongListener<CaseInfoBean>() {
+            @Override
+            public void onlongListerer(int i, CaseInfoBean data) {
+
+            }
+        });*/
     }
 
     @Override

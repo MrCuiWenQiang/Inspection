@@ -79,6 +79,7 @@
         <activity android:name=".view.BranchModelActivity"/>
         <activity android:name=".view.WebActivity"/>
         <activity android:name=".view.WorkInfoActivity"/>
+        <activity android:name=".view.AddHandleInfoActivity"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.zt.inspection.fileprovider"

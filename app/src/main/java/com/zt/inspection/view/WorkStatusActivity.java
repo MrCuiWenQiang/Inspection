@@ -1,6 +1,7 @@
 package com.zt.inspection.view;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,8 @@ import com.zt.inspection.R;
 import com.zt.inspection.contract.WorkStatusContract;
 import com.zt.inspection.model.entity.response.CaseInfoBean;
 import com.zt.inspection.presenter.WorkStatusPresenter;
+import com.zt.inspection.util.RoleIdUtil;
+import com.zt.inspection.view.adapter.OnLongListener;
 import com.zt.inspection.view.adapter.WorkAdapter;
 
 import java.util.List;
@@ -91,8 +94,23 @@ public class WorkStatusActivity extends BaseMVPAcivity<WorkStatusContract.View, 
         adapter.setOnItemClickListener(new BaseRecycleView.OnItemClickListener<CaseInfoBean>() {
             @Override
             public void onItemClick(View view, CaseInfoBean data, int position) {
-                Intent intent = WorkInfoActivity.newInstance(getContext(),data.getCID());
+                Intent intent = WorkInfoActivity.newInstance(getContext(),data.getCID(),data.getCSTATE());
                 startActivity(intent);
+            }
+        });
+        adapter.setOnLongListener(new OnLongListener<CaseInfoBean>() {
+            @Override
+            public void onlongListerer(int i, CaseInfoBean data) {
+                if (status.equals("0")&&RoleIdUtil.isXUNJIAN()){
+                    showListDialog(null, new String[]{"删除"}, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            showLoading();
+                            mPresenter.delete(data.getCID());
+                        }
+                    });
+                }
             }
         });
     }
@@ -128,5 +146,16 @@ public class WorkStatusActivity extends BaseMVPAcivity<WorkStatusContract.View, 
         dimiss();
         ToastUtility.showToast(message);
         mRefreshLayout.setEnableLoadmore(false);
+    }
+
+    @Override
+    public void deleteSuccess() {
+        page = 1;
+        loadData();
+    }
+
+    @Override
+    public void deleteFail(String message) {
+        ToastUtility.showToast(message);
     }
 }
