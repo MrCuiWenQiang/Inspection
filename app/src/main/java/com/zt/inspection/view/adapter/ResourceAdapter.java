@@ -3,6 +3,7 @@ package com.zt.inspection.view.adapter;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.LinearLayout;
 
 import com.zt.inspection.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import cn.faker.repaymodel.net.loadimage.ImageLoadHelper;
@@ -42,6 +45,14 @@ public class ResourceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void setPhotoPaths(List<String> photoPaths) {
         this.photoPaths = photoPaths;
         notifyDataSetChanged();
+    }
+    public void setPhotoPaths(String ps) {
+        if (TextUtils.isEmpty(ps)){
+            String[] pss = ps.split(",");
+            List<String> photoPaths = Arrays.asList(pss);
+            this.photoPaths = photoPaths;
+            notifyDataSetChanged();
+        }
     }
 
     @Override

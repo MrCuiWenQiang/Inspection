@@ -89,6 +89,9 @@ package com.zt.inspection.model.entity.response;
  * String
  * 否
  * 施工后的视频
+ * url
+ * String
+ * 网络
  */
 public class WordInfoBean {
     private String CHID;
@@ -108,6 +111,7 @@ public class WordInfoBean {
     private String HANDLEUNAME;
     private String SGHIMAGES;
     private String SGHVIDEO;
+    private String url;
 
     public String getCHID() {
         return CHID;
@@ -243,5 +247,13 @@ public class WordInfoBean {
 
     public void setSGHVIDEO(String SGHVIDEO) {
         this.SGHVIDEO = SGHVIDEO;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

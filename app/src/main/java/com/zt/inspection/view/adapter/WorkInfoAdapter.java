@@ -13,6 +13,8 @@ import com.zt.inspection.model.entity.response.WordInfoBean;
 
 import java.util.List;
 
+import static com.zt.inspection.view.adapter.ResourceAdapter.ADAPTER_TYPR_SHOW_PHOTO;
+
 public class WorkInfoAdapter extends RecyclerView.Adapter<WorkInfoAdapter.ViewHolder> {
     private List<WordInfoBean> datas;
 
@@ -36,6 +38,10 @@ public class WorkInfoAdapter extends RecyclerView.Adapter<WorkInfoAdapter.ViewHo
         viewHolder.tvFkuid.setText(wordInfoBean.getSENDUNAME());
         viewHolder.tvFeedbacktime.setText(wordInfoBean.getFEEDBACKTIME());
         viewHolder.tvFeedbackcontent.setText(wordInfoBean.getFEEDBACKCONTENT());
+        ImageAdapter adapter = new ImageAdapter();
+        adapter.setPhotoPaths(wordInfoBean.getUrl(),wordInfoBean.getSGHIMAGES());
+        viewHolder.rv_photo.setAdapter(adapter);
+
     }
 
     @Override

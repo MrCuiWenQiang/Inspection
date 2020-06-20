@@ -41,7 +41,7 @@
                     style="@style/home_tool_text_sum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(80)" />
+                    android:text="" />
             </LinearLayout>
 
             <LinearLayout
@@ -64,7 +64,7 @@
                     style="@style/home_tool_text_sum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(80)" />
+                    android:text="" />
             </LinearLayout>
 
             <LinearLayout
@@ -88,7 +88,7 @@
                     style="@style/home_tool_text_sum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(80)" />
+                    android:text="" />
             </LinearLayout>
 
         </LinearLayout>

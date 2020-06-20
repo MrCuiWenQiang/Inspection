@@ -25,6 +25,7 @@ import com.zt.inspection.model.entity.request.WorkUpdateBean;
 import com.zt.inspection.model.entity.response.CtypeBean;
 import com.zt.inspection.presenter.UploadPresenter;
 import com.zt.inspection.view.adapter.ResourceAdapter;
+import com.zt.inspection.view.dialog.PhotoDialog;
 import com.zt.inspection.view.dialog.VideoDialog;
 
 import java.util.ArrayList;
@@ -142,6 +143,10 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
                     intent.putExtra(CameraActivity.CAMERA_TAG, CameraActivity.CAMERA_TAG_PHOTO);
                     startActivityForResult(intent, REQUESTCODE);
                 } else if (type == TYPE_PHOTO) {
+                    String videoPaths = photo_paths.get(postoin);
+                    PhotoDialog videoDialog = new PhotoDialog();
+                    videoDialog.setUrl(videoPaths);
+                    videoDialog.show(getSupportFragmentManager(), "s");
                 }
             }
         });
