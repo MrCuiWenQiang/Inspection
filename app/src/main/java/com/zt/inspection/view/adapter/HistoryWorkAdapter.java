@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.zt.inspection.R;
 import com.zt.inspection.model.entity.response.CaseInfoBean;
+import com.zt.inspection.util.StatusUtil;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class HistoryWorkAdapter extends RecyclerView.Adapter<HistoryWorkAdapter.
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         CaseInfoBean data = datas.get(i);
         viewHolder.tvTitle.setText(data.getTITLE());
-        viewHolder.tvCtid.setText(data.getCTID());
+        viewHolder.tvCtid.setText(StatusUtil.getName(data.getCSTATE()));
         viewHolder.tvCtype.setText(data.getCTYPE());
         viewHolder.tvUpuid.setText(data.getUPUID());
         viewHolder.tvSenduid.setText(data.getSENDUID());

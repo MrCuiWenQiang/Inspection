@@ -13,6 +13,9 @@ import com.zt.inspection.model.entity.response.WordInfoBean;
 
 import java.util.List;
 
+import cn.faker.repaymodel.util.DateUtils;
+import cn.faker.repaymodel.widget.view.date.DateUtil;
+
 import static com.zt.inspection.view.adapter.ResourceAdapter.ADAPTER_TYPR_SHOW_PHOTO;
 
 public class WorkInfoAdapter extends RecyclerView.Adapter<WorkInfoAdapter.ViewHolder> {
@@ -36,7 +39,7 @@ public class WorkInfoAdapter extends RecyclerView.Adapter<WorkInfoAdapter.ViewHo
         viewHolder.tvHandlebegintime.setText(wordInfoBean.getHANDLEENDTIME());
         viewHolder.tvHandleendtime.setText(wordInfoBean.getHANDLEENDTIME());
         viewHolder.tvFkuid.setText(wordInfoBean.getSENDUNAME());
-        viewHolder.tvFeedbacktime.setText(wordInfoBean.getFEEDBACKTIME());
+        viewHolder.tvFeedbacktime.setText(DateUtils.dateToString(DateUtils.stringToDate(wordInfoBean.getFEEDBACKTIME(),DateUtils.DATE_TIME_FORMAT),DateUtils.DATE_TIME_FORMAT));
         viewHolder.tvFeedbackcontent.setText(wordInfoBean.getFEEDBACKCONTENT());
         ImageAdapter adapter = new ImageAdapter();
         adapter.setPhotoPaths(wordInfoBean.getUrl(),wordInfoBean.getSGHIMAGES());
