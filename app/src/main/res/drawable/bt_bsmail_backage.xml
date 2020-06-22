@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="false">
+        <shape>
+            <solid android:color="@color/t_rule" />
+            <padding android:bottom="5dp" android:top="5dp" android:right="7dp" android:left="7dp"/>
+            <corners android:radius="3dp"/>
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/t_rule2" />
+            <padding android:bottom="5dp" android:top="5dp" android:right="7dp" android:left="7dp"/>
+            <corners android:radius="3dp"/>
+        </shape>
+    </item>
+</selector>

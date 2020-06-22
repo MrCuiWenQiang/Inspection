@@ -15,7 +15,11 @@ import com.zt.inspection.model.entity.response.CaseInfoBean;
 import com.zt.inspection.presenter.HistoryWorkFragmentPresenter;
 import com.zt.inspection.view.WorkInfoActivity;
 import com.zt.inspection.view.adapter.HistoryWorkAdapter;
+import com.zt.inspection.view.adapter.ImageAdapter;
 import com.zt.inspection.view.adapter.OnLongListener;
+import com.zt.inspection.view.adapter.VideoImageAdapter;
+import com.zt.inspection.view.dialog.DownLoadViewDialog;
+import com.zt.inspection.view.dialog.PhotoDialog;
 
 import java.util.List;
 
@@ -48,7 +52,9 @@ public class HistoryWorkFragment extends BaseMVPFragment<HistoryWorkFragmentCont
     @Override
     public void initview(View v) {
         rv_list = findViewById(R.id.rv_list);
-        rv_list.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        manager.setAutoMeasureEnabled(true);
+        rv_list.setLayoutManager(manager);
         adapter = new HistoryWorkAdapter();
         rv_list.setAdapter(adapter);
         mRefreshLayout = findViewById(R.id.refreshLayout);
@@ -78,6 +84,24 @@ public class HistoryWorkFragment extends BaseMVPFragment<HistoryWorkFragmentCont
             public void onItemClick(View view, CaseInfoBean data, int position) {
                 Intent intent = WorkInfoActivity.newInstance(getContext(),data.getCID(),data.getCSTATE());
                 startActivity(intent);
+            }
+        });
+        adapter.setOnPhotoListener(new ImageAdapter.OnPhotoListener() {
+            @Override
+            public void onClick(int type, int postoin, Object data) {
+                String videoPaths = (String) data;
+                PhotoDialog videoDialog = new PhotoDialog();
+                videoDialog.setUrl(videoPaths);
+                videoDialog.show(getChildFragmentManager(), "s");
+            }
+        });
+        adapter.setOnVideoPhotoListener(new VideoImageAdapter.OnVideoPhotoListener() {
+            @Override
+            public void onClick(int type, int postoin, Object data) {
+                String videoPaths = (String) data;
+                DownLoadViewDialog downLoadViewDialog = new DownLoadViewDialog();
+                downLoadViewDialog.setUrl(videoPaths);
+                downLoadViewDialog.show(getChildFragmentManager(),"v");
             }
         });
      /*   adapter.setOnLongListener(new OnLongListener<CaseInfoBean>() {

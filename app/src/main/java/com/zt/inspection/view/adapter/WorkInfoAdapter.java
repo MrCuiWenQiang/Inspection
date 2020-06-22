@@ -41,6 +41,7 @@ public class WorkInfoAdapter extends RecyclerView.Adapter<WorkInfoAdapter.ViewHo
         viewHolder.tvFkuid.setText(wordInfoBean.getSENDUNAME());
         viewHolder.tvFeedbacktime.setText(DateUtils.dateToString(DateUtils.stringToDate(wordInfoBean.getFEEDBACKTIME(),DateUtils.DATE_TIME_FORMAT),DateUtils.DATE_TIME_FORMAT));
         viewHolder.tvFeedbackcontent.setText(wordInfoBean.getFEEDBACKCONTENT());
+
         ImageAdapter adapter = new ImageAdapter();
         adapter.setPhotoPaths(wordInfoBean.getUrl(),wordInfoBean.getSGHIMAGES());
         viewHolder.rv_photo.setAdapter(adapter);
@@ -71,8 +72,10 @@ public class WorkInfoAdapter extends RecyclerView.Adapter<WorkInfoAdapter.ViewHo
             tvFeedbackcontent = itemView.findViewById(R.id.tv_feedbackcontent);
             rv_photo = itemView.findViewById(R.id.rv_photo);
             rv_video = itemView.findViewById(R.id.rv_video);
-            rv_photo.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
-            rv_video.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
+
+            rv_photo.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
+            rv_video.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
+
         }
     }
 }

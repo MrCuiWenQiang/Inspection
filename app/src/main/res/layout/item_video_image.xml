@@ -5,7 +5,6 @@
     android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/iv_pto"
-        android:src="@drawable/bt_base_backage"
-        android:layout_width="120dp"
-        android:layout_height="120dp" />
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
 </android.support.constraint.ConstraintLayout>

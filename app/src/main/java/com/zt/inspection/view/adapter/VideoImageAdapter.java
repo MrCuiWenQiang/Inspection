@@ -1,34 +1,31 @@
 package com.zt.inspection.view.adapter;
 
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.zt.inspection.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import cn.faker.repaymodel.net.loadimage.ImageLoadHelper;
 
 
-public class ImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class VideoImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
 
 
     private List<String> photoPaths;
-    private OnPhotoListener onPhotoListener;
+    private OnVideoPhotoListener onPhotoListener;
 
 
-    public void setOnPhotoListener(OnPhotoListener onPhotoListener) {
+    public void setOnPhotoListener(OnVideoPhotoListener onPhotoListener) {
         this.onPhotoListener = onPhotoListener;
     }
 
@@ -51,7 +48,7 @@ public class ImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int type) {
         RecyclerView.ViewHolder viewHolder = null;
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_image, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_video_image, viewGroup, false);
         viewHolder = new PhotoViewHolder(v);
         return viewHolder;
     }
@@ -59,7 +56,8 @@ public class ImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         PhotoViewHolder photoViewHolder = (PhotoViewHolder) viewHolder;
-        ImageLoadHelper.loadImage(photoViewHolder.itemView.getContext(), photoViewHolder.iv_pto, photoPaths.get(i));
+//        ImageLoadHelper.loadImage(photoViewHolder.itemView.getContext(), photoViewHolder.iv_pto, photoPaths.get(i));
+        photoViewHolder.iv_pto.setBackgroundResource(R.mipmap.video);
         photoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +70,7 @@ public class ImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 
 
-    public interface OnPhotoListener{
+    public interface OnVideoPhotoListener{
         void onClick(int type, int postoin, Object data);
     }
 

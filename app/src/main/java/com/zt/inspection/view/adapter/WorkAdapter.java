@@ -1,6 +1,7 @@
 package com.zt.inspection.view.adapter;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,8 +68,27 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.ViewHolder> {
                 return true;
             }
         });
+
+        ImageAdapter adapter = new ImageAdapter();
+        adapter.setPhotoPaths(data.getUrl(),data.getSGQIMAGES());
+        adapter.setOnPhotoListener(onPhotoListener);
+        viewHolder.rv_photo.setAdapter(adapter);
+
+        VideoImageAdapter videoImageAdapter = new VideoImageAdapter();
+        videoImageAdapter.setPhotoPaths(data.getUrl(),data.getSGQVIDEO());
+        videoImageAdapter.setOnPhotoListener(onVideoPhotoListener);
+        viewHolder.rv_video.setAdapter(videoImageAdapter);
+    }
+    private ImageAdapter.OnPhotoListener onPhotoListener;
+    private VideoImageAdapter.OnVideoPhotoListener onVideoPhotoListener;
+
+    public void setOnVideoPhotoListener(VideoImageAdapter.OnVideoPhotoListener onVideoPhotoListener) {
+        this.onVideoPhotoListener = onVideoPhotoListener;
     }
 
+    public void setOnPhotoListener(ImageAdapter.OnPhotoListener onPhotoListener) {
+        this.onPhotoListener = onPhotoListener;
+    }
     @Override
     public int getItemCount() {
         return datas == null ? 0 : datas.size();
@@ -100,7 +120,8 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.ViewHolder> {
         private TextView tvClosetime;
         private TextView tvFeedbackcontent;
         private TextView tvCaddress;
-
+        private RecyclerView rv_video;
+        private RecyclerView rv_photo;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -117,6 +138,11 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.ViewHolder> {
             tvFeedbacktime = itemView.findViewById(R.id.tv_feedbacktime);
             tvClosetime = itemView.findViewById(R.id.tv_closetime);
             tvFeedbackcontent = itemView.findViewById(R.id.tv_feedbackcontent);
+            rv_video = itemView.findViewById(R.id.rv_video);
+            rv_photo = itemView.findViewById(R.id.rv_photo);
+            rv_photo.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
+            rv_video.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
+
         }
     }
 }

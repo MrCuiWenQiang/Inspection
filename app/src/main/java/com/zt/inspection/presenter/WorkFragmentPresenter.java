@@ -53,11 +53,11 @@ public class WorkFragmentPresenter extends BaseMVPPresenter<WorkFragmentContract
             public void onSuccess(String data) {
                 JSONObject jsonObject = JSONObject.parseObject(data);
                 String statusValue = jsonObject.getString("result");
-                if ("成功".equals(statusValue)) {
+                if ("ok".equals(statusValue)) {
                     int status = jsonObject.getInteger("state");
                     String v =WorkUtil.typeName(status);
                     getView().AddCLOCKIN_success(status, v);
-                } else if ("失败".equals(statusValue)) {
+                } else  {
                     getView().AddCLOCKIN_fail("打卡失败");
                 }
             }

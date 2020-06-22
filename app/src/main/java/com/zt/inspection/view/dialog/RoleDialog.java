@@ -78,7 +78,7 @@ public class RoleDialog extends BasicDialog {
     }
 
     protected int getDialogHeght() {
-        return ScreenUtil.getWindowHeight(getContext()) /4;
+        return ScreenUtil.getWindowHeight(getContext())* 3/11;
 
     }
 }

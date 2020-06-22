@@ -16,8 +16,12 @@ import com.zt.inspection.contract.WorkStatusContract;
 import com.zt.inspection.model.entity.response.CaseInfoBean;
 import com.zt.inspection.presenter.WorkStatusPresenter;
 import com.zt.inspection.util.RoleIdUtil;
+import com.zt.inspection.view.adapter.ImageAdapter;
 import com.zt.inspection.view.adapter.OnLongListener;
+import com.zt.inspection.view.adapter.VideoImageAdapter;
 import com.zt.inspection.view.adapter.WorkAdapter;
+import com.zt.inspection.view.dialog.DownLoadViewDialog;
+import com.zt.inspection.view.dialog.PhotoDialog;
 
 import java.util.List;
 
@@ -111,6 +115,25 @@ public class WorkStatusActivity extends BaseMVPAcivity<WorkStatusContract.View, 
                         }
                     });
                 }
+            }
+        });
+
+        adapter.setOnPhotoListener(new ImageAdapter.OnPhotoListener() {
+            @Override
+            public void onClick(int type, int postoin, Object data) {
+                String videoPaths = (String) data;
+                PhotoDialog videoDialog = new PhotoDialog();
+                videoDialog.setUrl(videoPaths);
+                videoDialog.show(getSupportFragmentManager(), "s");
+            }
+        });
+        adapter.setOnVideoPhotoListener(new VideoImageAdapter.OnVideoPhotoListener() {
+            @Override
+            public void onClick(int type, int postoin, Object data) {
+                String videoPaths = (String) data;
+                DownLoadViewDialog downLoadViewDialog = new DownLoadViewDialog();
+                downLoadViewDialog.setUrl(videoPaths);
+                downLoadViewDialog.show(getSupportFragmentManager(),"v");
             }
         });
     }

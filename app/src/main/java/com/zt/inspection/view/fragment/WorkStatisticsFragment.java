@@ -41,7 +41,7 @@ public class WorkStatisticsFragment extends BaseMVPFragment<WorkStatisticsFragme
     private WorkManualStatisAdapter adapter_manua;
     private TextView tv_date;
     private TextView tv_date_end;
-    private Button bt_search;
+    private TextView bt_search;
 
     @Override
     public void onClick(View v) {
@@ -88,10 +88,10 @@ public class WorkStatisticsFragment extends BaseMVPFragment<WorkStatisticsFragme
                 .btnTextSize(16) // button text size
                 .viewTextSize(25) // pick view text size
                 .colorCancel(Color.parseColor("#999999")) //color of cancel button
-                .colorConfirm(Color.parseColor("#009900"))//color of confirm button
+                .colorConfirm(Color.parseColor("#4688f8"))//color of confirm button
                 .minYear(1990) //min year in loop
                 .maxYear(2550) // max year in loop
-                .showDayMonthYear(true) // shows like dd mm yyyy (default is false)
+//                .showDayMonthYear(true) // shows like dd mm yyyy (default is false)
                 .dateChose(tv.getText().toString()) // date chose when init popwindow
                 .build();
         pickerPopWin.showPopWin(getActivity());
@@ -103,6 +103,8 @@ public class WorkStatisticsFragment extends BaseMVPFragment<WorkStatisticsFragme
         String mend = MonthUtil.getMonthLastDay(new Date());
         tv_date.setText(mstart);
         tv_date_end.setText(mend);
+        showLoading();
+        mPresenter.search(tv_date.getText().toString(),tv_date_end.getText().toString());
     }
 
     @Override

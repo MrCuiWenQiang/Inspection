@@ -106,7 +106,7 @@ public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, Wor
         dimiss();
         //今日未打卡
         ll_up.setVisibility(View.VISIBLE);
-        tv_up_hint.setVisibility(View.VISIBLE);
+        tv_up_hint.setVisibility(View.GONE);
         tv_down_hint.setVisibility(View.GONE);
         ll_down.setVisibility(View.GONE);
     }

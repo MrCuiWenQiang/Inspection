@@ -26,6 +26,9 @@ public abstract class DownLoadFileCallBack implements Callback {
     private FileOutputStream fos = null;
     private String  fileName;
 
+    public DownLoadFileCallBack() {
+    }
+
     public DownLoadFileCallBack(String filePath, String fileName){
         this.filePath = filePath;
         this.fileName = fileName;
