@@ -33,5 +33,6 @@ public class Urls {
     public static final String GETBRANCHLIST = URL + "UserApi/GetBranchList";
     public static final String GETQUERYINFO = URL + "CaseInfoApi/GetQueryInfo";
     public static final String UPDATEDELTYPE = URL + "CaseInfoApi/UpdateDelType";
+    public static final String BAIDUREVERSE_GEOCODING =  "http://api.map.baidu.com/reverse_geocoding/v3";
 
 }

@@ -10,10 +10,13 @@ import com.esri.core.tasks.geocode.LocatorReverseGeocodeResult;
 import com.zt.inspection.MyApplication;
 import com.zt.inspection.Urls;
 import com.zt.inspection.contract.UploadActivityContract;
+import com.zt.inspection.model.Params;
 import com.zt.inspection.model.entity.request.WorkUpdateBean;
+import com.zt.inspection.model.entity.response.BaiDuLocalBean;
 import com.zt.inspection.model.entity.response.CtypeBean;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -174,7 +177,37 @@ public class UploadPresenter extends BaseMVPPresenter<UploadActivityContract.Vie
     }
 
     public void queryAddress(double x,double y)  {
-        DBThreadHelper.startThreadInPool(new DBThreadHelper.ThreadCallback< Map<String, String>>() {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("ak", Params.BAIDU_AK);
+        params.put("output", "json");
+        params.put("coordtype", "wgs84ll");
+        params.put("location", x+","+y);
+        HttpHelper.get(Urls.BAIDUREVERSE_GEOCODING, params, new HttpCallback() {
+
+            @Override
+            public void onSuccess(String result) {
+                BaiDuLocalBean bean = JsonUtil.convertJsonToObject(result,BaiDuLocalBean.class);
+                if (bean!=null){
+                    if (bean.getStatus()==0){
+                        getView().getAddress_Success(bean.getResult().getFormatted_address());
+                    }else {
+                        getView().getAddress_Fail("暂时没有地址描述:地址反编码服务错误");
+                    }
+                }else {
+                    getView().getAddress_Fail("暂时没有地址描述：地址反编码服务出现问题");
+                }
+            }
+
+            @Override
+            public void onFailed(int status, String message) {
+            getView().getAddress_Fail("暂时没有地址描述");
+
+            }
+        });
+
+
+
+      /*  DBThreadHelper.startThreadInPool(new DBThreadHelper.ThreadCallback< Map<String, String>>() {
             @Override
             protected  Map<String, String> jobContent() throws Exception {
                 Map<String, String>  mvl = null;
@@ -198,6 +231,6 @@ public class UploadPresenter extends BaseMVPPresenter<UploadActivityContract.Vie
                     getView().getAddress_Success("....");
                 }
             }
-        });
+        });*/
     }
 }
