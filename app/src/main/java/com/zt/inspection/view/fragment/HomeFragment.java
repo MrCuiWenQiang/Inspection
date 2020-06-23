@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.esri.android.map.GraphicsLayer;
@@ -44,6 +45,7 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
     private LinearLayout ll_work;
     private RecyclerView rv_works;
     private HomeWorkAdapter adapter;
+    private ImageView im_top;
 
     @Override
     public void onClick(View v) {
@@ -66,6 +68,7 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
 
     @Override
     public void initview(View v) {
+        im_top = findViewById(R.id.im_top);
         mapview = findViewById(R.id.mapview);
         ll_notice = findViewById(R.id.ll_notice);
         ll_work = findViewById(R.id.ll_work);
@@ -121,5 +124,10 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
     @Override
     public void showWorks(List<HomeWorkBean> datas) {
         adapter.setDatas(datas);
+    }
+
+    @Override
+    public void showTab(int c) {
+        im_top.setBackgroundResource(c);
     }
 }

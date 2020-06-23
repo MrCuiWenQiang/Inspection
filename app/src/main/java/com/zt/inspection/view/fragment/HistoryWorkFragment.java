@@ -82,7 +82,7 @@ public class HistoryWorkFragment extends BaseMVPFragment<HistoryWorkFragmentCont
         adapter.setOnItemClickListener(new BaseRecycleView.OnItemClickListener<CaseInfoBean>() {
             @Override
             public void onItemClick(View view, CaseInfoBean data, int position) {
-                Intent intent = WorkInfoActivity.newInstance(getContext(),data.getCID(),data.getCSTATE());
+                Intent intent = WorkInfoActivity.newInstance(getContext(),data.getCID(),data.getCSTATE(),data.getCASENUMBER());
                 startActivity(intent);
             }
         });

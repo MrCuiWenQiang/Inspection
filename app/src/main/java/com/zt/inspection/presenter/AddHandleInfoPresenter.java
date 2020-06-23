@@ -103,9 +103,11 @@ public class AddHandleInfoPresenter extends BaseMVPPresenter<AddHandleInfoContra
     }
 
     private void uploadTxt(AddHandleInfoEntity workUpdateBean){
+        workUpdateBean.setSGHIMAGES(listtoString(updateUrl));
+        workUpdateBean.setSGHVIDEO(listtoString(updateVideoUrl));
         workUpdateBean.setHANDLEUID(MyApplication.loginUser.getPATROLCODE());
         workUpdateBean.setDEPTID(MyApplication.loginUser.getDEPARTID());
-        HttpHelper.post(Urls.ADDINFO, workUpdateBean, new HttpResponseCallback() {
+        HttpHelper.post(Urls.AddHandleInfo, workUpdateBean, new HttpResponseCallback() {
             @Override
             public void onSuccess(String datajson) {
                 getView().uploadSuccess("上报成功");
@@ -117,5 +119,15 @@ public class AddHandleInfoPresenter extends BaseMVPPresenter<AddHandleInfoContra
             }
         });
     }
-
+    private String listtoString(List<String> list){
+        if (list==null||list.size()<=0){
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (String value:list ) {
+            sb.append(value);
+            sb.append(",");
+        }
+        return sb.subSequence(0,sb.length()-1).toString();
+    }
 }

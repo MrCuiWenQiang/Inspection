@@ -44,16 +44,19 @@ public class AddHandleInfoActivity extends BaseMVPAcivity<AddHandleInfoContract.
         implements AddHandleInfoContract.View {
 
     private static final String INTENT_KEY_ID= "INTENT_KEY_ID";
+    private static final String INTENT_KEY_CASENUMBER = "INTENT_KEY_CASENUMBER";
 
-    public static Intent toIntent(Context context, String id) {
+    public static Intent toIntent(Context context, String id, String casenumber) {
         Intent intent = new Intent();
         intent.setClass(context, AddHandleInfoActivity.class);
         intent.putExtra(INTENT_KEY_ID, id);
+        intent.putExtra(INTENT_KEY_CASENUMBER,casenumber);
         return intent;
     }
 
 
     private String id;
+    private String casenumber;
     private TextView tvCstate;
     private EditText tvFeedbackcontent;
     private Button btUpdate;
@@ -98,6 +101,7 @@ public class AddHandleInfoActivity extends BaseMVPAcivity<AddHandleInfoContract.
         rv_photo.setAdapter(adapter_photo);
         rv_video.setAdapter(adapter_video);
         id = getIntent().getStringExtra(INTENT_KEY_ID);
+        casenumber = getIntent().getStringExtra(INTENT_KEY_CASENUMBER);
     }
 
     @Override
@@ -150,7 +154,8 @@ public class AddHandleInfoActivity extends BaseMVPAcivity<AddHandleInfoContract.
                     return;
                 }
                 AddHandleInfoEntity entity = new AddHandleInfoEntity();
-                entity.setCID(id);
+                // TODO: 2020/6/22 因接口原因 换为案件编号
+                entity.setCID(casenumber);
                 entity.setFEEDBACKCONTENT(getEditTextValue(tvFeedbackcontent));
                 entity.setCSTATE(String.valueOf(tvCstate.getTag()));
                 showLoading();
@@ -203,6 +208,7 @@ public class AddHandleInfoActivity extends BaseMVPAcivity<AddHandleInfoContract.
 
     @Override
     public void uploadSuccess(String message) {
+        setResult(200);
         dimiss();
         showDialog(message, new QMUIDialogAction.ActionListener() {
             @Override

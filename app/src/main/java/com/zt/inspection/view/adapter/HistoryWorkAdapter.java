@@ -77,6 +77,16 @@ public class HistoryWorkAdapter extends RecyclerView.Adapter<HistoryWorkAdapter.
         videoImageAdapter.setPhotoPaths(data.getUrl(),data.getSGQVIDEO());
         videoImageAdapter.setOnPhotoListener(onVideoPhotoListener);
         viewHolder.rv_video.setAdapter(videoImageAdapter);
+
+        ImageAdapter adapterd = new ImageAdapter();
+        adapterd.setPhotoPaths(data.getUrl(),data.getSGHIMAGES());
+        adapterd.setOnPhotoListener(onPhotoListener);
+        viewHolder.rv_photo_d.setAdapter(adapterd);
+
+        VideoImageAdapter videoImageAdapterd = new VideoImageAdapter();
+        videoImageAdapterd.setPhotoPaths(data.getUrl(),data.getSGHVIDEO());
+        videoImageAdapterd.setOnPhotoListener(onVideoPhotoListener);
+        viewHolder.rv_video_d.setAdapter(videoImageAdapterd);
     }
     private ImageAdapter.OnPhotoListener onPhotoListener;
     private VideoImageAdapter.OnVideoPhotoListener onVideoPhotoListener;
@@ -121,6 +131,8 @@ public class HistoryWorkAdapter extends RecyclerView.Adapter<HistoryWorkAdapter.
         private TextView tvCaddress;
         private RecyclerView rv_video;
         private RecyclerView rv_photo;
+        private RecyclerView rv_video_d;
+        private RecyclerView rv_photo_d;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -140,8 +152,13 @@ public class HistoryWorkAdapter extends RecyclerView.Adapter<HistoryWorkAdapter.
             tvFeedbackcontent = itemView.findViewById(R.id.tv_feedbackcontent);
             rv_video = itemView.findViewById(R.id.rv_video);
             rv_photo = itemView.findViewById(R.id.rv_photo);
+            rv_photo_d = itemView.findViewById(R.id.rv_photo_d);
+            rv_video_d = itemView.findViewById(R.id.rv_video_d);
             rv_photo.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
             rv_video.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
+            rv_photo_d.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
+            rv_video_d.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
+
         }
     }
 }

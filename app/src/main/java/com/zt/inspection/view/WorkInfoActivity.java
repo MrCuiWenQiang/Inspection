@@ -3,6 +3,7 @@ package com.zt.inspection.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -28,15 +29,18 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
 
     private static final String INTENT_KEY_WORK = "INTENT_KEY_WORK";
     private static final String INTENT_KEY_CSTATE = "INTENT_KEY_CSTATE";
+    private static final String INTENT_KEY_CASENUMBER = "INTENT_KEY_CASENUMBER";
 
-    public static Intent newInstance(Context context,String id,String cstate) {
+    public static Intent newInstance(Context context,String id,String cstate,String casenumber) {
         Intent intent = new Intent(context,WorkInfoActivity.class);
         intent.putExtra(INTENT_KEY_WORK,id);
         intent.putExtra(INTENT_KEY_CSTATE,cstate);
+        intent.putExtra(INTENT_KEY_CASENUMBER,casenumber);
         return intent;
     }
 
     private String id;
+    private String casenumber;
     private String cstate;
 
     private Button bt_addinfo;
@@ -66,6 +70,7 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         showLoading();
         id = getIntent().getStringExtra(INTENT_KEY_WORK);
         cstate = getIntent().getStringExtra(INTENT_KEY_CSTATE);
+        casenumber = getIntent().getStringExtra(INTENT_KEY_CASENUMBER);
         mPresenter.queryDatas(id);
 
         if (RoleIdUtil.isSHIGONG()&&cstate.equals("2")){
@@ -79,10 +84,19 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         bt_addinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = AddHandleInfoActivity.toIntent(getContext(),id);
-                startActivity(intent);
+                Intent intent = AddHandleInfoActivity.toIntent(getContext(),id,casenumber);
+                startActivityForResult(intent,200);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==200&&resultCode==200){
+            showLoading();
+            mPresenter.queryDatas(id);
+        }
     }
 
     @Override

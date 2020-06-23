@@ -7,16 +7,18 @@ import android.os.Bundle;
 
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.zt.inspection.R;
 import com.zt.inspection.contract.MainContract;
 import com.zt.inspection.model.entity.view.MainTableBean;
 import com.zt.inspection.presenter.MainPresenter;
-import com.zt.inspection.util.LBS.LBSUtil;
 import com.zt.inspection.view.adapter.MainPageAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.faker.repaymodel.activity.manager.ActivityManager;
 import cn.faker.repaymodel.mvp.BaseMVPAcivity;
 import cn.faker.repaymodel.widget.viewgroup.CurrentViewPager;
 
@@ -64,5 +66,23 @@ public class MainActivity extends BaseMVPAcivity<MainContract.View, MainPresente
         mTabSegment.setupWithViewPager(mContentViewPager, false);
         mTabSegment.notifyDataChanged();
         mContentViewPager.setCurrentItem(0);
+    }
+
+    @Override
+    public void onBackPressed() {
+        new QMUIDialog.MessageDialogBuilder(this).setMessage("是否退出当前应用").setCancelable(false)
+                .addAction("退出", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                        ActivityManager.exit(getContext());
+                    }
+                })
+                .addAction("取消", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                    }
+                }).show();
     }
 }

@@ -15,7 +15,7 @@
 
         <ImageView
             android:id="@+id/iv_logo"
-            android:layout_width="150dp"
+            android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerInParent="true"
             android:background="@mipmap/ic_launcher" />
@@ -24,8 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="巡查系统"
-            android:textColor="@color/login_text"
+            android:text="历下区巡查系统"
+            android:textColor="@color/text_color"
             android:textSize="25sp" />
     </LinearLayout>
 
