@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResurltUtil {
-    public static List<String> toPaths(String url,String ps) {
+    public static List<String> toPaths(String ps,String url) {
         if (!TextUtils.isEmpty(ps)){
             List<String> photoPaths = new ArrayList<>();
             String[] pss = ps.split(",");

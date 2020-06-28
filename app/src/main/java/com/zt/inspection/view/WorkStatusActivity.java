@@ -16,6 +16,7 @@ import com.zt.inspection.contract.WorkStatusContract;
 import com.zt.inspection.model.entity.response.CaseInfoBean;
 import com.zt.inspection.presenter.WorkStatusPresenter;
 import com.zt.inspection.util.RoleIdUtil;
+import com.zt.inspection.view.adapter.HistoryWorkAdapter;
 import com.zt.inspection.view.adapter.ImageAdapter;
 import com.zt.inspection.view.adapter.OnLongListener;
 import com.zt.inspection.view.adapter.VideoImageAdapter;
@@ -46,7 +47,7 @@ public class WorkStatusActivity extends BaseMVPAcivity<WorkStatusContract.View, 
 
     private RefreshLayout mRefreshLayout;
     private RecyclerView rv_list;
-    private WorkAdapter adapter;
+    private HistoryWorkAdapter adapter;
     private int page = 1;
     private String status;
 
@@ -59,7 +60,7 @@ public class WorkStatusActivity extends BaseMVPAcivity<WorkStatusContract.View, 
     protected void initContentView() {
         rv_list = findViewById(R.id.rv_list);
         rv_list.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new WorkAdapter();
+        adapter = new HistoryWorkAdapter();
         rv_list.setAdapter(adapter);
         mRefreshLayout = findViewById(R.id.refreshLayout);
         mRefreshLayout.setEnableRefresh(true);//启用刷新
@@ -98,7 +99,7 @@ public class WorkStatusActivity extends BaseMVPAcivity<WorkStatusContract.View, 
         adapter.setOnItemClickListener(new BaseRecycleView.OnItemClickListener<CaseInfoBean>() {
             @Override
             public void onItemClick(View view, CaseInfoBean data, int position) {
-                Intent intent = WorkInfoActivity.newInstance(getContext(),data.getCID(),data.getCSTATE(),data.getCASENUMBER());
+                Intent intent = WorkInfoActivity.newInstance(getContext(),data.getCID(),data.getCSTATE(),data.getCASENUMBER(),data);
                 startActivity(intent);
             }
         });

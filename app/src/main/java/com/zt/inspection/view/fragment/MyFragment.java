@@ -38,8 +38,8 @@ public class MyFragment extends BaseMVPFragment<MyFragmentContract.View, MyFragm
         return fragment;
     }
 
-    private String[] item_one_name = new String[]{"用户信息", "修改密码","通讯录"};
-    private int[] one_ids = new int[]{R.id.one_1, R.id.one_2, R.id.one_3};
+    private String[] item_one_name = new String[]{ "修改密码","通讯录"};
+    private int[] one_ids = new int[]{ R.id.one_2, R.id.one_3};
     private String[] item_two_name = new String[]{"版本更新"};
     private int[] two_ids = new int[]{R.id.two_1};
     private String[] item_three_name = new String[]{"意见反馈", "使用说明"};
@@ -60,7 +60,7 @@ public class MyFragment extends BaseMVPFragment<MyFragmentContract.View, MyFragm
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.one_1: {
-                toAcitvity(UserInfoActivity.class);
+//                toAcitvity(UserInfoActivity.class);
                 break;
             }
             case R.id.one_2: {

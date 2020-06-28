@@ -38,7 +38,7 @@ public class PatrolSectionListAdapter extends RecyclerView.Adapter<PatrolSection
     public void onBindViewHolder(@NonNull PatrolSectioViewHolder viewHolder, int i) {
         PatrolSectionListBean bean = datas.get(i);
         viewHolder.tvTitle.setText(bean.getDEPARTNAME());
-        viewHolder.tvTitle.setText(bean.getOUTTIME());
+        viewHolder.tvDate.setText(bean.getOUTTIME());
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

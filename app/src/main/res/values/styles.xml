@@ -172,6 +172,12 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
     </style>
+    <style name="tab_s_view">
+        <item name="android:background">@color/select_color</item>
+        <item name="android:layout_width">3dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
     <style name="bt">
         <item name="android:layout_weight">1</item>
         <item name="android:layout_width">0dp</item>
@@ -208,5 +214,26 @@
         <item name="android:paddingLeft">8dp</item>
         <item name="android:paddingRight">8dp</item>
         <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="info_gg">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:weightSum">1</item>
+    </style>
+    <style name="info_key">
+        <item name="android:textColor">@color/xm_dlg_color_4</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">0.25</item>
+        <item name="android:gravity">right</item>
+    </style>
+    <style name="info_value">
+        <item name="android:textColor">@color/color_gray_open</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">0.7</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 </resources>

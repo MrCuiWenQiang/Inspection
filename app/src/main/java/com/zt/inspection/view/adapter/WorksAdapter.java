@@ -15,11 +15,16 @@ import com.zt.inspection.util.ResurltUtil;
 import java.util.List;
 
 import cn.faker.repaymodel.net.loadimage.ImageLoadHelper;
+import cn.faker.repaymodel.widget.view.BaseRecycleView;
 
 public class WorksAdapter extends RecyclerView.Adapter<WorksAdapter.WorksViewHolder> {
 
     private List<CaseInfoBean> datas;
+    private BaseRecycleView.OnItemClickListener<CaseInfoBean> onItemClickListener;
 
+    public void setOnItemClickListener(BaseRecycleView.OnItemClickListener<CaseInfoBean> onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
     public void setDatas(List<CaseInfoBean> datas) {
         this.datas = datas;
         notifyDataSetChanged();
@@ -42,6 +47,12 @@ public class WorksAdapter extends RecyclerView.Adapter<WorksAdapter.WorksViewHol
         if (paths!=null&&paths.size()>0){
             ImageLoadHelper.loadImage(viewHolder.itemView.getContext(), viewHolder.imIcon, paths.get(0));
         }
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemClick(v, bean, i);
+            }
+        });
     }
 
     @Override

@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
     style="@style/list_item_group">
     <LinearLayout
         android:layout_width="0dp"
@@ -13,6 +14,8 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/tv_casenumber"
+                android:textSize="16sp"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -20,22 +23,30 @@
                 android:layout_marginLeft="4dp"
                 android:background="@drawable/bt_base_backage_kk"
                 android:textColor="@color/t_rule"
+                android:textSize="13sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <TextView
             android:id="@+id/tv_title"
+            android:textSize="17sp"
+            android:layout_marginTop="7dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <LinearLayout
+            android:layout_marginTop="7dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:text="计划完成时间:"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:textSize="16sp"
+                android:textColor="@color/black"
                 android:id="@+id/tv_handleendtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -47,8 +58,8 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/im_icon"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
             />
     </LinearLayout>
 </LinearLayout>

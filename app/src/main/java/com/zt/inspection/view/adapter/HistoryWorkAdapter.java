@@ -6,14 +6,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zt.inspection.R;
 import com.zt.inspection.model.entity.response.CaseInfoBean;
+import com.zt.inspection.util.ResurltUtil;
 import com.zt.inspection.util.StatusUtil;
 
 import java.util.List;
 
+import cn.faker.repaymodel.net.loadimage.ImageLoadHelper;
 import cn.faker.repaymodel.widget.view.BaseRecycleView;
 
 public class HistoryWorkAdapter extends RecyclerView.Adapter<HistoryWorkAdapter.ViewHolder> {
@@ -40,18 +43,15 @@ public class HistoryWorkAdapter extends RecyclerView.Adapter<HistoryWorkAdapter.
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         CaseInfoBean data = datas.get(i);
         viewHolder.tvTitle.setText(data.getTITLE());
-        viewHolder.tvCtid.setText(StatusUtil.getName(data.getCSTATE()));
-        viewHolder.tvCtype.setText(data.getCTYPE());
-        viewHolder.tvUpuid.setText(data.getUPUID());
-        viewHolder.tvSenduid.setText(data.getSENDUID());
-        viewHolder.tvSendtime.setText(data.getSENDTIME());
-        viewHolder.tvHandleuid.setText(data.getHANDLEUID());
-        viewHolder.tvHandlebegintime.setText(data.getHANDLEBEGINTIME());
-        viewHolder.tvHandleendtime.setText(data.getHANDLEENDTIME());
-        viewHolder.tvFeedbacktime.setText(data.getFEEDBACKTIME());
-        viewHolder.tvClosetime.setText(data.getCLOSETIME());
+        viewHolder.tvCasenumber.setText(data.getCASENUMBER());
+        viewHolder.tvCdatetime.setText(data.getCDATETIME());
+        viewHolder.tvRemarks.setText(data.getFEEDBACKCONTENT());
         viewHolder.tvCaddress.setText(data.getCADDRESS());
-        viewHolder.tvFeedbackcontent.setText(data.getFEEDBACKCONTENT());
+
+        List<String> paths = ResurltUtil.toPaths(data.getSGQIMAGES(),data.getUrl());
+        if (paths!=null&&paths.size()>0){
+            ImageLoadHelper.loadImage(viewHolder.itemView.getContext(), viewHolder.im_sgq, paths.get(0));
+        }
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,26 +67,6 @@ public class HistoryWorkAdapter extends RecyclerView.Adapter<HistoryWorkAdapter.
                 return true;
             }
         });
-
-        ImageAdapter adapter = new ImageAdapter();
-        adapter.setPhotoPaths(data.getUrl(),data.getSGQIMAGES());
-        adapter.setOnPhotoListener(onPhotoListener);
-        viewHolder.rv_photo.setAdapter(adapter);
-
-        VideoImageAdapter videoImageAdapter = new VideoImageAdapter();
-        videoImageAdapter.setPhotoPaths(data.getUrl(),data.getSGQVIDEO());
-        videoImageAdapter.setOnPhotoListener(onVideoPhotoListener);
-        viewHolder.rv_video.setAdapter(videoImageAdapter);
-
-        ImageAdapter adapterd = new ImageAdapter();
-        adapterd.setPhotoPaths(data.getUrl(),data.getSGHIMAGES());
-        adapterd.setOnPhotoListener(onPhotoListener);
-        viewHolder.rv_photo_d.setAdapter(adapterd);
-
-        VideoImageAdapter videoImageAdapterd = new VideoImageAdapter();
-        videoImageAdapterd.setPhotoPaths(data.getUrl(),data.getSGHVIDEO());
-        videoImageAdapterd.setOnPhotoListener(onVideoPhotoListener);
-        viewHolder.rv_video_d.setAdapter(videoImageAdapterd);
     }
     private ImageAdapter.OnPhotoListener onPhotoListener;
     private VideoImageAdapter.OnVideoPhotoListener onVideoPhotoListener;
@@ -116,49 +96,21 @@ public class HistoryWorkAdapter extends RecyclerView.Adapter<HistoryWorkAdapter.
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView tvCasenumber;
+        private TextView tvCdatetime;
         private TextView tvTitle;
-        private TextView tvCtid;
-        private TextView tvCtype;
-        private TextView tvUpuid;
-        private TextView tvSenduid;
-        private TextView tvSendtime;
-        private TextView tvHandleuid;
-        private TextView tvHandlebegintime;
-        private TextView tvHandleendtime;
-        private TextView tvFeedbacktime;
-        private TextView tvClosetime;
-        private TextView tvFeedbackcontent;
+        private TextView tvRemarks;
         private TextView tvCaddress;
-        private RecyclerView rv_video;
-        private RecyclerView rv_photo;
-        private RecyclerView rv_video_d;
-        private RecyclerView rv_photo_d;
+        private ImageView im_sgq;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            tvCasenumber = itemView.findViewById(R.id.tv_casenumber);
+            tvCdatetime = itemView.findViewById(R.id.tv_cdatetime);
             tvTitle = itemView.findViewById(R.id.tv_title);
+            tvRemarks = itemView.findViewById(R.id.tv_remarks);
             tvCaddress = itemView.findViewById(R.id.tv_caddress);
-            tvCtid = itemView.findViewById(R.id.tv_ctid);
-            tvCtype = itemView.findViewById(R.id.tv_ctype);
-            tvUpuid = itemView.findViewById(R.id.tv_upuid);
-            tvSenduid = itemView.findViewById(R.id.tv_senduid);
-            tvSendtime = itemView.findViewById(R.id.tv_sendtime);
-            tvHandleuid = itemView.findViewById(R.id.tv_handleuid);
-            tvHandlebegintime = itemView.findViewById(R.id.tv_handlebegintime);
-            tvHandleendtime = itemView.findViewById(R.id.tv_handleendtime);
-            tvFeedbacktime = itemView.findViewById(R.id.tv_feedbacktime);
-            tvClosetime = itemView.findViewById(R.id.tv_closetime);
-            tvFeedbackcontent = itemView.findViewById(R.id.tv_feedbackcontent);
-            rv_video = itemView.findViewById(R.id.rv_video);
-            rv_photo = itemView.findViewById(R.id.rv_photo);
-            rv_photo_d = itemView.findViewById(R.id.rv_photo_d);
-            rv_video_d = itemView.findViewById(R.id.rv_video_d);
-            rv_photo.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
-            rv_video.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
-            rv_photo_d.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
-            rv_video_d.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
-
+            im_sgq = itemView.findViewById(R.id.im_sgq);
         }
     }
 }

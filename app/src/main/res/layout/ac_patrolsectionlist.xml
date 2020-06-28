@@ -4,7 +4,6 @@
     android:layout_height="match_parent">
     <com.esri.android.map.MapView
         android:id="@+id/mapview"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <LinearLayout
@@ -12,10 +11,12 @@
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:background="@drawable/hh_bg"
+        android:layout_height="170dp">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_data"
             android:layout_width="match_parent"
-            android:layout_height="250dp"/>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </RelativeLayout>

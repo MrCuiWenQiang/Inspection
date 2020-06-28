@@ -1,5 +1,6 @@
 package com.zt.inspection.view.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import com.esri.android.map.GraphicsLayer;
 import com.esri.android.map.MapView;
 import com.esri.android.map.ags.ArcGISDynamicMapServiceLayer;
+import com.esri.android.map.event.OnSingleTapListener;
 import com.esri.core.geometry.Polyline;
 import com.esri.core.map.Graphic;
 import com.esri.core.symbol.SimpleLineSymbol;
@@ -26,6 +28,7 @@ import com.zt.inspection.presenter.HomeFragmentPresenter;
 import com.zt.inspection.view.NoticeActivity;
 import com.zt.inspection.view.PatrolSectionListActivity;
 import com.zt.inspection.view.WorkActivity;
+import com.zt.inspection.view.WorkInfoActivity;
 import com.zt.inspection.view.WorkStatusActivity;
 import com.zt.inspection.view.adapter.HomeWorkAdapter;
 import com.zt.inspection.view.adapter.WorksAdapter;
@@ -103,12 +106,14 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
                 startActivity(WorkStatusActivity.newInstance(getContext(), data.getStatus(), data.getTitle()));
             }
         });
-        mapview.setOnClickListener(new View.OnClickListener() {
+        mapview.setOnSingleTapListener(new OnSingleTapListener() {
             @Override
-            public void onClick(View v) {
+            public void onSingleTap(float v, float v1) {
                 toAcitvity(PatrolSectionListActivity.class);
+
             }
         });
+
     }
 
     @Override
@@ -156,6 +161,13 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
         WorksAdapter wadapter = new WorksAdapter();
         wadapter.setDatas(datas);
         rv_tabs.setAdapter(wadapter);
+        wadapter.setOnItemClickListener(new BaseRecycleView.OnItemClickListener<CaseInfoBean>() {
+            @Override
+            public void onItemClick(View view, CaseInfoBean data, int position) {
+                Intent intent = WorkInfoActivity.newInstance(getContext(),data.getCID(),data.getCSTATE(),data.getCASENUMBER(),data);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -166,6 +178,7 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
     @Override
     public void loadLoncal(List<PatrolRlistBean> datas) {
         mapview.setVisibility(View.VISIBLE);
+        hiddenSegmentsLayer.removeAll();
         if (datas!=null&&datas.size()>0){
             Polyline polyline = new Polyline();
             for (int i = 0; i < datas.size(); i++) {

@@ -7,6 +7,7 @@ import com.zt.inspection.MyApplication;
 import com.zt.inspection.Urls;
 import com.zt.inspection.contract.HistoryWorkFragmentContract;
 import com.zt.inspection.model.entity.response.CaseInfoBean;
+import com.zt.inspection.util.RoleIdUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,22 +33,23 @@ public class HistoryWorkFragmentPresenter extends BaseMVPPresenter<HistoryWorkFr
         }
         params.put("page", page);
         params.put("limit", 10);
-        params.put("CSTATE", "");
+        params.put("CSTATE", "-1");
+        params.put("SFSG", RoleIdUtil.isSHIGONG() ? "1" : "0");
         params.put("strWhere", "");
         params.put("CDateDateTime", "");
         params.put("CloseDateTime", "");
         HttpHelper.get(Urls.GETCASEINFOLIST, params, new HttpResponseCallback() {
             @Override
             public void onSuccess(String datajson) {
-                List<CaseInfoBean> datas = JsonUtil.fromList(datajson,CaseInfoBean.class);
-                if (getView()!=null){
+                List<CaseInfoBean> datas = JsonUtil.fromList(datajson, CaseInfoBean.class);
+                if (getView() != null) {
                     getView().loadSuccess(datas);
                 }
             }
 
             @Override
             public void onFailed(int status, String message) {
-                if (getView()!=null){
+                if (getView() != null) {
                     getView().loadFail(message);
                 }
             }

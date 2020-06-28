@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.zt.inspection.R;
 import com.zt.inspection.model.entity.response.WordInfoBean;
+import com.zt.inspection.util.StatusUtil;
 
+import java.util.Date;
 import java.util.List;
 
 import cn.faker.repaymodel.util.DateUtils;
@@ -36,16 +38,9 @@ public class WorkInfoAdapter extends RecyclerView.Adapter<WorkInfoAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         WordInfoBean wordInfoBean = datas.get(i);
-        viewHolder.tvHandlebegintime.setText(wordInfoBean.getHANDLEENDTIME());
-        viewHolder.tvHandleendtime.setText(wordInfoBean.getHANDLEENDTIME());
-        viewHolder.tvFkuid.setText(wordInfoBean.getSENDUNAME());
-        viewHolder.tvFeedbacktime.setText(DateUtils.dateToString(DateUtils.stringToDate(wordInfoBean.getFEEDBACKTIME(),DateUtils.DATE_TIME_FORMAT),DateUtils.DATE_TIME_FORMAT));
-        viewHolder.tvFeedbackcontent.setText(wordInfoBean.getFEEDBACKCONTENT());
-
-        ImageAdapter adapter = new ImageAdapter();
-        adapter.setPhotoPaths(wordInfoBean.getUrl(),wordInfoBean.getSGHIMAGES());
-        viewHolder.rv_photo.setAdapter(adapter);
-
+        viewHolder.tvCstate.setText(StatusUtil.getName(wordInfoBean.getCSTATE()));
+        Date d = DateUtils.stringToDate(wordInfoBean.getCREATETIME(), DateUtils.DATE_TIME_FORMAT);
+        viewHolder.tvCreatetime.setText(DateUtils.dateToString(d, DateUtils.DATE_TIME_FORMAT));
     }
 
     @Override
@@ -55,27 +50,13 @@ public class WorkInfoAdapter extends RecyclerView.Adapter<WorkInfoAdapter.ViewHo
 
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvHandlebegintime;
-        TextView tvHandleendtime;
-        TextView tvFkuid;
-        TextView tvFeedbacktime;
-        TextView tvFeedbackcontent;
-        RecyclerView rv_photo;
-        RecyclerView rv_video;
+        TextView tvCstate;
+        TextView tvCreatetime;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvHandlebegintime = itemView.findViewById(R.id.tv_handlebegintime);
-            tvHandleendtime = itemView.findViewById(R.id.tv_handleendtime);
-            tvFkuid = itemView.findViewById(R.id.tv_fkuid);
-            tvFeedbacktime = itemView.findViewById(R.id.tv_feedbacktime);
-            tvFeedbackcontent = itemView.findViewById(R.id.tv_feedbackcontent);
-            rv_photo = itemView.findViewById(R.id.rv_photo);
-            rv_video = itemView.findViewById(R.id.rv_video);
-
-            rv_photo.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
-            rv_video.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
-
+            tvCstate = itemView.findViewById(R.id.tv_cstate);
+            tvCreatetime = itemView.findViewById(R.id.tv_createtime);
         }
     }
 }

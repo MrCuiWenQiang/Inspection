@@ -1,5 +1,7 @@
 package com.zt.inspection.model.entity.response;
 
+import java.io.Serializable;
+
 /**
  *       案件ID:CID
  *         案件标题:TITLE
@@ -35,7 +37,7 @@ package com.zt.inspection.model.entity.response;
  *         施工后视频：SGHVIDEO
  *         返回路径信息：url
  */
-public class CaseInfoBean {
+public class CaseInfoBean implements Serializable {
     private String CID;
     private String TITLE;
     private String CASENUMBER;

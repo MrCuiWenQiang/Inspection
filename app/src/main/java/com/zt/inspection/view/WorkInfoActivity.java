@@ -8,13 +8,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.zt.inspection.R;
 import com.zt.inspection.contract.WorkInfoContract;
+import com.zt.inspection.model.entity.response.CaseInfoBean;
 import com.zt.inspection.model.entity.response.WordInfoBean;
 import com.zt.inspection.presenter.WorkInfoPresenter;
 import com.zt.inspection.util.RoleIdUtil;
+import com.zt.inspection.util.StatusUtil;
+import com.zt.inspection.view.adapter.ImageAdapter;
+import com.zt.inspection.view.adapter.VideoImageAdapter;
 import com.zt.inspection.view.adapter.WorkInfoAdapter;
+import com.zt.inspection.view.dialog.DownLoadViewDialog;
+import com.zt.inspection.view.dialog.PhotoDialog;
 
 import java.util.List;
 
@@ -30,12 +37,16 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
     private static final String INTENT_KEY_WORK = "INTENT_KEY_WORK";
     private static final String INTENT_KEY_CSTATE = "INTENT_KEY_CSTATE";
     private static final String INTENT_KEY_CASENUMBER = "INTENT_KEY_CASENUMBER";
+    private static final String INTENT_KEY_CASEINFOBEAN = "INTENT_KEY_CASEINFOBEAN";
 
-    public static Intent newInstance(Context context,String id,String cstate,String casenumber) {
-        Intent intent = new Intent(context,WorkInfoActivity.class);
-        intent.putExtra(INTENT_KEY_WORK,id);
-        intent.putExtra(INTENT_KEY_CSTATE,cstate);
-        intent.putExtra(INTENT_KEY_CASENUMBER,casenumber);
+    public static Intent newInstance(Context context, String id, String cstate, String casenumber, CaseInfoBean caseinfo) {
+        Intent intent = new Intent(context, WorkInfoActivity.class);
+        intent.putExtra(INTENT_KEY_WORK, id);
+        intent.putExtra(INTENT_KEY_CSTATE, cstate);
+        intent.putExtra(INTENT_KEY_CASENUMBER, casenumber);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(INTENT_KEY_CASEINFOBEAN, caseinfo);
+        intent.putExtras(bundle);
         return intent;
     }
 
@@ -46,6 +57,20 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
     private Button bt_addinfo;
     private RecyclerView rv_list;
     private WorkInfoAdapter adapter;
+
+    private RecyclerView rvSgqPhoto;
+    private RecyclerView rvSgqVideo;
+    private RecyclerView rvSghPhoto;
+    private RecyclerView rvSghVideo;
+
+    private TextView tvCtid;
+    private TextView tvCstate;
+    private TextView tvWorklevel;
+    private TextView tvUpuid;
+    private TextView tvCdatetime;
+    private TextView tvFeedbackcontent;
+
+    private CaseInfoBean caseinfo;
 
     @Override
     protected int getLayoutContentId() {
@@ -58,11 +83,31 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         setTitle("案件记录", R.color.white);
         setToolBarBackgroundColor(R.color.select_color);
 
+
+        rvSgqPhoto = findViewById(R.id.rv_sgq_photo);
+        rvSgqVideo = findViewById(R.id.rv_sgq_video);
+        rvSghPhoto = findViewById(R.id.rv_sgh_photo);
+        rvSghVideo = findViewById(R.id.rv_sgh_video);
+
+
+        tvCtid = findViewById(R.id.tv_ctid);
+        tvCstate = findViewById(R.id.tv_cstate);
+        tvWorklevel = findViewById(R.id.tv_worklevel);
+        tvUpuid = findViewById(R.id.tv_upuid);
+        tvCdatetime = findViewById(R.id.tv_cdatetime);
+        tvFeedbackcontent = findViewById(R.id.tv_feedbackcontent);
+
+
         bt_addinfo = findViewById(R.id.bt_addinfo);
         rv_list = findViewById(R.id.rv_list);
         rv_list.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new WorkInfoAdapter();
         rv_list.setAdapter(adapter);
+
+        rvSgqPhoto.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        rvSgqVideo.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        rvSghPhoto.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        rvSghVideo.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
     }
 
     @Override
@@ -72,10 +117,79 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         cstate = getIntent().getStringExtra(INTENT_KEY_CSTATE);
         casenumber = getIntent().getStringExtra(INTENT_KEY_CASENUMBER);
         mPresenter.queryDatas(id);
+        caseinfo = (CaseInfoBean) getIntent().getSerializableExtra(INTENT_KEY_CASEINFOBEAN);
 
-        if (RoleIdUtil.isSHIGONG()&&cstate.equals("2")){
+        settingData();
+        initResource();
+        if (RoleIdUtil.isSHIGONG() && cstate.equals("2")) {
             bt_addinfo.setVisibility(View.GONE);
         }
+    }
+
+    private void initResource() {
+
+        ImageAdapter adapterd = new ImageAdapter();
+        adapterd.setPhotoPaths(caseinfo.getUrl(), caseinfo.getSGQIMAGES());
+        adapterd.setOnPhotoListener(new ImageAdapter.OnPhotoListener() {
+            @Override
+            public void onClick(int type, int postoin, Object data) {
+                String videoPaths = (String) data;
+                PhotoDialog videoDialog = new PhotoDialog();
+                videoDialog.setUrl(videoPaths);
+                videoDialog.show(getSupportFragmentManager(), "s");
+            }
+        });
+        rvSgqPhoto.setAdapter(adapterd);
+
+        ImageAdapter adaptere = new ImageAdapter();
+        adaptere.setPhotoPaths(caseinfo.getUrl(), caseinfo.getSGHIMAGES());
+        adaptere.setOnPhotoListener(new ImageAdapter.OnPhotoListener() {
+            @Override
+            public void onClick(int type, int postoin, Object data) {
+                String videoPaths = (String) data;
+                PhotoDialog videoDialog = new PhotoDialog();
+                videoDialog.setUrl(videoPaths);
+                videoDialog.show(getSupportFragmentManager(), "es");
+            }
+        });
+        rvSghPhoto.setAdapter(adaptere);
+
+        VideoImageAdapter videoImageAdapterd = new VideoImageAdapter();
+        videoImageAdapterd.setPhotoPaths(caseinfo.getUrl(), caseinfo.getSGQVIDEO());
+        videoImageAdapterd.setOnPhotoListener(new VideoImageAdapter.OnVideoPhotoListener() {
+            @Override
+            public void onClick(int type, int postoin, Object data) {
+                String videoPaths = (String) data;
+                DownLoadViewDialog downLoadViewDialog = new DownLoadViewDialog();
+                downLoadViewDialog.setUrl(videoPaths);
+                downLoadViewDialog.show(getSupportFragmentManager(),"v");
+            }
+        });
+        rvSgqVideo.setAdapter(videoImageAdapterd);
+
+
+        VideoImageAdapter videoImageAdaptere = new VideoImageAdapter();
+        videoImageAdaptere.setPhotoPaths(caseinfo.getUrl(), caseinfo.getSGHVIDEO());
+        videoImageAdaptere.setOnPhotoListener(new VideoImageAdapter.OnVideoPhotoListener() {
+            @Override
+            public void onClick(int type, int postoin, Object data) {
+                String videoPaths = (String) data;
+                DownLoadViewDialog downLoadViewDialog = new DownLoadViewDialog();
+                downLoadViewDialog.setUrl(videoPaths);
+                downLoadViewDialog.show(getSupportFragmentManager(),"ev");
+            }
+        });
+        rvSghVideo.setAdapter(videoImageAdaptere);
+
+    }
+
+    private void settingData() {
+        tvCtid.setText(caseinfo.getCTID());
+        tvCstate.setText(StatusUtil.getName(caseinfo.getCSTATE()));
+        tvWorklevel.setText(caseinfo.getWORKLEVEL());
+        tvUpuid.setText(caseinfo.getUPUID());
+        tvCdatetime.setText(caseinfo.getCDATETIME());
+        tvFeedbackcontent.setText(caseinfo.getFEEDBACKCONTENT());
     }
 
     @Override
@@ -84,8 +198,8 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         bt_addinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = AddHandleInfoActivity.toIntent(getContext(),id,casenumber);
-                startActivityForResult(intent,200);
+                Intent intent = AddHandleInfoActivity.toIntent(getContext(), id, casenumber);
+                startActivityForResult(intent, 200);
             }
         });
     }
@@ -93,7 +207,7 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==200&&resultCode==200){
+        if (requestCode == 200 && resultCode == 200) {
             showLoading();
             mPresenter.queryDatas(id);
         }
@@ -109,5 +223,11 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
     public void queryDatasSuccess(List<WordInfoBean> datas) {
         dimiss();
         adapter.setData(datas);
+        for (WordInfoBean data:datas){
+            if (StatusUtil.isFinsh(data.getCSTATE())){
+                bt_addinfo.setVisibility(View.GONE);
+                break;
+            }
+        }
     }
 }

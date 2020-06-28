@@ -37,7 +37,7 @@ public class HomeFragmentPresenter extends BaseMVPPresenter<HomeFragmentContract
             tabs.add(new HomeWorkBean("已完结", null, R.mipmap.main_rw_ybj, "4"));
 
         } else if (RoleIdUtil.isXUNJIAN()) {
-            tabs.add(new HomeWorkBean("全 部", null, R.mipmap.main_rw_dzx, ""));
+            tabs.add(new HomeWorkBean("全 部", null, R.mipmap.main_rw_dzx, "-1"));
             tabs.add(new HomeWorkBean("待执行", null, R.mipmap.main_rw_update, "1"));
             tabs.add(new HomeWorkBean("施工完", null, R.mipmap.main_rw_bj, "2"));
             tabs.add(new HomeWorkBean("已完结", null, R.mipmap.main_rw_ybj, "4"));
@@ -115,6 +115,7 @@ public class HomeFragmentPresenter extends BaseMVPPresenter<HomeFragmentContract
         params.put("page", 1);
         params.put("limit", 3);
         params.put("CSTATE", "1");
+        params.put("SFSG", RoleIdUtil.isSHIGONG() ? "1" : "0");
         params.put("strWhere", "");
         params.put("CDateDateTime", "");
         params.put("CloseDateTime", "");

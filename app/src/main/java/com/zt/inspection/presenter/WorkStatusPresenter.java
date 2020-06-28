@@ -7,6 +7,7 @@ import com.zt.inspection.MyApplication;
 import com.zt.inspection.Urls;
 import com.zt.inspection.contract.WorkStatusContract;
 import com.zt.inspection.model.entity.response.CaseInfoBean;
+import com.zt.inspection.util.RoleIdUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +34,7 @@ public class WorkStatusPresenter extends BaseMVPPresenter<WorkStatusContract.Vie
         params.put("page", page);
         params.put("limit", 10);
         params.put("CSTATE", status);
+        params.put("SFSG", RoleIdUtil.isSHIGONG() ? "1" : "0");
         params.put("strWhere", "");
         params.put("CDateDateTime", "");
         params.put("CloseDateTime", "");
