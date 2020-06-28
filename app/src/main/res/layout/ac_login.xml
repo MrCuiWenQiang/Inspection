@@ -111,6 +111,7 @@
 
     </LinearLayout>
     <TextView
+        android:id="@+id/tv_setting"
         android:text="@string/banquan"
         android:textSize="12sp"
         android:layout_alignParentBottom="true"

@@ -121,8 +121,8 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
 
         settingData();
         initResource();
-        if (RoleIdUtil.isSHIGONG() && cstate.equals("2")) {
-            bt_addinfo.setVisibility(View.GONE);
+        if (RoleIdUtil.isSHIGONG() ) {
+            bt_addinfo.setVisibility(View.VISIBLE);
         }
     }
 

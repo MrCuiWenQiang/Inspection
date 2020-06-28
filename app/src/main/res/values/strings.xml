@@ -2,4 +2,7 @@
     <string name="app_name">综合巡检</string>
 
     <string name="banquan">版权所有@ 山东中图</string>
+    <string name="setting_ip">IP地址：</string>
+    <string name="setting_port">端口号：</string>
+    <string name="setting_http_save">保存地址：</string>
 </resources>

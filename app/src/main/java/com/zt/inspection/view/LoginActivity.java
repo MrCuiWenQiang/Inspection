@@ -59,6 +59,13 @@ public class LoginActivity extends BaseMVPAcivity<LoginContract.View, LoginPrese
         et_password = findViewById(R.id.et_password);
         cb_pw = findViewById(R.id.cb_pw);
         bt_login = findViewById(R.id.bt_login);
+
+        findViewById(R.id.tv_setting).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toAcitvity(SettingActivity.class);
+            }
+        });
     }
 
     @Override
