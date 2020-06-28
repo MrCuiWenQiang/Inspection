@@ -41,6 +41,7 @@ public class CaseInfoBean implements Serializable {
     private String CID;
     private String TITLE;
     private String CASENUMBER;
+    private String TYPENAME;
     private String CDATETIME;
     private String CTID;
     private String WORKLEVEL;
@@ -69,6 +70,14 @@ public class CaseInfoBean implements Serializable {
     private String SGHIMAGES;
     private String SGHVIDEO;
     private String url;
+
+    public String getTYPENAME() {
+        return TYPENAME;
+    }
+
+    public void setTYPENAME(String TYPENAME) {
+        this.TYPENAME = TYPENAME;
+    }
 
     public String getSGQIMAGES() {
         return SGQIMAGES;

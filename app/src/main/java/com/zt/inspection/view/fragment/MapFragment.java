@@ -95,6 +95,7 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
         mMapView.addLayer(arcGISTiledMapServiceLayer);
         hiddenSegmentsLayer = new GraphicsLayer();
         mMapView.addLayer(hiddenSegmentsLayer);
+        mMapView.setMaxScale(10000);
     }
 
     private void initLocation() {

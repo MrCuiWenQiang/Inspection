@@ -184,7 +184,7 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
     }
 
     private void settingData() {
-        tvCtid.setText(caseinfo.getCTID());
+        tvCtid.setText(caseinfo.getTYPENAME());
         tvCstate.setText(StatusUtil.getName(caseinfo.getCSTATE()));
         tvWorklevel.setText(caseinfo.getWORKLEVEL());
         tvUpuid.setText(caseinfo.getUPUID());

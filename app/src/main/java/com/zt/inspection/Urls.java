@@ -5,7 +5,7 @@ import com.zt.inspection.util.HttpUtil;
 public class Urls {
     private static final String baseUrl = "http://192.168.2.15:6080";
 
-    public static final String mapUrl = baseUrl+"/arcgis/rest/services/lixiamap1/MapServer";//LYG测试
+    public static final String mapUrl = baseUrl+"/arcgis/rest/services/lixiamap1/MapServer";
 //    public static final String addressURL = baseUrl+"/arcgis/rest/services/社区卫生院_CreateAddressLocator/GeocodeServer";//地理编码
     public static final String addressURL = baseUrl+"/arcgis/rest/services/road_AddressLocator/GeocodeServer";//地理编码
 

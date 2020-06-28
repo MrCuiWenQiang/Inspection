@@ -38,7 +38,7 @@ public class WorkInfoAdapter extends RecyclerView.Adapter<WorkInfoAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         WordInfoBean wordInfoBean = datas.get(i);
-        viewHolder.tvCstate.setText(StatusUtil.getName(wordInfoBean.getCSTATE()));
+        viewHolder.tvCstate.setText(StatusUtil.getLcName(wordInfoBean.getCSTATE()));
         Date d = DateUtils.stringToDate(wordInfoBean.getCREATETIME(), DateUtils.DATE_TIME_FORMAT);
         viewHolder.tvCreatetime.setText(DateUtils.dateToString(d, DateUtils.DATE_TIME_FORMAT));
     }
