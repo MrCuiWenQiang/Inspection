@@ -129,6 +129,8 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
         mapview.addLayer(hiddenSegmentsLayer);
     }
 
+
+
     @Override
     public void onPause() {
         super.onPause();

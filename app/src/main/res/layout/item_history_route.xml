@@ -8,36 +8,53 @@
     android:orientation="vertical">
     <TextView
         android:id="@+id/tv_patrolsectionname"
+        android:textSize="16sp"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/tv_userid"
+        android:layout_marginTop="4dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <LinearLayout
+        android:layout_marginTop="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
+            android:textSize="16sp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="开始巡检时间:" />
 
         <TextView
             android:id="@+id/tv_signtime"
+            android:textSize="16sp"
+            android:layout_marginLeft="4dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
+        android:layout_marginTop="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
+            android:textSize="16sp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="结束巡检时间:" />
 
         <TextView
+            android:textSize="16sp"
+            android:layout_marginLeft="4dp"
+            android:textColor="@color/black"
             android:id="@+id/tv_outtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

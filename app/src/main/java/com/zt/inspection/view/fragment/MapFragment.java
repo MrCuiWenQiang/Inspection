@@ -67,8 +67,13 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
         tv_start = v.findViewById(R.id.tv_start);
         tv_update = v.findViewById(R.id.tv_update);
         tv_end = v.findViewById(R.id.tv_end);
+
         initMap();
+        if (isHavePM(getContext(), pers)) {
+            initLocation();
+        }
     }
+
 
     @Override
     protected void initListener() {
@@ -78,13 +83,7 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
         tv_end.setOnClickListener(this);
     }
 
-    @Override
-    public boolean requestData() {
-        if (isHavePM(getContext(), pers)) {
-            initLocation();
-        }
-        return false;
-    }
+
 
     @Override
     public void initData(Bundle savedInstanceState) {
@@ -244,6 +243,7 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
         dimiss();
         show();
     }
+
 
     @Override
     public void onPause() {

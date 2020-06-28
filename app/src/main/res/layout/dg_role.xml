@@ -3,7 +3,7 @@
     android:orientation="vertical"
     style="@style/ll_base"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <View style="@style/tab_w_view"/>
 

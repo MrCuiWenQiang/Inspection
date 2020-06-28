@@ -11,6 +11,8 @@ import com.zt.inspection.R;
 import cn.faker.repaymodel.util.ScreenUtil;
 import cn.faker.repaymodel.widget.view.dialog.BasicDialog;
 
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 public class RoleDialog extends BasicDialog {
     private onRegisListener regisListener;
 
@@ -78,7 +80,7 @@ public class RoleDialog extends BasicDialog {
     }
 
     protected int getDialogHeght() {
-        return ScreenUtil.getWindowHeight(getContext())* 3/11;
+        return WRAP_CONTENT;
 
     }
 }
