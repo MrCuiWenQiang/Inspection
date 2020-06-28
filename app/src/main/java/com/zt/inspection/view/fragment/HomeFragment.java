@@ -1,7 +1,9 @@
 package com.zt.inspection.view.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,15 +12,23 @@ import android.widget.LinearLayout;
 import com.esri.android.map.GraphicsLayer;
 import com.esri.android.map.MapView;
 import com.esri.android.map.ags.ArcGISDynamicMapServiceLayer;
+import com.esri.core.geometry.Polyline;
+import com.esri.core.map.Graphic;
+import com.esri.core.symbol.SimpleLineSymbol;
 import com.zt.inspection.R;
 import com.zt.inspection.Urls;
 import com.zt.inspection.contract.HomeFragmentContract;
+import com.zt.inspection.model.entity.response.CaseInfoBean;
+import com.zt.inspection.model.entity.response.PatrikRouteBean;
+import com.zt.inspection.model.entity.response.PatrolRlistBean;
 import com.zt.inspection.model.entity.view.HomeWorkBean;
 import com.zt.inspection.presenter.HomeFragmentPresenter;
 import com.zt.inspection.view.NoticeActivity;
+import com.zt.inspection.view.PatrolSectionListActivity;
 import com.zt.inspection.view.WorkActivity;
 import com.zt.inspection.view.WorkStatusActivity;
 import com.zt.inspection.view.adapter.HomeWorkAdapter;
+import com.zt.inspection.view.adapter.WorksAdapter;
 
 import java.util.List;
 
@@ -44,6 +54,7 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
     private LinearLayout ll_notice;
     private LinearLayout ll_work;
     private RecyclerView rv_works;
+    private RecyclerView rv_tabs;
     private HomeWorkAdapter adapter;
     private ImageView im_top;
 
@@ -68,6 +79,7 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
 
     @Override
     public void initview(View v) {
+        rv_tabs = findViewById(R.id.rv_tabs);
         im_top = findViewById(R.id.im_top);
         mapview = findViewById(R.id.mapview);
         ll_notice = findViewById(R.id.ll_notice);
@@ -77,6 +89,7 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
         adapter = new HomeWorkAdapter();
         rv_works.setAdapter(adapter);
         rv_works.addItemDecoration(new SpaceGridItemDecoration(4, 2));//靠间隔背景色做分割线也算另外一个思路
+        rv_tabs.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override
@@ -88,6 +101,12 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
             @Override
             public void onItemClick(View view, HomeWorkBean data, int position) {
                 startActivity(WorkStatusActivity.newInstance(getContext(), data.getStatus(), data.getTitle()));
+            }
+        });
+        mapview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toAcitvity(PatrolSectionListActivity.class);
             }
         });
     }
@@ -129,5 +148,37 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
     @Override
     public void showTab(int c) {
         im_top.setBackgroundResource(c);
+    }
+
+    @Override
+    public void loadWorkDataSuccess(List<CaseInfoBean> datas) {
+        rv_tabs.setVisibility(View.VISIBLE);
+        WorksAdapter wadapter = new WorksAdapter();
+        wadapter.setDatas(datas);
+        rv_tabs.setAdapter(wadapter);
+    }
+
+    @Override
+    public void loadWorkDataFail(String message) {
+
+    }
+
+    @Override
+    public void loadLoncal(List<PatrolRlistBean> datas) {
+        mapview.setVisibility(View.VISIBLE);
+        if (datas!=null&&datas.size()>0){
+            Polyline polyline = new Polyline();
+            for (int i = 0; i < datas.size(); i++) {
+                PatrolRlistBean item = datas.get(i);
+                if (i == 0) {
+                    polyline.startPath(Double.valueOf(item.getY()), Double.valueOf(item.getX()));
+                } else {
+                    polyline.lineTo(Double.valueOf(item.getY()), Double.valueOf(item.getX()));
+                }
+            }
+            mapview.setExtent(polyline);
+            SimpleLineSymbol simpleLineSymbol = new SimpleLineSymbol(Color.BLUE, 3);//创建线要素对象
+            hiddenSegmentsLayer.addGraphic(new Graphic(polyline, simpleLineSymbol));
+        }
     }
 }

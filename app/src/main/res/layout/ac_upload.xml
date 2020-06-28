@@ -35,7 +35,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/edit_style"
+                        style="@style/et_back"
+                        android:drawableRight="@mipmap/right"
                         android:gravity="center_vertical"
                         android:hint="点击选择事件类型"
                         android:textSize="18sp" />
@@ -49,7 +50,7 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:gravity="center_vertical">
 
@@ -58,7 +59,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/edit_style"
+                        style="@style/et_back"
+                        android:drawableRight="@mipmap/upload_date"
                         android:gravity="center_vertical"
                         android:hint="请填写事件标题"
                         android:textSize="18sp" />
@@ -83,7 +85,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/edit_style"
+                        style="@style/et_back"
                         android:textSize="18sp" />
 
                       </LinearLayout>
@@ -97,7 +99,7 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:gravity="center_vertical">
 
@@ -106,7 +108,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/edit_style"
+                        style="@style/et_back"
+                        android:drawableRight="@mipmap/upload_local"
                         android:textSize="18sp" />
 
                     <ImageView
@@ -136,7 +139,10 @@
                         android:id="@+id/tv_feedbackcontent"
                         android:layout_width="match_parent"
                         android:layout_height="125dp"
-                        android:background="@drawable/edit_style" />
+                        style="@style/et_back"
+                        android:minLines="5"
+                        android:gravity="top"
+                         />
                 </LinearLayout>
             </LinearLayout>
 
@@ -148,12 +154,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                style="@style/edit_title"
+            <RelativeLayout
                 android:layout_marginLeft="25dp"
-                android:text="上传图片:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_marginRight="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/edit_title"
+                    android:text="上传图片:"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:src="@mipmap/camera"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp" />
+            </RelativeLayout>
+            <View
+                style="@style/tab_w_view"/>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_photo"
                 android:layout_marginTop="8dp"
@@ -165,12 +185,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                style="@style/edit_title"
-                android:text="上传视频:"
+            <RelativeLayout
                 android:layout_marginLeft="25dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_marginRight="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/edit_title"
+                    android:text="短视频:"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:src="@mipmap/up_video"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp" />
+            </RelativeLayout>
+            <View
+                style="@style/tab_w_view"/>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_video"
                 android:layout_marginTop="8dp"
@@ -184,7 +218,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/bt_login_backage"
-            android:text="提交"
+            android:text="上报"
             android:textColor="@color/white"
             android:textSize="17sp" />
     </LinearLayout>

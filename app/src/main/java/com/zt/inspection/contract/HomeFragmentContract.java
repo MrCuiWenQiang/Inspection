@@ -1,5 +1,7 @@
 package com.zt.inspection.contract;
 
+import com.zt.inspection.model.entity.response.CaseInfoBean;
+import com.zt.inspection.model.entity.response.PatrolRlistBean;
 import com.zt.inspection.model.entity.view.HomeWorkBean;
 
 import java.util.List;
@@ -9,6 +11,12 @@ public class HomeFragmentContract {
         void showWorks(List<HomeWorkBean> datas);
 
         void showTab(int c);
+
+        void loadWorkDataSuccess(List<CaseInfoBean> datas);
+
+        void loadWorkDataFail(String message);
+
+        void loadLoncal(List<PatrolRlistBean> itemDatas);
     }
 
     public interface Presenter {

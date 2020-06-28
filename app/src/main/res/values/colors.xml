@@ -58,4 +58,5 @@
     <color name="text_title_color">#4F4D5A</color>
     <color name="ed_bc">#F2F2F2</color>
     <color name="et_hint">#808080</color>
+    <color name="et_back">#F4F4F4</color>
 </resources>

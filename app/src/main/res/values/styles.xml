@@ -198,7 +198,9 @@
     </style>
 
 
-
+<style name="et_back">
+    <item name="android:background">@drawable/ed_back</item>
+</style>
 
     <style name="list_item_group">
         <item name="android:paddingTop">6dp</item>
