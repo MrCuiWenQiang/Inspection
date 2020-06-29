@@ -31,8 +31,8 @@ public class WorkStatisticsPresenter extends BaseMVPPresenter<WorkStatisticsFrag
     @Override
     public void getListData(String startDate, String endDate) {
         HashMap<String, Object> params = new HashMap<>();
-        params.put("userId", MyApplication.loginUser.getDEPARTID());
-        params.put("startDate", endDate);
+        params.put("userId", MyApplication.loginUser.getPATROLCODE());
+        params.put("startDate", startDate);
         params.put("endDate", endDate);
         HttpHelper.get(Urls.GETSIGNTJ, params, new HttpResponseCallback() {
             @Override
@@ -63,7 +63,7 @@ public class WorkStatisticsPresenter extends BaseMVPPresenter<WorkStatisticsFrag
         HashMap<String, Object> params = new HashMap<>();
         params.put("userid", MyApplication.loginUser.getPATROLCODE());
         params.put("deptid", MyApplication.loginUser.getDEPARTID());
-        params.put("startDate", endDate);
+        params.put("startDate", startDate);
         params.put("endDate", endDate);
         HttpHelper.get(Urls.DEPTSIGN, params, new HttpResponseCallback() {
             @Override

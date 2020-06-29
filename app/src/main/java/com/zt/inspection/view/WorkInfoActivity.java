@@ -2,15 +2,24 @@ package com.zt.inspection.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.esri.android.map.GraphicsLayer;
+import com.esri.android.map.MapView;
+import com.esri.android.map.ags.ArcGISDynamicMapServiceLayer;
+import com.esri.core.geometry.Point;
+import com.esri.core.map.Graphic;
+import com.esri.core.symbol.PictureMarkerSymbol;
 import com.zt.inspection.R;
+import com.zt.inspection.Urls;
 import com.zt.inspection.contract.WorkInfoContract;
 import com.zt.inspection.model.entity.response.CaseInfoBean;
 import com.zt.inspection.model.entity.response.WordInfoBean;
@@ -69,6 +78,9 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
     private TextView tvUpuid;
     private TextView tvCdatetime;
     private TextView tvFeedbackcontent;
+    private TextView tv_caddress;
+    private TextView tv_pidname;
+    private MapView mMapView;
 
     private CaseInfoBean caseinfo;
 
@@ -88,6 +100,8 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         rvSgqVideo = findViewById(R.id.rv_sgq_video);
         rvSghPhoto = findViewById(R.id.rv_sgh_photo);
         rvSghVideo = findViewById(R.id.rv_sgh_video);
+        tv_pidname = findViewById(R.id.tv_pidname);
+        tv_caddress = findViewById(R.id.tv_caddress);
 
 
         tvCtid = findViewById(R.id.tv_ctid);
@@ -95,6 +109,7 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         tvWorklevel = findViewById(R.id.tv_worklevel);
         tvUpuid = findViewById(R.id.tv_upuid);
         tvCdatetime = findViewById(R.id.tv_cdatetime);
+        mMapView = findViewById(R.id.mapview);
         tvFeedbackcontent = findViewById(R.id.tv_feedbackcontent);
 
 
@@ -121,10 +136,25 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
 
         settingData();
         initResource();
+        initMap();
         if (RoleIdUtil.isSHIGONG() ) {
             bt_addinfo.setVisibility(View.VISIBLE);
         }
     }
+    private void initMap() {
+        ArcGISDynamicMapServiceLayer arcGISTiledMapServiceLayer = new ArcGISDynamicMapServiceLayer(Urls.mapUrl);
+        mMapView.addLayer(arcGISTiledMapServiceLayer);
+        GraphicsLayer hiddenSegmentsLayer = new GraphicsLayer();
+        mMapView.addLayer(hiddenSegmentsLayer);
+        mMapView.setMaxScale(10000);
+        Point point = new Point(Double.valueOf(caseinfo.getX()),Double.valueOf(caseinfo.getY()));
+        Drawable bitmap = ContextCompat.getDrawable(getContext(), R.mipmap.anfapoint);
+        PictureMarkerSymbol pictureMarkerSymbol = new PictureMarkerSymbol(bitmap);
+        Graphic graphic = new Graphic(point, pictureMarkerSymbol);
+        mMapView.setExtent(point);
+        hiddenSegmentsLayer.addGraphic(graphic);
+    }
+
 
     private void initResource() {
 
@@ -187,6 +217,8 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         tvCtid.setText(caseinfo.getTYPENAME());
         tvCstate.setText(StatusUtil.getName(caseinfo.getCSTATE()));
         tvWorklevel.setText(caseinfo.getWORKLEVEL());
+        tv_caddress.setText(caseinfo.getCADDRESS());
+        tv_pidname.setText(caseinfo.getPIDNAME());
         tvUpuid.setText(caseinfo.getUPUID());
         tvCdatetime.setText(caseinfo.getCDATETIME());
         tvFeedbackcontent.setText(caseinfo.getFEEDBACKCONTENT());
@@ -229,5 +261,23 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
                 break;
             }
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mMapView.pause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMapView.unpause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mMapView.destroyDrawingCache();
     }
 }

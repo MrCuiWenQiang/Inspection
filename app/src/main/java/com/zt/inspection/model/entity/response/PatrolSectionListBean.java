@@ -6,8 +6,17 @@ public class PatrolSectionListBean {
     private List<PatrolRlistBean> RList;
     private String DEPARTNAME;
     private String OUTTIME;
+    private String PATROLSECTIONNAME;
     public List<PatrolRlistBean> getRList() {
         return RList;
+    }
+
+    public String getPATROLSECTIONNAME() {
+        return PATROLSECTIONNAME;
+    }
+
+    public void setPATROLSECTIONNAME(String PATROLSECTIONNAME) {
+        this.PATROLSECTIONNAME = PATROLSECTIONNAME;
     }
 
     public void setRList(List<PatrolRlistBean> RList) {

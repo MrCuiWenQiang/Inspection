@@ -43,7 +43,7 @@ public class StatusUtil {
     }
 
     public static boolean isFinsh(String status) {
-          if ("2".equals(status)){
+          if ("4".equals(status)){
             return true;
         }else  if ("3".equals(status)){
             return true;

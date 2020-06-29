@@ -127,6 +127,7 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
         mapview.addLayer(arcGISTiledMapServiceLayer);
         hiddenSegmentsLayer = new GraphicsLayer();
         mapview.addLayer(hiddenSegmentsLayer);
+        mapview.setMaxScale(10000);
     }
 
 
@@ -186,9 +187,9 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
             for (int i = 0; i < datas.size(); i++) {
                 PatrolRlistBean item = datas.get(i);
                 if (i == 0) {
-                    polyline.startPath(Double.valueOf(item.getY()), Double.valueOf(item.getX()));
+                    polyline.startPath(Double.valueOf(item.getX()), Double.valueOf(item.getY()));
                 } else {
-                    polyline.lineTo(Double.valueOf(item.getY()), Double.valueOf(item.getX()));
+                    polyline.lineTo(Double.valueOf(item.getX()), Double.valueOf(item.getY()));
                 }
             }
             mapview.setExtent(polyline);

@@ -46,7 +46,15 @@ public class WorkFragmentPresenter extends BaseMVPPresenter<WorkFragmentContract
     }
 
     @Override
-    public void AddCLOCKIN(String remarks) {
+    public void AddCLOCKIN(String remarks,Double x,Double y) {
+        if (workData==null){
+            getView().AddCLOCKIN_fail("获取不到打卡所属数据");
+            return;
+        }
+        if (!isInArea(x,y)){
+            getView().AddCLOCKIN_fail("不在打卡范围内!");
+            return;
+        }
         AddClockinEntity entity = new AddClockinEntity(MyApplication.loginUser.getPATROLCODE(), remarks,MyApplication.loginUser.getDEPARTID());
         HttpHelper.post(Urls.ADDCLOCKIN, entity, new HttpResponseCallback() {
             @Override
@@ -73,7 +81,7 @@ public class WorkFragmentPresenter extends BaseMVPPresenter<WorkFragmentContract
     @Override
     public boolean isInArea(double x, double y) {
         if (workData != null) {
-            double point_x = Double.valueOf(workData.getX());
+            double point_x = Double.valueOf(workData.getY());
             double point_Y = Double.valueOf(workData.getX());
             return MyMathUtil.isHave(point_x,point_Y,x,y,Double.valueOf(workData.getRADIUS()));
         } else {

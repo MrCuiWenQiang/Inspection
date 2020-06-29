@@ -145,7 +145,8 @@ public class PatrolSectionListActivity extends BaseMVPAcivity<PatrolSectionListC
         Point point = new Point(x, y);
         Graphic graphic = new Graphic(point, pictureMarkerSymbol);
         pointId = hiddenSegmentsLayer.addGraphic(graphic);
-        mapview.setExtent(point, 120);
+        mapview.setExtent(point);
+
     }
 
     private void initMap() {
@@ -153,6 +154,7 @@ public class PatrolSectionListActivity extends BaseMVPAcivity<PatrolSectionListC
         mapview.addLayer(arcGISTiledMapServiceLayer);
         hiddenSegmentsLayer = new GraphicsLayer();
         mapview.addLayer(hiddenSegmentsLayer);
+        mapview.setMaxScale(10000);
     }
 
     @Override

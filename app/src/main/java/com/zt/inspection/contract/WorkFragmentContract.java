@@ -24,7 +24,7 @@ public class WorkFragmentContract {
 
     public interface Presenter {
         void GetCLOCKINList();//获取打卡所需信息
-        void AddCLOCKIN(String remarks);//打卡
+        void AddCLOCKIN(String remarks,Double x,Double y);//打卡
 
 
         boolean isInArea(double x, double y);//定位位置校验

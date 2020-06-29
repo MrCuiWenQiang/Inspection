@@ -107,6 +107,7 @@ public class PatrolRouteActivity extends BaseMVPAcivity<PatrolRouteContract.View
         graphicsLayer = new GraphicsLayer();
         mMapView.addLayer(hiddenSegmentsLayer);
         mMapView.addLayer(graphicsLayer);
+        mMapView.setMaxScale(10000);
     }
 
     @Override

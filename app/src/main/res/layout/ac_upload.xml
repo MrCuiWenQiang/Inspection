@@ -36,7 +36,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         style="@style/et_back"
-                        android:drawableRight="@mipmap/right"
+                        android:drawableRight="@mipmap/next"
                         android:gravity="center_vertical"
                         android:hint="点击选择事件类型"
                         android:textSize="18sp" />
@@ -86,6 +86,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         style="@style/et_back"
+                        android:drawableRight="@mipmap/next"
                         android:textSize="18sp" />
 
                       </LinearLayout>

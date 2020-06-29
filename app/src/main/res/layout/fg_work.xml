@@ -9,7 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
+        <com.esri.android.map.MapView
+            android:id="@+id/mapview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
         <TextView
             style="@style/dd_t"
             android:layout_width="wrap_content"
@@ -19,11 +22,25 @@
         <TextView
             android:id="@+id/tv_up_hint"
             style="@style/dd_hint"
+            android:textSize="18sp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxx时间打卡成功" />
-
+        <TextView
+            android:id="@+id/tv_up_date"
+            style="@style/dd_hint"
+            android:textColor="@color/viewfinder_mask"
+            android:textSize="16sp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xxxx时间打卡成功"
+            />
         <RelativeLayout
             android:id="@+id/ll_up"
             android:layout_width="wrap_content"
@@ -49,11 +66,24 @@
         <TextView
             android:id="@+id/tv_down_hint"
             style="@style/dd_hint"
+            android:textSize="18sp"
+            android:layout_marginTop="12dp"
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxx时间打卡成功" />
-
+        <TextView
+            android:id="@+id/tv_down_date"
+            style="@style/dd_hint"
+            android:textColor="@color/viewfinder_mask"
+            android:textSize="16sp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xxxx时间打卡成功"
+            />
         <RelativeLayout
             android:id="@+id/ll_down"
             android:layout_width="wrap_content"

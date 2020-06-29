@@ -3,8 +3,15 @@ package com.zt.inspection.model.entity.response;
 public class TodayBean {
     private int type;
     private String remarks;
+    private String SIGNTIME;
 
+    public String getSIGNTIME() {
+        return SIGNTIME;
+    }
 
+    public void setSIGNTIME(String SIGNTIME) {
+        this.SIGNTIME = SIGNTIME;
+    }
 
     public int getType() {
         return type;
