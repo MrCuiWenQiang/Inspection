@@ -12,12 +12,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.esri.android.map.GraphicsLayer;
+/*import com.esri.android.map.GraphicsLayer;
 import com.esri.android.map.MapView;
 import com.esri.android.map.ags.ArcGISDynamicMapServiceLayer;
 import com.esri.core.geometry.Point;
 import com.esri.core.map.Graphic;
-import com.esri.core.symbol.PictureMarkerSymbol;
+import com.esri.core.symbol.PictureMarkerSymbol;*/
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.model.LatLng;
 import com.zt.inspection.R;
 import com.zt.inspection.Urls;
 import com.zt.inspection.contract.WorkInfoContract;
@@ -80,9 +90,12 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
     private TextView tvFeedbackcontent;
     private TextView tv_caddress;
     private TextView tv_pidname;
-    private MapView mMapView;
+//    private MapView mMapView;
 
     private CaseInfoBean caseinfo;
+
+    private MapView bmapView;
+    private BaiduMap mBaiduMap;
 
     @Override
     protected int getLayoutContentId() {
@@ -95,6 +108,8 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         setTitle("案件记录", R.color.white);
         setToolBarBackgroundColor(R.color.select_color);
 
+        bmapView = findViewById(R.id.bmapView);
+        mBaiduMap = bmapView.getMap();
 
         rvSgqPhoto = findViewById(R.id.rv_sgq_photo);
         rvSgqVideo = findViewById(R.id.rv_sgq_video);
@@ -109,7 +124,7 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         tvWorklevel = findViewById(R.id.tv_worklevel);
         tvUpuid = findViewById(R.id.tv_upuid);
         tvCdatetime = findViewById(R.id.tv_cdatetime);
-        mMapView = findViewById(R.id.mapview);
+//        mMapView = findViewById(R.id.mapview);
         tvFeedbackcontent = findViewById(R.id.tv_feedbackcontent);
 
 
@@ -142,7 +157,7 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         }
     }
     private void initMap() {
-        ArcGISDynamicMapServiceLayer arcGISTiledMapServiceLayer = new ArcGISDynamicMapServiceLayer(Urls.mapUrl);
+/*        ArcGISDynamicMapServiceLayer arcGISTiledMapServiceLayer = new ArcGISDynamicMapServiceLayer(Urls.mapUrl);
         mMapView.addLayer(arcGISTiledMapServiceLayer);
         GraphicsLayer hiddenSegmentsLayer = new GraphicsLayer();
         mMapView.addLayer(hiddenSegmentsLayer);
@@ -152,7 +167,22 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         PictureMarkerSymbol pictureMarkerSymbol = new PictureMarkerSymbol(bitmap);
         Graphic graphic = new Graphic(point, pictureMarkerSymbol);
         mMapView.setExtent(point);
-        hiddenSegmentsLayer.addGraphic(graphic);
+        hiddenSegmentsLayer.addGraphic(graphic);*/
+        bmapView.showZoomControls(false);
+        LatLng point = new LatLng(Double.valueOf(caseinfo.getY()),Double.valueOf(caseinfo.getX()));
+        BitmapDescriptor bitmap = BitmapDescriptorFactory
+                .fromResource(R.mipmap.anfapoint);
+        OverlayOptions option = new MarkerOptions()
+                .position(point)
+                .icon(bitmap);
+        mBaiduMap.addOverlay(option);
+
+        MapStatus mMapStatus = new MapStatus.Builder()
+                .target(point)
+                .zoom(19)
+                .build();
+        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+        mBaiduMap.setMapStatus(mMapStatusUpdate);
     }
 
 
@@ -266,18 +296,21 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
     @Override
     public void onPause() {
         super.onPause();
-        mMapView.pause();
+//        mMapView.pause();
+        bmapView.onPause();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mMapView.unpause();
+//        mMapView.unpause();
+        bmapView.onResume();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mMapView.destroyDrawingCache();
+//        mMapView.destroyDrawingCache();
+        bmapView.onDestroy();
     }
 }

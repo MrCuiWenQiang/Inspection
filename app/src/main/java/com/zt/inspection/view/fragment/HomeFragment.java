@@ -10,13 +10,23 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.esri.android.map.GraphicsLayer;
+/*import com.esri.android.map.GraphicsLayer;
 import com.esri.android.map.MapView;
 import com.esri.android.map.ags.ArcGISDynamicMapServiceLayer;
 import com.esri.android.map.event.OnSingleTapListener;
 import com.esri.core.geometry.Polyline;
 import com.esri.core.map.Graphic;
-import com.esri.core.symbol.SimpleLineSymbol;
+import com.esri.core.symbol.SimpleLineSymbol;*/
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapPoi;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Overlay;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.PolylineOptions;
+import com.baidu.mapapi.model.LatLng;
 import com.zt.inspection.R;
 import com.zt.inspection.Urls;
 import com.zt.inspection.contract.HomeFragmentContract;
@@ -33,6 +43,7 @@ import com.zt.inspection.view.WorkStatusActivity;
 import com.zt.inspection.view.adapter.HomeWorkAdapter;
 import com.zt.inspection.view.adapter.WorksAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.faker.repaymodel.mvp.BaseMVPFragment;
@@ -51,8 +62,11 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
         return fragment;
     }
 
-    private MapView mapview;
-    private GraphicsLayer hiddenSegmentsLayer;
+//    private MapView mapview;
+//    private GraphicsLayer hiddenSegmentsLayer;
+
+    private MapView bmapView;
+    private BaiduMap mBaiduMap;
 
     private LinearLayout ll_notice;
     private LinearLayout ll_work;
@@ -84,7 +98,9 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
     public void initview(View v) {
         rv_tabs = findViewById(R.id.rv_tabs);
         im_top = findViewById(R.id.im_top);
-        mapview = findViewById(R.id.mapview);
+//        mapview = findViewById(R.id.mapview);
+        bmapView = findViewById(R.id.bmapView);
+        mBaiduMap = bmapView.getMap();
         ll_notice = findViewById(R.id.ll_notice);
         ll_work = findViewById(R.id.ll_work);
         rv_works = findViewById(R.id.rv_works);
@@ -106,14 +122,24 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
                 startActivity(WorkStatusActivity.newInstance(getContext(), data.getStatus(), data.getTitle()));
             }
         });
-        mapview.setOnSingleTapListener(new OnSingleTapListener() {
+/*        mapview.setOnSingleTapListener(new OnSingleTapListener() {
             @Override
             public void onSingleTap(float v, float v1) {
                 toAcitvity(PatrolSectionListActivity.class);
 
             }
-        });
+        });*/
+        mBaiduMap.setOnMapClickListener(new BaiduMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                toAcitvity(PatrolSectionListActivity.class);
+            }
 
+            @Override
+            public void onMapPoiClick(MapPoi mapPoi) {
+
+            }
+        });
     }
 
     @Override
@@ -122,12 +148,15 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
         mPresenter.loadShowDatas();
     }
 
-    private void initMap() {
+/*    private void initMap() {
         ArcGISDynamicMapServiceLayer arcGISTiledMapServiceLayer = new ArcGISDynamicMapServiceLayer(Urls.mapUrl);
         mapview.addLayer(arcGISTiledMapServiceLayer);
         hiddenSegmentsLayer = new GraphicsLayer();
         mapview.addLayer(hiddenSegmentsLayer);
         mapview.setMaxScale(10000);
+    }*/
+    private void initMap() {
+
     }
 
 
@@ -135,17 +164,20 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
     @Override
     public void onPause() {
         super.onPause();
-        mapview.pause();
+//        mapview.pause();
+        bmapView.onPause();
     }
     @Override
     public void onResume() {
         super.onResume();
-        mapview.unpause();
+//        mapview.unpause();
+        bmapView.onResume();
     }
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mapview.destroyDrawingCache();
+//        mapview.destroyDrawingCache();
+        bmapView.onDestroy();
     }
 
     @Override
@@ -178,7 +210,7 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
 
     }
 
-    @Override
+/*    @Override
     public void loadLoncal(List<PatrolRlistBean> datas) {
         mapview.setVisibility(View.VISIBLE);
         hiddenSegmentsLayer.removeAll();
@@ -195,6 +227,32 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
             mapview.setExtent(polyline);
             SimpleLineSymbol simpleLineSymbol = new SimpleLineSymbol(Color.BLUE, 3);//创建线要素对象
             hiddenSegmentsLayer.addGraphic(new Graphic(polyline, simpleLineSymbol));
+        }
+    }*/
+
+    @Override
+    public void loadLoncal(List<PatrolRlistBean> datas) {
+        bmapView.setVisibility(View.VISIBLE);
+        mBaiduMap.clear();
+        if (datas!=null&&datas.size()>0){
+            List<LatLng> points = new ArrayList<LatLng>();
+            for (int i = 0; i < datas.size(); i++) {
+                PatrolRlistBean item = datas.get(i);
+                LatLng p1 = new LatLng(Double.valueOf(item.getY()), Double.valueOf(item.getX()));
+                points.add(p1);
+            }
+            //设置折线的属性
+            OverlayOptions mOverlayOptions = new PolylineOptions()
+                    .width(10)
+                    .color(0xAAFF0000)
+                    .points(points);
+            Overlay mPolyline = mBaiduMap.addOverlay(mOverlayOptions);
+            MapStatus mMapStatus = new MapStatus.Builder()
+                    .target(points.get(0))
+                    .zoom(19)
+                    .build();
+            MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+            mBaiduMap.setMapStatus(mMapStatusUpdate);
         }
     }
 }

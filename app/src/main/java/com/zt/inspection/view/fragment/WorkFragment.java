@@ -1,26 +1,18 @@
 package com.zt.inspection.view.fragment;
 
-import android.location.Location;
-import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.esri.android.map.GraphicsLayer;
-import com.esri.android.map.LocationDisplayManager;
-import com.esri.android.map.MapView;
-import com.esri.android.map.ags.ArcGISDynamicMapServiceLayer;
-import com.esri.core.geometry.Point;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
+
+import com.baidu.location.BDLocation;
 import com.zt.inspection.R;
-import com.zt.inspection.Urls;
 import com.zt.inspection.contract.WorkFragmentContract;
-import com.zt.inspection.model.entity.response.ClockInBean;
 import com.zt.inspection.model.entity.response.TodayBean;
 import com.zt.inspection.presenter.WorkFragmentPresenter;
+import com.zt.inspection.util.LBS.LBSUtil;
 import com.zt.inspection.util.WorkUtil;
 
 import java.util.List;
@@ -31,7 +23,9 @@ import cn.faker.repaymodel.util.LogUtil;
 /**
  * 考勤打卡
  */
-public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, WorkFragmentPresenter> implements WorkFragmentContract.View, View.OnClickListener {
+public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, WorkFragmentPresenter>
+        implements WorkFragmentContract.View, View.OnClickListener
+        , com.zt.inspection.util.LBS.LocationListener{
     private String TAG = getClass().getName();
 
     public static WorkFragment newInstance() {
@@ -46,8 +40,7 @@ public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, Wor
     private TextView tv_up_date;
     private TextView tv_down_date;
 
-    private MapView mMapView;
-    private GraphicsLayer hiddenSegmentsLayer;
+
 
     private ViewGroup ll_up;
     private ViewGroup ll_down;
@@ -82,8 +75,6 @@ public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, Wor
         ll_down = findViewById(R.id.ll_down);
         tv_up_date = findViewById(R.id.tv_up_date);
         tv_down_date = findViewById(R.id.tv_down_date);
-        mMapView = findViewById(R.id.mapview);
-        initMap();
     }
 
     @Override
@@ -95,52 +86,14 @@ public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, Wor
     @Override
     protected void initListener() {
         super.initListener();
+        LBSUtil.addListener(this);
         ll_up.setOnClickListener(this);
         ll_down.setOnClickListener(this);
     }
 
 
-    private void initMap() {
-        ArcGISDynamicMapServiceLayer arcGISTiledMapServiceLayer = new ArcGISDynamicMapServiceLayer(Urls.mapUrl);
-        mMapView.addLayer(arcGISTiledMapServiceLayer);
-        hiddenSegmentsLayer = new GraphicsLayer();
-        mMapView.addLayer(hiddenSegmentsLayer);
-        mMapView.setMaxScale(10000);
-        initLocation();
-    }
-    LocationDisplayManager locationDisplayManager;
-    private void initLocation() {
-        locationDisplayManager = mMapView.getLocationDisplayManager();
-        locationDisplayManager.setAutoPanMode(LocationDisplayManager.AutoPanMode.LOCATION);
-        locationDisplayManager.setLocationListener(new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                String bdlat = location.getLatitude() + "";
-                String bdlon = location.getLongitude() + "";
-                if (bdlat.indexOf("E") == -1 || bdlon.indexOf("E") == -1) {
-                    //这里做个判断是因为，可能因为gps信号问题，定位出来的经纬度不正常。
-                    lat = location.getLatitude();//纬度
-                    lon = location.getLongitude();//经度
-                }
-            }
 
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
 
-            }
-
-            @Override
-            public void onProviderEnabled(String s) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String s) {
-
-            }
-        });
-        locationDisplayManager.start();
-    }
 
 
     @Override
@@ -209,4 +162,9 @@ public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, Wor
         LogUtil.e(TAG, message);
     }
 
+    @Override
+    public void onReceiveLocation(BDLocation location, int errorCode, double latitude, double longitude) {
+        lat = location.getLatitude();//纬度
+        lon = location.getLongitude();//经度
+    }
 }

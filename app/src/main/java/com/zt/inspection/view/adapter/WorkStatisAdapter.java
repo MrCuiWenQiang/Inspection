@@ -84,7 +84,7 @@ public class WorkStatisAdapter extends RecyclerView.Adapter<WorkStatisAdapter.Wo
         @Override
         public void onBindViewHolder(@NonNull WorkStatisDetailsViewHolder viewHolder, int i) {
             WorkUserItemBean item = list.get(i);
-            viewHolder.tv_date.setText(item.getDate());
+            viewHolder.tv_date.setText(item.getData());
             if (item.getTime()>0){
                 viewHolder.tv_right_time.setText(item.getTime()+"分钟");
             }
@@ -108,8 +108,8 @@ public class WorkStatisAdapter extends RecyclerView.Adapter<WorkStatisAdapter.Wo
 
             public WorkStatisDetailsViewHolder(@NonNull View itemView) {
                 super(itemView);
-                tv_date = itemView.findViewById(R.id.tv_status);
-                tv_right_time = itemView.findViewById(R.id.tv_sum);
+                tv_date = itemView.findViewById(R.id.tv_date);
+                tv_right_time = itemView.findViewById(R.id.tv_right_time);
                 tv_remars = itemView.findViewById(R.id.tv_remars);
             }
         }

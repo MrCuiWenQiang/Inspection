@@ -9,10 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <com.esri.android.map.MapView
-            android:id="@+id/mapview"
-            android:layout_width="0dp"
-            android:layout_height="0dp"/>
+
         <TextView
             style="@style/dd_t"
             android:layout_width="wrap_content"

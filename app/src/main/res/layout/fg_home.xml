@@ -125,13 +125,19 @@
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
-
-        <com.esri.android.map.MapView
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/bmapView"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:visibility="gone"
+            />
+ <!--       <com.esri.android.map.MapView
             android:id="@+id/mapview"
             android:layout_marginTop="8dp"
             android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="250dp" />
+            android:layout_height="250dp" />-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

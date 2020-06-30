@@ -2,6 +2,8 @@ package com.zt.inspection.presenter;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
 import com.zt.inspection.MyApplication;
 import com.zt.inspection.Urls;
 import com.zt.inspection.contract.WorkFragmentContract;
@@ -83,7 +85,12 @@ public class WorkFragmentPresenter extends BaseMVPPresenter<WorkFragmentContract
         if (workData != null) {
             double point_x = Double.valueOf(workData.getY());
             double point_Y = Double.valueOf(workData.getX());
-            return MyMathUtil.isHave(point_x,point_Y,x,y,Double.valueOf(workData.getRADIUS()));
+            LatLng p1 = new LatLng(point_x,point_Y);
+            LatLng p2 = new LatLng(x,y);
+            double len = DistanceUtil. getDistance(p1, p2);
+            return  len <= Double.valueOf(workData.getRADIUS());
+/*
+            return MyMathUtil.isHave(point_x,point_Y,x,y,Double.valueOf(workData.getRADIUS()));*/
         } else {
             return false;
         }

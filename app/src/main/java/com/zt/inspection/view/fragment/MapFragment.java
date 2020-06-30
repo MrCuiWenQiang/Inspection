@@ -12,16 +12,26 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
-import com.esri.android.map.GraphicsLayer;
+/*import com.esri.android.map.GraphicsLayer;
 import com.esri.android.map.LocationDisplayManager;
 import com.esri.android.map.MapView;
 import com.esri.android.map.ags.ArcGISDynamicMapServiceLayer;
-import com.esri.core.geometry.Point;
+import com.esri.core.geometry.Point;*/
+import com.baidu.location.BDLocation;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BaiduMapOptions;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.model.LatLng;
 import com.zt.inspection.R;
 import com.zt.inspection.Urls;
 import com.zt.inspection.contract.MapFragmentContract;
 import com.zt.inspection.model.entity.response.PatrolSectionBean;
 import com.zt.inspection.presenter.MapFragmentPresenter;
+import com.zt.inspection.util.LBS.LBSUtil;
 import com.zt.inspection.view.UploadActivity;
 import com.zt.inspection.view.dialog.RoleDialog;
 
@@ -33,21 +43,27 @@ import cn.faker.repaymodel.util.permission.collocation.Api23;
 /**
  * Map地图展示Fragment
  */
-public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFragmentPresenter> implements MapFragmentContract.View, View.OnClickListener {
+public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFragmentPresenter>
+        implements MapFragmentContract.View, View.OnClickListener
+        , com.zt.inspection.util.LBS.LocationListener {
     String[] pers = new String[]{Api23.LOCATION, Api23.STORAGE};
 
-    private MapView mMapView;
-    private GraphicsLayer hiddenSegmentsLayer;
+/*    private MapView mMapView;
+    private GraphicsLayer hiddenSegmentsLayer;*/
 
     private TextView tv_start;
     private TextView tv_update;
     private TextView tv_end;
 
-    private LocationDisplayManager locationDisplayManager;
+//    private LocationDisplayManager locationDisplayManager;
 
     private boolean isUpload = false;//是否上传坐标
     private double lat;
     private double lon;
+
+
+    private MapView bmapView;
+    private BaiduMap mBaiduMap;
 
     public static MapFragment newInstance() {
         Bundle args = new Bundle();
@@ -63,11 +79,12 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
 
     @Override
     public void initview(View v) {
-        mMapView = v.findViewById(R.id.mapview);
+//        mMapView = v.findViewById(R.id.mapview);
         tv_start = v.findViewById(R.id.tv_start);
         tv_update = v.findViewById(R.id.tv_update);
         tv_end = v.findViewById(R.id.tv_end);
-
+        bmapView = findViewById(R.id.bmapView);
+        mBaiduMap = bmapView.getMap();
         initMap();
         if (isHavePM(getContext(), pers)) {
             initLocation();
@@ -84,57 +101,64 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
     }
 
 
-
     @Override
     public void initData(Bundle savedInstanceState) {
         end();
     }
 
-    private void initMap() {
+/*    private void initMap() {
         ArcGISDynamicMapServiceLayer arcGISTiledMapServiceLayer = new ArcGISDynamicMapServiceLayer(Urls.mapUrl);
         mMapView.addLayer(arcGISTiledMapServiceLayer);
         hiddenSegmentsLayer = new GraphicsLayer();
         mMapView.addLayer(hiddenSegmentsLayer);
         mMapView.setMaxScale(10000);
+    }*/
+
+    private void initMap() {
+        bmapView.showZoomControls(false);
     }
 
+    /* private void initLocation() {
+         locationDisplayManager = mMapView.getLocationDisplayManager();
+         locationDisplayManager.setAutoPanMode(LocationDisplayManager.AutoPanMode.LOCATION);
+         locationDisplayManager.setLocationListener(new LocationListener() {
+             @Override
+             public void onLocationChanged(Location location) {
+                 String bdlat = location.getLatitude() + "";
+                 String bdlon = location.getLongitude() + "";
+                 if (bdlat.indexOf("E") == -1 || bdlon.indexOf("E") == -1) {
+                     //这里做个判断是因为，可能因为gps信号问题，定位出来的经纬度不正常。
+                     lat = location.getLatitude();//纬度
+                     lon = location.getLongitude();//经度
+
+                     if (isUpload) {
+                         mPresenter.uploadLocal(lat, lon, roleId);
+                         mMapView.setExtent(new Point(lon, lat), 250);
+                     }
+
+                 }
+             }
+
+             @Override
+             public void onStatusChanged(String s, int i, Bundle bundle) {
+
+             }
+
+             @Override
+             public void onProviderEnabled(String s) {
+
+             }
+
+             @Override
+             public void onProviderDisabled(String s) {
+
+             }
+         });
+         locationDisplayManager.start();
+     }*/
     private void initLocation() {
-        locationDisplayManager = mMapView.getLocationDisplayManager();
-        locationDisplayManager.setAutoPanMode(LocationDisplayManager.AutoPanMode.LOCATION);
-        locationDisplayManager.setLocationListener(new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                String bdlat = location.getLatitude() + "";
-                String bdlon = location.getLongitude() + "";
-                if (bdlat.indexOf("E") == -1 || bdlon.indexOf("E") == -1) {
-                    //这里做个判断是因为，可能因为gps信号问题，定位出来的经纬度不正常。
-                    lat = location.getLatitude();//纬度
-                    lon = location.getLongitude();//经度
-
-                    if (isUpload) {
-                        mPresenter.uploadLocal(lat, lon, roleId);
-                        mMapView.setExtent(new Point(lon, lat), 250);
-                    }
-
-                }
-            }
-
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String s) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String s) {
-
-            }
-        });
-        locationDisplayManager.start();
+        mBaiduMap.setMyLocationEnabled(true);
+        LBSUtil.addListener(this);
     }
 
 
@@ -249,20 +273,55 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
     @Override
     public void onPause() {
         super.onPause();
-        mMapView.pause();
+//        mapview.pause();
+        bmapView.onPause();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mMapView.unpause();
+//        mapview.unpause();
+        bmapView.onResume();
     }
+
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mMapView.destroyDrawingCache();
-        locationDisplayManager.stop();
+        bmapView.onDestroy();
+        LBSUtil.removeListener(this);
+//        mMapView.destroyDrawingCache();
+//        locationDisplayManager.stop();
     }
 
+    boolean isOne = false;
+
+    @Override
+    public void onReceiveLocation(BDLocation location, int errorCode, double latitude, double longitude) {
+        //mapView 销毁后不在处理新接收的位置
+        if (location == null || bmapView == null) {
+            return;
+        }
+        MyLocationData locData = new MyLocationData.Builder()
+                .accuracy(location.getRadius())
+                // 此处设置开发者获取到的方向信息，顺时针0-360
+                .direction(location.getDirection()).latitude(location.getLatitude())
+                .longitude(location.getLongitude()).build();
+        mBaiduMap.setMyLocationData(locData);
+        lat = location.getLatitude();//纬度
+        lon = location.getLongitude();//经度
+        if (!isOne || isUpload) {
+            MapStatus mMapStatus = new MapStatus.Builder()
+                    .target(new LatLng(lat, lon))
+                    .zoom(17)
+                    .build();
+            MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+            mBaiduMap.setMapStatus(mMapStatusUpdate);
+            isOne = true;
+        }
+
+        if (isUpload) {
+            mPresenter.uploadLocal(lat, lon, roleId);
+        }
+    }
 }

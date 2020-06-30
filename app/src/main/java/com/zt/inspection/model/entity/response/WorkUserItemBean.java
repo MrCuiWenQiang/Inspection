@@ -1,16 +1,16 @@
 package com.zt.inspection.model.entity.response;
 
 public class WorkUserItemBean {
-    private String date;
+    private String data;
     private float time;
     private String remarks;
 
-    public String getDate() {
-        return date;
+    public String getData() {
+        return data;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public float getTime() {

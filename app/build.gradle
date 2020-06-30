@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
         externalNativeBuild {
             cmake {
                 cppFlags ""
@@ -52,8 +53,11 @@ android {
             keyPassword "123456"
         }
     }
-
-
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
 }
 repositories {
     flatDir {
@@ -70,7 +74,9 @@ dependencies {
     implementation('com.github.gzu-liyujiang.AndroidPicker:WheelPicker:latest.release') {
         exclude group: 'com.android.support'
     }
-//    implementation files('libs/BaiduLBS_Android.jar')
+    //    implementation files('libs/BaiduLBS_Android.jar')
     implementation 'com.brucetoo.pickview:library:1.2.3'
     implementation 'com.belerweb:pinyin4j:2.5.1'
+    implementation files('libs/BaiduLBS_Android.jar')
+    implementation 'com.android.support:multidex:1.0.3'
 }
