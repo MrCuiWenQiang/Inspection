@@ -1,6 +1,8 @@
 package com.zt.inspection.model.entity.response;
 
-public class ClockInBean {
+import java.io.Serializable;
+
+public class ClockInBean implements Serializable {
     /**
      * CLOCKIN_ID：id,
      * CLOCKIN_NAME:名称,

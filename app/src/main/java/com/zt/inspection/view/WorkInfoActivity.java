@@ -21,6 +21,7 @@ import com.esri.core.symbol.PictureMarkerSymbol;*/
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
@@ -183,6 +184,20 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
                 .build();
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
         mBaiduMap.setMapStatus(mMapStatusUpdate);
+
+        mBaiduMap.setOnMapClickListener(new BaiduMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+//                toAcitvity();
+                Intent intent = MapActivity.newInstance(getContext(),caseinfo);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onMapPoiClick(MapPoi mapPoi) {
+
+            }
+        });
     }
 
 

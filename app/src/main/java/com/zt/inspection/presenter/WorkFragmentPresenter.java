@@ -35,6 +35,7 @@ public class WorkFragmentPresenter extends BaseMVPPresenter<WorkFragmentContract
                 workData = JsonUtil.convertJsonToObject(data, ClockInBean.class);
                 if (workData != null) {
                     todayInfo();
+                    getView().GetCLOCKINList_SUCCESS(workData);
                 } else {
                     getView().GetCLOCKINList_Fail("获取不到打卡所属数据，请重试");
                 }

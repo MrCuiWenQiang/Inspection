@@ -94,6 +94,8 @@
         <activity android:name=".view.WorkInfoActivity"/>
         <activity android:name=".view.AddHandleInfoActivity"/>
         <activity android:name=".view.PatrolSectionListActivity"/>
+        <activity android:name=".view.MapActivity"/>
+        <activity android:name=".view.PassWordActivity"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.zt.inspection.fileprovider"

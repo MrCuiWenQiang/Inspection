@@ -47,10 +47,15 @@
                     android:layout_height="wrap_content"
                     android:text="" />
             </LinearLayout>
-
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="0.005"
+                android:layout_height="match_parent"
+                android:background="@color/black"/>
             <LinearLayout
                 style="@style/home_tool_layout"
                 android:layout_width="0dp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 

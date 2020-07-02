@@ -53,7 +53,16 @@
                 android:text="上班打卡"
                 android:textColor="@color/white" />
         </RelativeLayout>
-
+        <TextView
+            android:id="@+id/tv_show_up"
+            android:text="查看打卡范围"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="12dp"
+            android:textSize="14sp"
+            android:textColor="@color/bg_socket_power"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <TextView
             style="@style/dd_t"
             android:layout_width="wrap_content"
@@ -96,5 +105,15 @@
                 android:text="下班打卡"
                 android:textColor="@color/white" />
         </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_show_down"
+            android:text="查看打卡范围"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="12dp"
+            android:textSize="14sp"
+            android:textColor="@color/bg_socket_power"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

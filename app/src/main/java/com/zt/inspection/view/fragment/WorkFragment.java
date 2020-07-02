@@ -1,5 +1,6 @@
 package com.zt.inspection.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
@@ -10,10 +11,12 @@ import android.widget.TextView;
 import com.baidu.location.BDLocation;
 import com.zt.inspection.R;
 import com.zt.inspection.contract.WorkFragmentContract;
+import com.zt.inspection.model.entity.response.ClockInBean;
 import com.zt.inspection.model.entity.response.TodayBean;
 import com.zt.inspection.presenter.WorkFragmentPresenter;
 import com.zt.inspection.util.LBS.LBSUtil;
 import com.zt.inspection.util.WorkUtil;
+import com.zt.inspection.view.MapActivity;
 
 import java.util.List;
 
@@ -39,6 +42,8 @@ public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, Wor
     private TextView tv_down_hint;
     private TextView tv_up_date;
     private TextView tv_down_date;
+    private TextView tv_show_up;
+    private TextView tv_show_down;
 
 
 
@@ -58,8 +63,18 @@ public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, Wor
                 showLoading();
                 mPresenter.AddCLOCKIN(null,lat,lon);
                 break;
+            }case R.id.tv_show_down: {
+                toMap();
+                break;
+            }case R.id.tv_show_up: {
+                toMap();
+                break;
             }
         }
+    }
+    private void toMap(){
+        Intent intent = MapActivity.newInstance(getContext(),workData);
+        startActivity(intent);
     }
 
     @Override
@@ -75,6 +90,8 @@ public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, Wor
         ll_down = findViewById(R.id.ll_down);
         tv_up_date = findViewById(R.id.tv_up_date);
         tv_down_date = findViewById(R.id.tv_down_date);
+        tv_show_up = findViewById(R.id.tv_show_up);
+        tv_show_down = findViewById(R.id.tv_show_down);
     }
 
     @Override
@@ -89,6 +106,8 @@ public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, Wor
         LBSUtil.addListener(this);
         ll_up.setOnClickListener(this);
         ll_down.setOnClickListener(this);
+        tv_show_up.setOnClickListener(this);
+        tv_show_down.setOnClickListener(this);
     }
 
 
@@ -121,9 +140,11 @@ public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, Wor
         dimiss();
         //今日未打卡
         ll_up.setVisibility(View.VISIBLE);
+        tv_show_up.setVisibility(View.VISIBLE);
         tv_up_hint.setVisibility(View.GONE);
         tv_down_hint.setVisibility(View.GONE);
         ll_down.setVisibility(View.GONE);
+        tv_show_down.setVisibility(View.GONE);
     }
 
     @Override
@@ -138,7 +159,9 @@ public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, Wor
 
         if (datas.size() == 1) {
             ll_down.setVisibility(View.VISIBLE);
+            tv_show_down.setVisibility(View.VISIBLE);
             ll_up.setVisibility(View.GONE);
+            tv_show_up.setVisibility(View.GONE);
 
         } else if (datas.size() == 2) {
             TodayBean todayBean2 = datas.get(1);
@@ -151,7 +174,9 @@ public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, Wor
             tv_down_hint.setVisibility(View.VISIBLE);
 //            tv_up_hint.setVisibility(View.VISIBLE);
             ll_down.setVisibility(View.GONE);
+            tv_show_down.setVisibility(View.GONE);
             ll_up.setVisibility(View.GONE);
+            tv_show_up.setVisibility(View.GONE);
         }
         dimiss();
     }
@@ -160,6 +185,11 @@ public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, Wor
     public void todayinfo_final(String message) {
         dimiss();
         LogUtil.e(TAG, message);
+    }
+    ClockInBean workData;
+    @Override
+    public void GetCLOCKINList_SUCCESS(ClockInBean workData) {
+        this.workData = workData;
     }
 
     @Override

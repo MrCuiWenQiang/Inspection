@@ -148,6 +148,23 @@ public class DateUtils {
         return date;
     }
 
+    /**
+     * 判断是否第一个时间大于第二个
+     * @param beginTime
+     * @param endTime
+     * @return
+     * @throws ParseException
+     */
+    public static boolean isbeginTime(String beginTime,String endTime) throws ParseException {
+        SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT);
+        Date sd1=df.parse(beginTime);
+        Date sd2=df.parse(endTime);
+
+        long long1 =sd1.getTime();
+
+        long long2= sd2.getTime();
+        return long1>long2;
+    }
 
     /**
      * 将日期格式日期转换为字符串格式

@@ -20,6 +20,8 @@ public class WorkFragmentContract {
         void todayinfo_gone(List<TodayBean> datas); //今日已打卡的界面显示
 
         void todayinfo_final(String message);//信息获取失败界面显示
+
+        void GetCLOCKINList_SUCCESS(ClockInBean workData);
     }
 
     public interface Presenter {

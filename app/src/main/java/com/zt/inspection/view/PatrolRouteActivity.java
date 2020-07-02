@@ -17,6 +17,8 @@ import com.esri.core.geometry.Polyline;
 import com.esri.core.map.Graphic;
 import com.esri.core.symbol.PictureMarkerSymbol;
 import com.esri.core.symbol.SimpleLineSymbol;*/
+import com.baidu.mapapi.animation.Animation;
+import com.baidu.mapapi.animation.Transformation;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -24,6 +26,7 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
@@ -165,10 +168,11 @@ public class PatrolRouteActivity extends BaseMVPAcivity<PatrolRouteContract.View
             mTimer.cancel();
         }
     }
-
+    List<LatLng> points;
     @Override
     public void queryDataSuccess(List<PatrikRouteBean> datas) {
         dimiss();
+        mBaiduMap.clear();
         this.datas = datas;
 /*        Polyline polyline = new Polyline();
         for (int i = 0; i < datas.size(); i++) {
@@ -185,7 +189,7 @@ public class PatrolRouteActivity extends BaseMVPAcivity<PatrolRouteContract.View
         SimpleLineSymbol simpleLineSymbol = new SimpleLineSymbol(Color.BLUE, 3);//创建线要素对象
         graphicsLayer.addGraphic(new Graphic(polyline, simpleLineSymbol));*/
 
-        List<LatLng> points = new ArrayList<LatLng>();
+        points = new ArrayList<LatLng>();
         for (int i = 0; i < datas.size(); i++) {
             PatrikRouteBean item = datas.get(i);
             LatLng p1 = new LatLng(Double.valueOf(item.getY()), Double.valueOf(item.getX()));
@@ -198,12 +202,73 @@ public class PatrolRouteActivity extends BaseMVPAcivity<PatrolRouteContract.View
                 .points(points);
         Overlay mPolyline = mBaiduMap.addOverlay(mOverlayOptions);
 
+        if (points.size()>0){
+            BitmapDescriptor bitmap = BitmapDescriptorFactory
+                    .fromResource(R.mipmap.qd);
+            OverlayOptions option = new MarkerOptions()
+                    .position(points.get(0))
+                    .icon(bitmap);
+            mBaiduMap.addOverlay(option);
+
+            BitmapDescriptor bitmape = BitmapDescriptorFactory
+                    .fromResource(R.mipmap.zd);
+            OverlayOptions optione = new MarkerOptions()
+                    .position(points.get(points.size()-1))
+                    .icon(bitmape);
+            mBaiduMap.addOverlay(optione);
+        }
         toPoint();
     }
-
-    int index = 0;
-
     private void toPoint() {
+        //通过LatLng列表构造Transformation对象
+        Transformation mTransforma = new Transformation(points.toArray(new LatLng[]{}));
+
+//动画执行时间
+        mTransforma.setDuration(3000);
+
+//动画重复模式
+        mTransforma.setRepeatMode(Animation.RepeatMode.RESTART);
+
+//动画重复次数
+        mTransforma.setRepeatCount(1);
+
+//根据开发需要设置动画监听
+        mTransforma.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart() {
+            }
+
+            @Override
+            public void onAnimationEnd() {
+            }
+
+            @Override
+            public void onAnimationCancel() {
+            }
+
+            @Override
+            public void onAnimationRepeat() {
+
+            }
+        });
+
+        MarkerOptions option = new MarkerOptions()
+                .position(points.get(0))
+                .icon(bbitmap);
+        MapStatus mMapStatus = new MapStatus.Builder()
+                .target(points.get(0))
+                .build();
+        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+        mBaiduMap.setMapStatus(mMapStatusUpdate);
+//设置动画
+        Marker marker= (Marker) mBaiduMap.addOverlay(option);
+        marker.setAnimation(mTransforma);
+//开启动画
+        marker.startAnimation();
+    }
+    int index = 0;
+    Overlay overlay;
+/*    private void toPoint() {
         if (index != 0) {
             index = 0;
             mTimerTask.cancel();
@@ -240,17 +305,17 @@ public class PatrolRouteActivity extends BaseMVPAcivity<PatrolRouteContract.View
         };
         mTimer.schedule(mTimerTask, DELAY, PERIOD);
     }
-    Overlay overlay;
+
     private void toPoint(double x, double y) {
 
-/*        if (pointId != -1) {
+*//*        if (pointId != -1) {
             hiddenSegmentsLayer.removeGraphic(pointId);
             pointId = -1;
         }
         Point point = new Point(x,y);
         Graphic graphic = new Graphic(point, pictureMarkerSymbol);
         pointId = hiddenSegmentsLayer.addGraphic(graphic);
-        mMapView.setExtent(point,120);*/
+        mMapView.setExtent(point,120);*//*
         if (overlay!=null){
             overlay.remove();
             overlay = null;
@@ -266,7 +331,7 @@ public class PatrolRouteActivity extends BaseMVPAcivity<PatrolRouteContract.View
                 .build();
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
         mBaiduMap.setMapStatus(mMapStatusUpdate);
-    }
+    }*/
 
     @Override
     public void queryDataFinsh(String message) {

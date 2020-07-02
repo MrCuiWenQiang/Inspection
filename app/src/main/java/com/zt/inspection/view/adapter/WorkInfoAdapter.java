@@ -3,6 +3,7 @@ package com.zt.inspection.view.adapter;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,8 +40,11 @@ public class WorkInfoAdapter extends RecyclerView.Adapter<WorkInfoAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         WordInfoBean wordInfoBean = datas.get(i);
         viewHolder.tvCstate.setText(StatusUtil.getLcName(wordInfoBean.getCSTATE()));
-        Date d = DateUtils.stringToDate(wordInfoBean.getCREATETIME(), DateUtils.DATE_TIME_FORMAT);
-        viewHolder.tvCreatetime.setText(DateUtils.dateToString(d, DateUtils.DATE_TIME_FORMAT));
+       String date = wordInfoBean.getCREATETIME();
+       if (!TextUtils.isEmpty(date)){
+           date = date.replace("T"," ");
+       }
+        viewHolder.tvCreatetime.setText(date);
     }
 
     @Override

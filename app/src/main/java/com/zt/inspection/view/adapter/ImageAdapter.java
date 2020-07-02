@@ -38,6 +38,9 @@ public class ImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             List<String> photoPaths = new ArrayList<>();
             String[] pss = ps.split(",");
             for (String path: pss ) {
+                if (TextUtils.isEmpty(path)){
+                    continue;
+                }
                 photoPaths.add( url+path);
             }
             this.photoPaths = photoPaths;
@@ -59,7 +62,8 @@ public class ImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         PhotoViewHolder photoViewHolder = (PhotoViewHolder) viewHolder;
-        ImageLoadHelper.loadImage(photoViewHolder.itemView.getContext(), photoViewHolder.iv_pto, photoPaths.get(i));
+//        ImageLoadHelper.loadImage(photoViewHolder.itemView.getContext(), photoViewHolder.iv_pto, photoPaths.get(i));
+        ImageLoadHelper.loadImage(photoViewHolder.itemView.getContext(), photoViewHolder.iv_pto, photoPaths.get(i),R.mipmap.imageload,R.mipmap.error);
         photoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

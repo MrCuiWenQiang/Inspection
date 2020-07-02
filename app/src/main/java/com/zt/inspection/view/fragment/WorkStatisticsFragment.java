@@ -17,10 +17,14 @@ import com.zt.inspection.presenter.WorkStatisticsPresenter;
 import com.zt.inspection.view.adapter.WorkManualStatisAdapter;
 import com.zt.inspection.view.adapter.WorkStatisAdapter;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
 import cn.faker.repaymodel.mvp.BaseMVPFragment;
+import cn.faker.repaymodel.util.DateUtils;
+import cn.faker.repaymodel.util.ToastUtility;
+import cn.faker.repaymodel.widget.view.date.DateUtil;
 import cn.faker.repaymodel.widget.view.date.MonthUtil;
 
 /**
@@ -47,15 +51,16 @@ public class WorkStatisticsFragment extends BaseMVPFragment<WorkStatisticsFragme
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_date: {
-                showDate(tv_date);
+                showDate(tv_date, 0);
                 break;
             }
             case R.id.tv_date_end: {
-                showDate(tv_date_end);
+                showDate(tv_date_end, 1);
                 break;
-            } case R.id.bt_search: {
+            }
+            case R.id.bt_search: {
                 showLoading();
-                mPresenter.search(tv_date.getText().toString(),tv_date_end.getText().toString());
+                mPresenter.search(tv_date.getText().toString(), tv_date_end.getText().toString());
                 break;
             }
         }
@@ -76,12 +81,38 @@ public class WorkStatisticsFragment extends BaseMVPFragment<WorkStatisticsFragme
 
     }
 
-    private void showDate(TextView tv) {
+    private void showDate(TextView tv, int type) {
 
         DatePickerPopWin pickerPopWin = new DatePickerPopWin.Builder(getContext(), new DatePickerPopWin.OnDatePickedListener() {
             @Override
             public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
-                tv.setText(dateDesc);
+                if (type == 0) {
+                    //0为开始时间
+                    boolean is = false;
+                    try {
+                        is = DateUtils.isbeginTime(dateDesc, tv_date_end.getText().toString());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if (is) {
+                        ToastUtility.showToast("开始时间不能大于结束时间");
+                    } else {
+                        tv.setText(dateDesc);
+                    }
+                } else {
+                    boolean is = false;
+                    try {
+                        is = DateUtils.isbeginTime(tv_date.getText().toString(),dateDesc);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if (is) {
+                        ToastUtility.showToast("结束时间不能小于开始时间");
+                    } else {
+                        tv.setText(dateDesc);
+                    }
+                }
+
             }
         }).textConfirm("确定") //text of confirm button
                 .textCancel("取消") //text of cancel button
@@ -104,7 +135,7 @@ public class WorkStatisticsFragment extends BaseMVPFragment<WorkStatisticsFragme
         tv_date.setText(mstart);
         tv_date_end.setText(mend);
         showLoading();
-        mPresenter.search(tv_date.getText().toString(),tv_date_end.getText().toString());
+        mPresenter.search(tv_date.getText().toString(), tv_date_end.getText().toString());
     }
 
     @Override

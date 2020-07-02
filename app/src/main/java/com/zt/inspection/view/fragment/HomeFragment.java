@@ -156,7 +156,9 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
         mapview.setMaxScale(10000);
     }*/
     private void initMap() {
-
+        LatLng GEO_BEIJING = new LatLng(36.657828,117.115476);
+        MapStatusUpdate status1 = MapStatusUpdateFactory.newLatLng(GEO_BEIJING);
+        mBaiduMap.setMapStatus(status1);
     }
 
 
