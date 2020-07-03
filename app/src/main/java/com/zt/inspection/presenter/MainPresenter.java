@@ -11,6 +11,7 @@ import com.zt.inspection.view.fragment.HistoryFragment;
 import com.zt.inspection.view.fragment.HomeFragment;
 import com.zt.inspection.view.fragment.MapFragment;
 import com.zt.inspection.view.fragment.MyFragment;
+import com.zt.inspection.view.fragment.StatisticsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,11 @@ public class MainPresenter extends BaseMVPPresenter<MainContract.View> implement
     @Override
     public void giveFragments() {
         ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(HomeFragment.newInstance());
+        if (RoleIdUtil.isManager()){
+            fragments.add(StatisticsFragment.newInstance());
+        }else {
+            fragments.add(HomeFragment.newInstance());
+        }
 
         fragments.add(HistoryFragment.newInstance());
         if (RoleIdUtil.isXUNJIAN()){

@@ -2,6 +2,7 @@ package cn.faker.repaymodel.fragment;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -93,7 +94,11 @@ public abstract class BaseFragment extends Fragment implements BasicFragment {
             getActivity().registerReceiver(mAllBroadCast, intentFilter);
         }
     }
-
+    protected void showListDialog(String title, String[] items, DialogInterface.OnClickListener listener) {
+        new QMUIDialog.CheckableDialogBuilder(getContext()).setTitle(title)
+                .addItems(items, listener)
+                .show();
+    }
     protected void showLoading() {
         dimiss();
         tipDialog = new QMUITipDialog.CustomBuilder(getContext())

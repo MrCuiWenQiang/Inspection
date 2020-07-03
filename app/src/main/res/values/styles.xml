@@ -236,4 +236,19 @@
         <item name="android:layout_marginLeft">8dp</item>
         <item name="android:gravity">center_vertical</item>
     </style>
+    <style name="st_tv_title">
+        <item name="android:textColor">@color/color_gray_open</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+    </style>
+    <style name="st_ll_base">
+        <item name="android:background">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
 </resources>

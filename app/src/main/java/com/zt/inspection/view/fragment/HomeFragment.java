@@ -26,6 +26,7 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.PolylineOptions;
+import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 import com.zt.inspection.R;
 import com.zt.inspection.Urls;
@@ -65,7 +66,7 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
 //    private MapView mapview;
 //    private GraphicsLayer hiddenSegmentsLayer;
 
-    private MapView bmapView;
+    private TextureMapView bmapView;
     private BaiduMap mBaiduMap;
 
     private LinearLayout ll_notice;
@@ -161,6 +162,9 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
         mBaiduMap.setMapStatus(status1);
     }
 
+    /**
+     * fragment显示或者隐藏时调用的方法
+     */
 
 
     @Override
@@ -236,7 +240,7 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
     public void loadLoncal(List<PatrolRlistBean> datas) {
         bmapView.setVisibility(View.VISIBLE);
         mBaiduMap.clear();
-        if (datas!=null&&datas.size()>0){
+        if (datas!=null&&datas.size()>1){
             List<LatLng> points = new ArrayList<LatLng>();
             for (int i = 0; i < datas.size(); i++) {
                 PatrolRlistBean item = datas.get(i);

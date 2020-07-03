@@ -13,11 +13,12 @@ import android.util.AttributeSet;
  */
 public class CurrentViewPager extends ViewPager {
     public CurrentViewPager(@NonNull Context context) {
-        super(context);
+        this(context,null);
     }
 
     public CurrentViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        setOffscreenPageLimit(4);
     }
 
     @Override

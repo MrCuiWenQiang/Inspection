@@ -10,19 +10,19 @@ public class RoleIdUtil {
     private static final String SHIGONG = "4";
 
     public static boolean isManager() {
-        return MANAGER.equals(MyApplication.loginUser.getRoleId());
+        return MANAGER.equals(MyApplication.loginUser.getRoleId())||MyApplication.loginUser.getRoleId().indexOf(MANAGER)>=0;
     }
 
     public static boolean isBUMEN() {
-        return BUMEN.equals(MyApplication.loginUser.getRoleId());
+        return BUMEN.equals(MyApplication.loginUser.getRoleId())||MyApplication.loginUser.getRoleId().indexOf(BUMEN)>=0;
     }
 
     public static boolean isXUNJIAN() {
-        return XUNJIAN.equals(MyApplication.loginUser.getRoleId());
+        return XUNJIAN.equals(MyApplication.loginUser.getRoleId())||MyApplication.loginUser.getRoleId().indexOf(XUNJIAN)>=0;
     }
 
     public static boolean isSHIGONG() {
-        return SHIGONG.equals(MyApplication.loginUser.getRoleId());
+        return SHIGONG.equals(MyApplication.loginUser.getRoleId())||MyApplication.loginUser.getRoleId().indexOf(SHIGONG)>=0;
     }
 
 }

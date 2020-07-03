@@ -141,13 +141,14 @@ public class PatrolSectionListActivity extends BaseMVPAcivity<PatrolSectionListC
                     .icon(bitmape);
             mBaiduMap.addOverlay(optione);
         }
-
-        //设置折线的属性
-        OverlayOptions mOverlayOptions = new PolylineOptions()
-                .width(10)
-                .color(0xAAFF0000)
-                .points(points);
-        Overlay mPolyline = mBaiduMap.addOverlay(mOverlayOptions);
+        if (points.size()>1){
+            //设置折线的属性
+            OverlayOptions mOverlayOptions = new PolylineOptions()
+                    .width(10)
+                    .color(0xAAFF0000)
+                    .points(points);
+            Overlay mPolyline = mBaiduMap.addOverlay(mOverlayOptions);
+        }
         toPoint();
     }
 

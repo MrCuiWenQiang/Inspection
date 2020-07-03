@@ -195,12 +195,15 @@ public class PatrolRouteActivity extends BaseMVPAcivity<PatrolRouteContract.View
             LatLng p1 = new LatLng(Double.valueOf(item.getY()), Double.valueOf(item.getX()));
             points.add(p1);
         }
-        //设置折线的属性
-        OverlayOptions mOverlayOptions = new PolylineOptions()
-                .width(10)
-                .color(0xAAFF0000)
-                .points(points);
-        Overlay mPolyline = mBaiduMap.addOverlay(mOverlayOptions);
+        if (points.size()>1){
+            //设置折线的属性
+            OverlayOptions mOverlayOptions = new PolylineOptions()
+                    .width(10)
+                    .color(0xAAFF0000)
+                    .points(points);
+            Overlay mPolyline = mBaiduMap.addOverlay(mOverlayOptions);
+        }
+
 
         if (points.size()>0){
             BitmapDescriptor bitmap = BitmapDescriptorFactory
