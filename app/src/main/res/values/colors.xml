@@ -19,6 +19,7 @@
     <color name="black">#000000</color>
     <color name="passw_changing">#676361</color>
     <color name="passw_weak">#FF416B</color>
+    <color name="passw_weakw">#ccff416b</color>
     <color name="passw_medium">#FFBC50</color>
     <color name="passw_strong">#24DC55</color>
     <color name="theme_color">#ffe97425</color>
@@ -61,5 +62,5 @@
     <color name="ed_bc">#F2F2F2</color>
     <color name="et_hint">#808080</color>
     <color name="et_back">#F4F4F4</color>
-    <color name="dasda">#B1D6F3</color>
+    <color name="dasda">#c1b1d6f3</color>
 </resources>

@@ -86,7 +86,6 @@ public class HistoryWorkAdapter extends RecyclerView.Adapter<HistoryWorkAdapter.
     public void setDatas(List<CaseInfoBean> datas) {
         if (datas == null) {
             this.datas = datas;
-            return;
         } else if (this.datas == null) {
             this.datas = datas;
         } else {

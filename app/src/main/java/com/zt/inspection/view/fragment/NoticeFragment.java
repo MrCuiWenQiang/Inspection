@@ -102,6 +102,9 @@ public class NoticeFragment extends BaseMVPFragment<NoticeFragmentContract.View,
     @Override
     public void loadData_Success(List<NoticeBean> noticeBeans) {
         dimiss();
+        if (page==1){
+            adapter.setData(null);
+        }
         adapter.setData(noticeBeans);
         mRefreshLayout.setEnableLoadmore(true);
     }

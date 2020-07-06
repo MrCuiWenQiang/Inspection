@@ -88,8 +88,7 @@ public class HomeFragmentPresenter extends BaseMVPPresenter<HomeFragmentContract
                 List<PatrolSectionListBean> datas = JsonUtil.fromList(datajson, PatrolSectionListBean.class);
                 if (datas!=null&&datas.size()>0){
                     if (getView() != null) {
-                        List<PatrolRlistBean> itemDatas = datas.get(0).getRList();
-                        getView().loadLoncal(itemDatas);
+                        getView().loadLoncal(datas);
                     }
                 }else {
                     getView().loadLoncal(null);

@@ -286,6 +286,7 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 200 && resultCode == 200) {
             showLoading();
+            setResult(200);
             mPresenter.queryDatas(id);
         }
     }

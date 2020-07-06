@@ -64,7 +64,7 @@ public class PatrolSectionListActivity extends BaseMVPAcivity<PatrolSectionListC
     @Override
     protected void initContentView() {
         setStatusBar(R.color.select_color);
-        setTitle("当日巡查路线", R.color.white);
+        setTitle("当日巡检路线", R.color.white);
         setToolBarBackgroundColor(R.color.select_color);
 
 //        mapview = findViewById(R.id.mapview);
@@ -148,6 +148,12 @@ public class PatrolSectionListActivity extends BaseMVPAcivity<PatrolSectionListC
                     .color(0xAAFF0000)
                     .points(points);
             Overlay mPolyline = mBaiduMap.addOverlay(mOverlayOptions);
+                MapStatus mMapStatus = new MapStatus.Builder()
+                        .target(points.get(0))
+                        .zoom(19)
+                        .build();
+                MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+                mBaiduMap.setMapStatus(mMapStatusUpdate);
         }
         toPoint();
     }
@@ -157,13 +163,13 @@ public class PatrolSectionListActivity extends BaseMVPAcivity<PatrolSectionListC
         Transformation mTransforma = new Transformation(points.toArray(new LatLng[]{}));
 
 //动画执行时间
-        mTransforma.setDuration(3000);
+        mTransforma.setDuration(5000);
 
 //动画重复模式
         mTransforma.setRepeatMode(Animation.RepeatMode.RESTART);
 
 //动画重复次数
-        mTransforma.setRepeatCount(1);
+        mTransforma.setRepeatCount(0);
 
 //根据开发需要设置动画监听
         mTransforma.setAnimationListener(new Animation.AnimationListener() {

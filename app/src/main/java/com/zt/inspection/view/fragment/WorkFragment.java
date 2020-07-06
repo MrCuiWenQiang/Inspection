@@ -22,6 +22,7 @@ import java.util.List;
 
 import cn.faker.repaymodel.mvp.BaseMVPFragment;
 import cn.faker.repaymodel.util.LogUtil;
+import cn.faker.repaymodel.util.ToastUtility;
 
 /**
  * 考勤打卡
@@ -73,6 +74,10 @@ public class WorkFragment extends BaseMVPFragment<WorkFragmentContract.View, Wor
         }
     }
     private void toMap(){
+        if (workData==null){
+            ToastUtility.showToast("没有打卡信息");
+            return;
+        }
         Intent intent = MapActivity.newInstance(getContext(),workData);
         startActivity(intent);
     }

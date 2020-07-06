@@ -13,7 +13,7 @@
     </item>
     <item android:state_pressed="true">
         <shape>
-            <solid android:color="@color/t_rule2" />
+            <solid android:color="@color/passw_weakw" />
             <padding
                 android:bottom="10dp"
                 android:left="50dp"

@@ -127,8 +127,8 @@ public class MapActivity extends BaseToolBarActivity implements
 //构造CircleOptions对象
         CircleOptions mCircleOptions = new CircleOptions().center(point)
                 .radius(Integer.valueOf(clockInBean.getRADIUS()))
-                .fillColor(Color.parseColor("#B1D6F3")) //填充颜色
-                .stroke(new Stroke(5, Color.parseColor("#B1D6F3"))); //边框宽和边框颜色
+                .fillColor(Color.parseColor("#c1b1d6f3")) //填充颜色
+                .stroke(new Stroke(5, Color.parseColor("#c1b1d6f3"))); //边框宽和边框颜色
 
 //在地图上显示圆
         Overlay mCircle = mBaiduMap.addOverlay(mCircleOptions);

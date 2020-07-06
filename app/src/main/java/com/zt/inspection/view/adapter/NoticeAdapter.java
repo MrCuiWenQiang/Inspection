@@ -23,7 +23,13 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeHold
     private OnItemListener listener;
 
     public void setData(List<NoticeBean> data) {
-        this.data = data;
+        if (data == null) {
+            this.data = data;
+        } else if (this.data == null) {
+            this.data = data;
+        } else {
+            this.data.addAll(data);
+        }
         notifyDataSetChanged();
     }
 

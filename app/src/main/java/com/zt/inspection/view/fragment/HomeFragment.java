@@ -28,12 +28,15 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zt.inspection.R;
 import com.zt.inspection.Urls;
 import com.zt.inspection.contract.HomeFragmentContract;
 import com.zt.inspection.model.entity.response.CaseInfoBean;
 import com.zt.inspection.model.entity.response.PatrikRouteBean;
 import com.zt.inspection.model.entity.response.PatrolRlistBean;
+import com.zt.inspection.model.entity.response.PatrolSectionListBean;
 import com.zt.inspection.model.entity.view.HomeWorkBean;
 import com.zt.inspection.presenter.HomeFragmentPresenter;
 import com.zt.inspection.view.NoticeActivity;
@@ -75,7 +78,7 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
     private RecyclerView rv_tabs;
     private HomeWorkAdapter adapter;
     private ImageView im_top;
-
+    private RefreshLayout mRefreshLayout;
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -110,6 +113,10 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
         rv_works.setAdapter(adapter);
         rv_works.addItemDecoration(new SpaceGridItemDecoration(4, 2));//靠间隔背景色做分割线也算另外一个思路
         rv_tabs.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        mRefreshLayout = findViewById(R.id.refreshLayout);
+        mRefreshLayout.setEnableRefresh(true);//启用刷新
+        mRefreshLayout.setEnableLoadmore(false);
     }
 
     @Override
@@ -139,6 +146,13 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
             @Override
             public void onMapPoiClick(MapPoi mapPoi) {
 
+            }
+        });
+
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                mPresenter.loadHomeDatas();
             }
         });
     }
@@ -196,19 +210,24 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
         im_top.setBackgroundResource(c);
     }
 
+    WorksAdapter wadapter ;
+
     @Override
     public void loadWorkDataSuccess(List<CaseInfoBean> datas) {
+        dimiss();
         rv_tabs.setVisibility(View.VISIBLE);
-        WorksAdapter wadapter = new WorksAdapter();
+        if (wadapter==null){
+            wadapter = new WorksAdapter();
+            rv_tabs.setAdapter(wadapter);
+            wadapter.setOnItemClickListener(new BaseRecycleView.OnItemClickListener<CaseInfoBean>() {
+                @Override
+                public void onItemClick(View view, CaseInfoBean data, int position) {
+                    Intent intent = WorkInfoActivity.newInstance(getContext(),data.getCID(),data.getCSTATE(),data.getCASENUMBER(),data);
+                    startActivity(intent);
+                }
+            });
+        }
         wadapter.setDatas(datas);
-        rv_tabs.setAdapter(wadapter);
-        wadapter.setOnItemClickListener(new BaseRecycleView.OnItemClickListener<CaseInfoBean>() {
-            @Override
-            public void onItemClick(View view, CaseInfoBean data, int position) {
-                Intent intent = WorkInfoActivity.newInstance(getContext(),data.getCID(),data.getCSTATE(),data.getCASENUMBER(),data);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -237,28 +256,44 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
     }*/
 
     @Override
-    public void loadLoncal(List<PatrolRlistBean> datas) {
+    public void loadLoncal(List<PatrolSectionListBean> fdatas) {
+        dimiss();
         bmapView.setVisibility(View.VISIBLE);
         mBaiduMap.clear();
-        if (datas!=null&&datas.size()>1){
-            List<LatLng> points = new ArrayList<LatLng>();
-            for (int i = 0; i < datas.size(); i++) {
-                PatrolRlistBean item = datas.get(i);
-                LatLng p1 = new LatLng(Double.valueOf(item.getY()), Double.valueOf(item.getX()));
-                points.add(p1);
+        int si = 0;
+        for (PatrolSectionListBean bean:fdatas) {
+            List<PatrolRlistBean> datas = bean.getRList();
+            if (datas!=null&&datas.size()>1){
+                List<LatLng> points = new ArrayList<LatLng>();
+                for (int i = 0; i < datas.size(); i++) {
+                    PatrolRlistBean item = datas.get(i);
+                    LatLng p1 = new LatLng(Double.valueOf(item.getY()), Double.valueOf(item.getX()));
+                    points.add(p1);
+                }
+                //设置折线的属性
+                OverlayOptions mOverlayOptions = new PolylineOptions()
+                        .width(10)
+                        .color(0xAAFF0000)
+                        .points(points);
+                Overlay mPolyline = mBaiduMap.addOverlay(mOverlayOptions);
+                if (si==0){
+                    si+=1;
+                    MapStatus mMapStatus = new MapStatus.Builder()
+                            .target(points.get(0))
+                            .zoom(19)
+                            .build();
+                    MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+                    mBaiduMap.setMapStatus(mMapStatusUpdate);
+                }
+
             }
-            //设置折线的属性
-            OverlayOptions mOverlayOptions = new PolylineOptions()
-                    .width(10)
-                    .color(0xAAFF0000)
-                    .points(points);
-            Overlay mPolyline = mBaiduMap.addOverlay(mOverlayOptions);
-            MapStatus mMapStatus = new MapStatus.Builder()
-                    .target(points.get(0))
-                    .zoom(19)
-                    .build();
-            MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
-            mBaiduMap.setMapStatus(mMapStatusUpdate);
         }
     }
+    @Override
+    protected void dimiss() {
+        super.dimiss();
+        mRefreshLayout.finishRefresh();//完成刷新
+        mRefreshLayout.finishLoadmore();//完成刷新
+    }
+
 }

@@ -20,9 +20,11 @@ import com.zt.inspection.contract.MyFragmentContract;
 import com.zt.inspection.presenter.MyFragmentPresenter;
 import com.zt.inspection.view.BranchModelActivity;
 import com.zt.inspection.view.LeaveActivity;
+import com.zt.inspection.view.LoginActivity;
 import com.zt.inspection.view.PassWordActivity;
 import com.zt.inspection.view.UserInfoActivity;
 
+import cn.faker.repaymodel.activity.manager.ActivityManager;
 import cn.faker.repaymodel.mvp.BaseMVPFragment;
 import cn.faker.repaymodel.util.UiTools;
 
@@ -106,6 +108,18 @@ public class MyFragment extends BaseMVPFragment<MyFragmentContract.View, MyFragm
         mFloatLayout.setGravity(Gravity.LEFT);
         mFloatLayout.setMaxNumber(3);
         mFloatLayout.setChildHorizontalSpacing(12);
+    }
+
+    @Override
+    protected void initListener() {
+        super.initListener();
+        findViewById(R.id.bt_exit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toAcitvity(LoginActivity.class);
+                ActivityManager.exit(getContext());
+            }
+        });
     }
 
     @Override

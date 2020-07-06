@@ -219,6 +219,13 @@ public class PatrolRouteActivity extends BaseMVPAcivity<PatrolRouteContract.View
                     .position(points.get(points.size()-1))
                     .icon(bitmape);
             mBaiduMap.addOverlay(optione);
+
+            MapStatus mMapStatus = new MapStatus.Builder()
+                    .target(points.get(0))
+                    .zoom(19)
+                    .build();
+            MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+            mBaiduMap.setMapStatus(mMapStatusUpdate);
         }
         toPoint();
     }
@@ -227,7 +234,7 @@ public class PatrolRouteActivity extends BaseMVPAcivity<PatrolRouteContract.View
         Transformation mTransforma = new Transformation(points.toArray(new LatLng[]{}));
 
 //动画执行时间
-        mTransforma.setDuration(3000);
+        mTransforma.setDuration(5000);
 
 //动画重复模式
         mTransforma.setRepeatMode(Animation.RepeatMode.RESTART);

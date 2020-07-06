@@ -61,7 +61,7 @@ public class HistoryWorkFragment extends BaseMVPFragment<HistoryWorkFragmentCont
         mRefreshLayout.setEnableRefresh(true);//启用刷新
         mRefreshLayout.setEnableLoadmore(false);
     }
-
+    int requestCode = 403;
     @Override
     protected void initListener() {
         super.initListener();
@@ -83,7 +83,7 @@ public class HistoryWorkFragment extends BaseMVPFragment<HistoryWorkFragmentCont
             @Override
             public void onItemClick(View view, CaseInfoBean data, int position) {
                 Intent intent = WorkInfoActivity.newInstance(getContext(),data.getCID(),data.getCSTATE(),data.getCASENUMBER(),data);
-                startActivity(intent);
+                startActivityForResult(intent,requestCode);
             }
         });
         adapter.setOnPhotoListener(new ImageAdapter.OnPhotoListener() {
@@ -135,6 +135,18 @@ public class HistoryWorkFragment extends BaseMVPFragment<HistoryWorkFragmentCont
         super.dimiss();
         mRefreshLayout.finishRefresh();//完成刷新
         mRefreshLayout.finishLoadmore();//完成刷新
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==this.requestCode){
+            if (resultCode==200){
+                showLoading();
+                page = 1;
+                loadData();
+            }
+        }
     }
 
     @Override
