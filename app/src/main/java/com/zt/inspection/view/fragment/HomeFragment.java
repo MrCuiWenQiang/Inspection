@@ -260,6 +260,9 @@ public class HomeFragment extends BaseMVPFragment<HomeFragmentContract.View, Hom
         dimiss();
         bmapView.setVisibility(View.VISIBLE);
         mBaiduMap.clear();
+        if (fdatas==null){
+            return;
+        }
         int si = 0;
         for (PatrolSectionListBean bean:fdatas) {
             List<PatrolRlistBean> datas = bean.getRList();

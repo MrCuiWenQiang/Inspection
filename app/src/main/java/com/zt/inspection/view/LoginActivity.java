@@ -54,7 +54,7 @@ public class LoginActivity extends BaseMVPAcivity<LoginContract.View, LoginPrese
     @Override
     protected void initContentView() {
         isShowToolView(false);
-
+        setStatusBar(R.color.logf);
         et_name = findViewById(R.id.et_name);
         et_password = findViewById(R.id.et_password);
         cb_pw = findViewById(R.id.cb_pw);

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/list_item_group"
+    style="@style/list_history_group"
     android:layout_marginTop="8dp"
     android:background="@color/white"
     android:orientation="vertical">
@@ -12,14 +12,19 @@
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <View style="@style/tab_w_view"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"/>
     <TextView
         android:id="@+id/tv_userid"
+        android:visibility="gone"
         android:layout_marginTop="4dp"
         android:textSize="16sp"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <LinearLayout
+
         android:layout_marginTop="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -34,9 +39,10 @@
         <TextView
             android:id="@+id/tv_signtime"
             android:textSize="16sp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:gravity="right"
             android:textColor="@color/black"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
@@ -53,10 +59,11 @@
 
         <TextView
             android:textSize="16sp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:gravity="right"
             android:textColor="@color/black"
             android:id="@+id/tv_outtime"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>

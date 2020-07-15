@@ -105,7 +105,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/myfile_paths" />
         </provider>
-
+        <service android:name=".view.LocalService"
+            android:enabled="true"/>
         <service android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote"/>

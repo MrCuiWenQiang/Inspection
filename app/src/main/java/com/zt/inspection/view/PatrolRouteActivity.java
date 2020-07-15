@@ -240,7 +240,7 @@ public class PatrolRouteActivity extends BaseMVPAcivity<PatrolRouteContract.View
         mTransforma.setRepeatMode(Animation.RepeatMode.RESTART);
 
 //动画重复次数
-        mTransforma.setRepeatCount(1);
+        mTransforma.setRepeatCount(0);
 
 //根据开发需要设置动画监听
         mTransforma.setAnimationListener(new Animation.AnimationListener() {

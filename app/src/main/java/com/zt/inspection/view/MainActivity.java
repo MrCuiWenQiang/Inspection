@@ -1,5 +1,9 @@
 package com.zt.inspection.view;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +13,7 @@ import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
+import com.zt.inspection.MyApplication;
 import com.zt.inspection.R;
 import com.zt.inspection.contract.MainContract;
 import com.zt.inspection.model.entity.view.MainTableBean;
@@ -50,8 +55,25 @@ public class MainActivity extends BaseMVPAcivity<MainContract.View, MainPresente
     public void initData(Bundle savedInstanceState) {
         mPresenter.giveTable();
         mPresenter.giveFragments();
+        if ("1".equals(MyApplication.loginUser.getISPUBLICEQUIPMENT())){
+            Intent intent = new Intent(getContext(),LocalService.class);
+            startService(intent);
+//            getApplicationContext().bindService(intent,conn,0);
+        }
     }
+    private ServiceConnection conn = new ServiceConnection() {
 
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            // TODO Auto-generated method stub
+
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            // TODO Auto-generated method stub
+        }
+    };
     @Override
     public void settingTabs(List<MainTableBean> datas) {
         for (MainTableBean tab : datas) {
@@ -66,6 +88,12 @@ public class MainActivity extends BaseMVPAcivity<MainContract.View, MainPresente
         mTabSegment.setupWithViewPager(mContentViewPager, false);
         mTabSegment.notifyDataChanged();
         mContentViewPager.setCurrentItem(0);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        getApplicationContext().unbindService(conn);
     }
 
     @Override

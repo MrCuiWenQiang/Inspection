@@ -36,6 +36,7 @@
     <color name="green_like">#7dc762</color>
     <color name="bg_socket_capture">#ff15a779</color>
     <color name="red_primary_color">#F44336</color>
+    <color name="logf">#0F3360</color>
     <color name="black_background">#353738</color>
     <color name="grey_bottom_menu">#454748</color>
     <color name="red_text">#a84338</color>

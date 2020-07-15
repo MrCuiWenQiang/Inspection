@@ -153,10 +153,11 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         settingData();
         initResource();
         initMap();
-        if (RoleIdUtil.isSHIGONG() ) {
+        if (RoleIdUtil.isSHIGONG()) {
             bt_addinfo.setVisibility(View.VISIBLE);
         }
     }
+
     private void initMap() {
 /*        ArcGISDynamicMapServiceLayer arcGISTiledMapServiceLayer = new ArcGISDynamicMapServiceLayer(Urls.mapUrl);
         mMapView.addLayer(arcGISTiledMapServiceLayer);
@@ -170,7 +171,7 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         mMapView.setExtent(point);
         hiddenSegmentsLayer.addGraphic(graphic);*/
         bmapView.showZoomControls(false);
-        LatLng point = new LatLng(Double.valueOf(caseinfo.getY()),Double.valueOf(caseinfo.getX()));
+        LatLng point = new LatLng(Double.valueOf(caseinfo.getY()), Double.valueOf(caseinfo.getX()));
         BitmapDescriptor bitmap = BitmapDescriptorFactory
                 .fromResource(R.mipmap.anfapoint);
         OverlayOptions option = new MarkerOptions()
@@ -189,7 +190,7 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
             @Override
             public void onMapClick(LatLng latLng) {
 //                toAcitvity();
-                Intent intent = MapActivity.newInstance(getContext(),caseinfo);
+                Intent intent = MapActivity.newInstance(getContext(), caseinfo);
                 startActivity(intent);
             }
 
@@ -237,7 +238,7 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
                 String videoPaths = (String) data;
                 DownLoadViewDialog downLoadViewDialog = new DownLoadViewDialog();
                 downLoadViewDialog.setUrl(videoPaths);
-                downLoadViewDialog.show(getSupportFragmentManager(),"v");
+                downLoadViewDialog.show(getSupportFragmentManager(), "v");
             }
         });
         rvSgqVideo.setAdapter(videoImageAdapterd);
@@ -251,7 +252,7 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
                 String videoPaths = (String) data;
                 DownLoadViewDialog downLoadViewDialog = new DownLoadViewDialog();
                 downLoadViewDialog.setUrl(videoPaths);
-                downLoadViewDialog.show(getSupportFragmentManager(),"ev");
+                downLoadViewDialog.show(getSupportFragmentManager(), "ev");
             }
         });
         rvSghVideo.setAdapter(videoImageAdaptere);
@@ -262,6 +263,9 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         tvCtid.setText(caseinfo.getTYPENAME());
         tvCstate.setText(StatusUtil.getName(caseinfo.getCSTATE()));
         tvWorklevel.setText(caseinfo.getWORKLEVEL());
+        if ("A".equals(caseinfo.getWORKLEVEL())) {
+            tvWorklevel.setTextColor(ContextCompat.getColor(getContext(), R.color.red_primary_color));
+        }
         tv_caddress.setText(caseinfo.getCADDRESS());
         tv_pidname.setText(caseinfo.getPIDNAME());
         tvUpuid.setText(caseinfo.getUPUID());
@@ -301,8 +305,8 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
     public void queryDatasSuccess(List<WordInfoBean> datas) {
         dimiss();
         adapter.setData(datas);
-        for (WordInfoBean data:datas){
-            if (StatusUtil.isFinsh(data.getCSTATE())){
+        for (WordInfoBean data : datas) {
+            if (StatusUtil.isFinsh(data.getCSTATE())) {
                 bt_addinfo.setVisibility(View.GONE);
                 break;
             }

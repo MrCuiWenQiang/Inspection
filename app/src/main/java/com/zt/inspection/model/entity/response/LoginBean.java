@@ -42,6 +42,10 @@ public class LoginBean {
     /// 用户Id
     /// </summary>
     private String PATROLCODE;
+    /**
+     * 是否是公司设备：0：不是，1是
+     */
+    private String ISPUBLICEQUIPMENT ;
     //是否是部门领导
     private String DEPARTLEADER;
     /// <summary>
@@ -148,6 +152,14 @@ public class LoginBean {
 
     public void setUserName(String userName) {
         UserName = userName;
+    }
+
+    public String getISPUBLICEQUIPMENT() {
+        return ISPUBLICEQUIPMENT;
+    }
+
+    public void setISPUBLICEQUIPMENT(String ISPUBLICEQUIPMENT) {
+        this.ISPUBLICEQUIPMENT = ISPUBLICEQUIPMENT;
     }
 
     public String getMODIYUSER() {

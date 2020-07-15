@@ -10,8 +10,8 @@ public class Urls {
     public static final String addressURL = baseUrl+"/arcgis/rest/services/road_AddressLocator/GeocodeServer";//地理编码
 
     private static final String URL = HttpUtil.getHttpSetting();
-    public static final String ip = "http://192.168.2.7";
-    public static final int port = 8087;
+    public static final String ip = "http://60.208.82.3";
+    public static final int port = 8011;
 //    private static final String URL = "http://192.168.2.7:8087/";
     public static final String GETNOTICELIST = URL + "/NoticeApi/GetNoticeList";
     public static final String LOGIN = URL + "/loginApi/login";
@@ -42,6 +42,7 @@ public class Urls {
     public static final String NOTICEDETAILS = URL + "/NoticeDetails/Index?NID=";
     public static final String MODIFYPOW = URL + "/UserApi/ModifyPOW";
     public static final String APPHOME = URL + "/MainDPApi/AppHome";
+    public static final String LOCATION = URL + "/UserApi/LOCATION";
     public static final String BAIDUREVERSE_GEOCODING =  "http://api.map.baidu.com/reverse_geocoding/v3";
 
 }
