@@ -18,7 +18,9 @@ import com.zt.inspection.R;
 import com.zt.inspection.contract.MainContract;
 import com.zt.inspection.model.entity.view.MainTableBean;
 import com.zt.inspection.presenter.MainPresenter;
+import com.zt.inspection.util.LBS.LocationUtil;
 import com.zt.inspection.view.adapter.MainPageAdapter;
+import com.zt.inspection.view.service.MessageClientService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,10 +51,13 @@ public class MainActivity extends BaseMVPAcivity<MainContract.View, MainPresente
         mTabSegment.setHasIndicator(true);
         mTabSegment.setIndicatorPosition(false);
         mTabSegment.setIndicatorWidthAdjustContent(true);
+        Intent intent = new Intent(getContext(),MessageClientService.class);
+        startService(intent);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        mPresenter.initpush();
         mPresenter.giveTable();
         mPresenter.giveFragments();
         if ("1".equals(MyApplication.loginUser.getISPUBLICEQUIPMENT())){
@@ -88,6 +93,14 @@ public class MainActivity extends BaseMVPAcivity<MainContract.View, MainPresente
         mTabSegment.setupWithViewPager(mContentViewPager, false);
         mTabSegment.notifyDataChanged();
         mContentViewPager.setCurrentItem(0);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(!LocationUtil.isLocationEnabled(this)) {
+            LocationUtil.toOpenGPS(this);
+        }
     }
 
     @Override

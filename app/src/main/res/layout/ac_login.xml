@@ -8,15 +8,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
         android:gravity="center_horizontal"
         android:layout_above="@id/ly_centent"
         android:orientation="vertical"
-        android:paddingTop="20dp">
-
+        >
         <ImageView
             android:id="@+id/iv_logo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
             android:layout_centerInParent="true"
             android:background="@mipmap/ic_launcher" />
 
@@ -24,9 +24,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="历下区巡查系统"
+            android:text="历下巡检"
             android:textColor="@color/text_color"
-            android:textSize="25sp" />
+            android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -37,14 +37,13 @@
         android:orientation="vertical"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:paddingTop="22dp">
+        android:paddingTop="80dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:background="@color/white"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
             android:paddingBottom="11dp"
@@ -58,6 +57,7 @@
             <EditText
                 android:id="@+id/et_name"
                 style="@style/login_edit"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
@@ -70,7 +70,6 @@
         <LinearLayout
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -87,6 +86,7 @@
             <EditText
                 android:id="@+id/et_password"
                 style="@style/login_password_edit"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"

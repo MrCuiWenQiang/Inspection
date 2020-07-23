@@ -19,6 +19,7 @@ import com.zt.inspection.contract.MainContract;
 import com.zt.inspection.model.entity.view.MainTableBean;
 import com.zt.inspection.presenter.LoginPresenter;
 import com.zt.inspection.presenter.MainPresenter;
+import com.zt.inspection.util.socket.SocketClient;
 import com.zt.inspection.view.adapter.MainPageAdapter;
 
 import java.util.ArrayList;
@@ -60,6 +61,9 @@ public class LoginActivity extends BaseMVPAcivity<LoginContract.View, LoginPrese
         cb_pw = findViewById(R.id.cb_pw);
         bt_login = findViewById(R.id.bt_login);
 
+        et_name.setHintTextColor(ContextCompat.getColor(getContext(),R.color.white));
+        et_password.setHintTextColor(ContextCompat.getColor(getContext(),R.color.white));
+
         findViewById(R.id.tv_setting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +91,8 @@ public class LoginActivity extends BaseMVPAcivity<LoginContract.View, LoginPrese
     protected void initListener() {
         super.initListener();
         bt_login.setOnClickListener(this);
+
+//        SocketClient.startClient("192.168.2.7",8098);
     }
 
     @Override

@@ -42,7 +42,7 @@ public class HistoryWorkAdapter extends RecyclerView.Adapter<HistoryWorkAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         CaseInfoBean data = datas.get(i);
-        viewHolder.tvTitle.setText(data.getTITLE());
+        viewHolder.tvTitle.setText(data.getTYPENAME());
         viewHolder.tvCasenumber.setText(data.getCASENUMBER());
         viewHolder.tvCdatetime.setText(data.getCDATETIME());
         viewHolder.tvRemarks.setText(data.getFEEDBACKCONTENT());

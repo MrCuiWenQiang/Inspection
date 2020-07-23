@@ -5,14 +5,19 @@ import com.zt.inspection.util.HttpUtil;
 public class Urls {
     private static final String baseUrl = "http://192.168.2.15:6080";
 
-    public static final String mapUrl = baseUrl+"/arcgis/rest/services/lixiamap1/MapServer";
-//    public static final String addressURL = baseUrl+"/arcgis/rest/services/社区卫生院_CreateAddressLocator/GeocodeServer";//地理编码
-    public static final String addressURL = baseUrl+"/arcgis/rest/services/road_AddressLocator/GeocodeServer";//地理编码
+    public static final String mapUrl = baseUrl + "/arcgis/rest/services/lixiamap1/MapServer";
+    //    public static final String addressURL = baseUrl+"/arcgis/rest/services/社区卫生院_CreateAddressLocator/GeocodeServer";//地理编码
+    public static final String addressURL = baseUrl + "/arcgis/rest/services/road_AddressLocator/GeocodeServer";//地理编码
 
     private static final String URL = HttpUtil.getHttpSetting();
-    public static final String ip = "http://60.208.82.3";
+    //    public static final String ip = "http://60.208.82.3";
+//    public static final int port = 8011;
+//public static final String ip = "http://192.168.2.16";
+//    public static final int port = 8111;
+    public static final String ip = "http://119.3.165.194";
     public static final int port = 8011;
-//    private static final String URL = "http://192.168.2.7:8087/";
+    public static final int msgPort = 8012;
+    //    private static final String URL = "http://192.168.2.7:8087/";
     public static final String GETNOTICELIST = URL + "/NoticeApi/GetNoticeList";
     public static final String LOGIN = URL + "/loginApi/login";
     public static final String GETLEAVELIST = URL + "/LeaveApi/GetleaveList";
@@ -43,6 +48,7 @@ public class Urls {
     public static final String MODIFYPOW = URL + "/UserApi/ModifyPOW";
     public static final String APPHOME = URL + "/MainDPApi/AppHome";
     public static final String LOCATION = URL + "/UserApi/LOCATION";
-    public static final String BAIDUREVERSE_GEOCODING =  "http://api.map.baidu.com/reverse_geocoding/v3";
+    public static final String EDITION = URL + "/UserApi/Edition";
+    public static final String BAIDUREVERSE_GEOCODING = "http://api.map.baidu.com/reverse_geocoding/v3";
 
 }

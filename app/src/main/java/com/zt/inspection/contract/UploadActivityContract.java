@@ -28,7 +28,7 @@ public class UploadActivityContract {
 
     public interface Presenter {
         void getCtype();
-        void queryAddress(double x,double y);
+//        void queryAddress(double x,double y);
         void uploadFile(WorkUpdateBean workUpdateBean, List<String> photos, List<String> videos);
     }
 

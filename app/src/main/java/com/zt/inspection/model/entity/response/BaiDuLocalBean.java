@@ -19,4 +19,5 @@ public class BaiDuLocalBean {
     public void setResult(BaiDuResultBean result) {
         this.result = result;
     }
+
 }

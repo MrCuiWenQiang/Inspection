@@ -72,7 +72,7 @@ public class LocalService extends Service implements LocationListener {
         isFinle = true;
         LocationBean locationBean = new LocationBean();
         locationBean.setUSERID(MyApplication.loginUser.getPATROLCODE());
-        locationBean.setUSERNAME(MyApplication.loginUser.getUserName());
+        locationBean.setUSERNAME(MyApplication.loginUser.getPATROLNAME());
         locationBean.setDEPARTID(MyApplication.loginUser.getDEPARTID());
         locationBean.setISLINE(isline);
         locationBean.setX(String.valueOf(latitude));

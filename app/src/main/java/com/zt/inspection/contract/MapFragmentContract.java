@@ -13,6 +13,8 @@ public class MapFragmentContract {
         void endLine_Fail(String msg);
 
         void endLine_Success();
+
+        void showEditDialog(String s);
     }
 
     public interface Presenter {
@@ -20,7 +22,7 @@ public class MapFragmentContract {
          * 巡查路段打卡
          * @param name 巡查名称
          */
-        void startLine(String name);
+        void  startLine(double x,double y);
         void endLine(String id);
         void uploadLocal(double lat,double lon ,String id);
     }

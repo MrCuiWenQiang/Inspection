@@ -42,7 +42,8 @@
                         android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
-            <LinearLayout style="@style/edit_ll">
+            <LinearLayout style="@style/edit_ll"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/edit_title"
@@ -92,7 +93,8 @@
                       </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout style="@style/edit_ll">
+            <LinearLayout style="@style/edit_ll"
+                >
 
                 <TextView
                     style="@style/edit_title"
@@ -141,6 +143,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="125dp"
                         style="@style/et_back"
+                        android:singleLine="false"
                         android:minLines="5"
                         android:gravity="top"
                          />
@@ -179,7 +182,7 @@
                 android:id="@+id/rv_photo"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="100dp"/>
         </LinearLayout>
         <LinearLayout
             style="@style/ll_file_base"
@@ -210,7 +213,7 @@
                 android:id="@+id/rv_video"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="100dp"/>
         </LinearLayout>
         <Button
             android:id="@+id/bt_update"

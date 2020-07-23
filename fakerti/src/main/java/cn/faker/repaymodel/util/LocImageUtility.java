@@ -94,7 +94,7 @@ public class LocImageUtility {
      * @param mBitmap
      * @return
      */
-    public static String saveBitmap(Context context, Bitmap mBitmap) {
+    public static synchronized String saveBitmap(Context context, Bitmap mBitmap) {
         String savePath;
         File filePic;
         if (Environment.getExternalStorageState().equals(

@@ -69,6 +69,8 @@ public class LBSUtil {
 //可选，设置是否需要过滤GPS仿真结果，默认需要，即参数为false
 
         option.setNeedNewVersionRgc(true);
+//        option.setIsNeedLocationDescribe(true);
+        option.setIsNeedAddress(true);
 
         mLocationClient.setLocOption(option);
     }

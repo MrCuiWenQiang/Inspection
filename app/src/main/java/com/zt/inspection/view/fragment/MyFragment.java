@@ -22,6 +22,7 @@ import com.zt.inspection.view.BranchModelActivity;
 import com.zt.inspection.view.LeaveActivity;
 import com.zt.inspection.view.LoginActivity;
 import com.zt.inspection.view.PassWordActivity;
+import com.zt.inspection.view.UpdateActivity;
 import com.zt.inspection.view.UserInfoActivity;
 
 import cn.faker.repaymodel.activity.manager.ActivityManager;
@@ -41,11 +42,11 @@ public class MyFragment extends BaseMVPFragment<MyFragmentContract.View, MyFragm
         return fragment;
     }
 
-    private String[] item_one_name = new String[]{ "修改密码","通讯录"};
-    private int[] one_ids = new int[]{ R.id.one_2, R.id.one_3};
-/*    private String[] item_two_name = new String[]{"版本更新"};
+    private String[] item_one_name = new String[]{"修改密码", "通讯录"};
+    private int[] one_ids = new int[]{R.id.one_2, R.id.one_3};
+    private String[] item_two_name = new String[]{"版本更新"};
     private int[] two_ids = new int[]{R.id.two_1};
-    private String[] item_three_name = new String[]{"意见反馈", "使用说明"};
+ /*    private String[] item_three_name = new String[]{"意见反馈", "使用说明"};
     private int[] three_ids = new int[]{R.id.three_1, R.id.three_2};*/
 
 
@@ -69,11 +70,13 @@ public class MyFragment extends BaseMVPFragment<MyFragmentContract.View, MyFragm
             case R.id.one_2: {
                 toAcitvity(PassWordActivity.class);
                 break;
-            } case R.id.one_3: {
+            }
+            case R.id.one_3: {
                 toAcitvity(BranchModelActivity.class);
                 break;
             }
             case R.id.two_1: {
+                toAcitvity(UpdateActivity.class);
                 break;
             }
             case R.id.two_2: {
@@ -130,7 +133,7 @@ public class MyFragment extends BaseMVPFragment<MyFragmentContract.View, MyFragm
             setTOP(top_name[i], top_images[i], top_ids[i]);
         }*/
         settingGroup("用户相关", QMUICommonListItemView.HORIZONTAL, QMUICommonListItemView.ACCESSORY_TYPE_NONE, item_one_name, null, one_ids);
-//        settingGroup("资源管理", QMUICommonListItemView.VERTICAL, QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON, item_two_name, null, two_ids);
+        settingGroup("资源管理", QMUICommonListItemView.VERTICAL, QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON, item_two_name, null, two_ids);
 //        settingGroup("帮助相关", QMUICommonListItemView.VERTICAL, QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON, item_three_name, null, three_ids);
     }
 

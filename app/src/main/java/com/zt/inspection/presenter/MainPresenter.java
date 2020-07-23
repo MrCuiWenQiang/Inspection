@@ -3,6 +3,7 @@ package com.zt.inspection.presenter;
 
 import android.support.v4.app.Fragment;
 
+import com.zt.inspection.MyApplication;
 import com.zt.inspection.R;
 import com.zt.inspection.contract.MainContract;
 import com.zt.inspection.model.entity.view.MainTableBean;
@@ -20,13 +21,14 @@ import cn.faker.repaymodel.mvp.BaseMVPPresenter;
 
 public class MainPresenter extends BaseMVPPresenter<MainContract.View> implements MainContract.Presenter {
 
-
+    public void initpush(){
+    }
     @Override
     public void giveTable() {
         List<MainTableBean> datas = new ArrayList<>();
         datas.add(new MainTableBean( R.mipmap.select_false_map,R.mipmap.select_true_map,"首页"));
         datas.add(new MainTableBean( R.mipmap.select_false_ls,R.mipmap.select_true_ls,"历史"));
-        if (RoleIdUtil.isXUNJIAN()){
+        if (RoleIdUtil.isXUNJIAN()||RoleIdUtil.isManager()||RoleIdUtil.isBUMEN()){
             datas.add(new MainTableBean( R.mipmap.select_false_tak,R.mipmap.select_true_tak,"巡检"));
         }
         datas.add(new MainTableBean( R.mipmap.bottom_user_gray,R.mipmap.bottom_user_green,"我的"));
@@ -43,7 +45,7 @@ public class MainPresenter extends BaseMVPPresenter<MainContract.View> implement
         }
 
         fragments.add(HistoryFragment.newInstance());
-        if (RoleIdUtil.isXUNJIAN()){
+        if (RoleIdUtil.isXUNJIAN()||RoleIdUtil.isManager()||RoleIdUtil.isBUMEN()){
             fragments.add(MapFragment.newInstance());
         }
         fragments.add(MyFragment.newInstance());

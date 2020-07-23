@@ -116,7 +116,7 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
 
     private void initMap() {
         bmapView.showZoomControls(false);
-        LatLng GEO_BEIJING = new LatLng(36.657828,117.115476);
+        LatLng GEO_BEIJING = new LatLng(36.657828, 117.115476);
         MapStatusUpdate status1 = MapStatusUpdateFactory.newLatLng(GEO_BEIJING);
         mBaiduMap.setMapStatus(status1);
     }
@@ -183,19 +183,15 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_start: {
-                rdialog = new RoleDialog().setRegisListener(new RoleDialog.onRegisListener() {
-                    @Override
-                    public void onRegistInfo(String info) {
-                        if (TextUtils.isEmpty(info)) {
-                            ToastUtility.showToast("请填写路线名称");
-                        } else {
-                            rdialog.dismiss();
-                            showLoading();
-                            mPresenter.startLine(info);
-                        }
-                    }
-                });
-                rdialog.show(getChildFragmentManager(), "11");
+//                showLoading();
+//                mPresenter.startLine(lat,lon);
+                if (location == null) {
+                    showDialog("请开启定位开关");
+                    return;
+                } else {
+                    showEditDialog(location.getStreet());
+                }
+
                 break;
             }
             case R.id.tv_update: {
@@ -267,6 +263,25 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
     }
 
     @Override
+    public void showEditDialog(String s) {
+        dimiss();
+        rdialog = new RoleDialog().setRegisListener(new RoleDialog.onRegisListener() {
+            @Override
+            public void onRegistInfo(String info) {
+                if (TextUtils.isEmpty(info)) {
+                    ToastUtility.showToast("请填写路线名称");
+                } else {
+                    rdialog.dismiss();
+                    showLoading();
+                    mPresenter.startLine(info);
+                }
+            }
+        });
+        rdialog.setRoleName(s);
+        rdialog.show(getChildFragmentManager(), "11");
+    }
+
+    @Override
     public void endLine_Fail(String msg) {
         dimiss();
         show();
@@ -298,6 +313,7 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
     }
 
     boolean isOne = false;
+    BDLocation location;
 
     @Override
     public void onReceiveLocation(BDLocation location, int errorCode, double latitude, double longitude) {
@@ -305,6 +321,7 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
         if (location == null || bmapView == null) {
             return;
         }
+        this.location = location;
         MyLocationData locData = new MyLocationData.Builder()
                 .accuracy(location.getRadius())
                 // 此处设置开发者获取到的方向信息，顺时针0-360

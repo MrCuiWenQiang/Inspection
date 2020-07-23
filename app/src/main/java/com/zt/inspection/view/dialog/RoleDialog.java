@@ -42,9 +42,12 @@ public class RoleDialog extends BasicDialog {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        tvName.setText(roleName);
     }
-
+    private String roleName;
+    public void setRoleName(String roleName){
+        this.roleName = roleName;
+    }
 
     @Override
     protected void initListener() {

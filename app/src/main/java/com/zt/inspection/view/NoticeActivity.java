@@ -1,5 +1,7 @@
 package com.zt.inspection.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -23,10 +25,16 @@ import cn.faker.repaymodel.widget.viewgroup.CurrentViewPager;
 public class NoticeActivity extends BaseMVPAcivity<NoticeContract.View, NoticePresenter> implements NoticeContract.View, View.OnClickListener {
 
 
-
     private CurrentViewPager mContentViewPager;
     private QMUITabSegment mTabSegment;
 
+    public static final String TAG_TYPE = "TAG_TYPES";
+
+    public static Intent newInstance(Context context, int type) {
+        Intent intent = new Intent(context, NoticeActivity.class);
+        intent.putExtra(TAG_TYPE, type);
+        return intent;
+    }
 
     @Override
     protected int getLayoutContentId() {
@@ -65,20 +73,28 @@ public class NoticeActivity extends BaseMVPAcivity<NoticeContract.View, NoticePr
         mContentViewPager.setAdapter(pageAdapter);
         mTabSegment.setupWithViewPager(mContentViewPager, false);
         mTabSegment.notifyDataChanged();
-        mContentViewPager.setCurrentItem(0);
+
+        int type = getIntent().getIntExtra(TAG_TYPE, -1);
+        if (type == 1) {
+            mContentViewPager.setCurrentItem(0);
+
+        } else if (type == 2) {
+            mContentViewPager.setCurrentItem(1);
+
+        } else if (type == 3) {
+            mContentViewPager.setCurrentItem(2);
+
+        } else {
+            mContentViewPager.setCurrentItem(0);
+        }
+
     }
-
-
-
 
 
     @Override
     public void onClick(View v) {
 
     }
-
-
-
 
 
 }

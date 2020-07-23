@@ -20,6 +20,12 @@ public class CountUtils {
             Color.rgb(80, 142, 229),
             Color.rgb(93, 119, 254),
             Color.rgb(66, 216, 176),
-            Color.rgb(155, 210, 60)
+            Color.rgb(155, 210, 60),
+            Color.rgb(210,105,30),
+            Color.rgb(255,127,80),
+            Color.rgb(220,20,60),
+            Color.rgb(178,34,34),
+            Color.rgb(255,105,180),
+            Color.rgb(60,179,113),
     };
 }

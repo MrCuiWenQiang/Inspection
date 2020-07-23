@@ -39,7 +39,8 @@ public class HomeFragmentPresenter extends BaseMVPPresenter<HomeFragmentContract
         } else if (RoleIdUtil.isXUNJIAN()) {
             tabs.add(new HomeWorkBean("全 部", null, R.mipmap.icon_all, "-1"));
             tabs.add(new HomeWorkBean("待分派", null, R.mipmap.icon_dfp, "0"));
-            tabs.add(new HomeWorkBean("施工完", null, R.mipmap.icon_finsh, "2"));
+//            tabs.add(new HomeWorkBean("施工完", null, R.mipmap.icon_finsh, "2"));
+            tabs.add(new HomeWorkBean("施工中", null, R.mipmap.icon_sgz, "1"));
             tabs.add(new HomeWorkBean("已完结", null, R.mipmap.icon_end, "3"));
         } else {
             tabs.add(new HomeWorkBean("全 部", null, R.mipmap.icon_all, "-1"));
