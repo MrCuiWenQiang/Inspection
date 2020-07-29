@@ -26,6 +26,7 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
+import com.zt.inspection.MyApplication;
 import com.zt.inspection.R;
 import com.zt.inspection.Urls;
 import com.zt.inspection.contract.MapFragmentContract;
@@ -36,6 +37,7 @@ import com.zt.inspection.view.UploadActivity;
 import com.zt.inspection.view.dialog.RoleDialog;
 
 import cn.faker.repaymodel.mvp.BaseMVPFragment;
+import cn.faker.repaymodel.util.DateUtils;
 import cn.faker.repaymodel.util.ToastUtility;
 import cn.faker.repaymodel.util.permission.PermissionHelper;
 import cn.faker.repaymodel.util.permission.collocation.Api23;
@@ -189,7 +191,8 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
                     showDialog("请开启定位开关");
                     return;
                 } else {
-                    showEditDialog(location.getStreet());
+//                    showEditDialog(location.getStreet());
+                   showEditDialog(MyApplication.loginUser.getPATROLNAME()+" "+DateUtils.getCurrentDateTime(DateUtils.DATE_FORMAT));
                 }
 
                 break;
@@ -265,7 +268,9 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
     @Override
     public void showEditDialog(String s) {
         dimiss();
-        rdialog = new RoleDialog().setRegisListener(new RoleDialog.onRegisListener() {
+        showLoading();
+        mPresenter.startLine(s);
+    /*    rdialog = new RoleDialog().setRegisListener(new RoleDialog.onRegisListener() {
             @Override
             public void onRegistInfo(String info) {
                 if (TextUtils.isEmpty(info)) {
@@ -278,7 +283,7 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
             }
         });
         rdialog.setRoleName(s);
-        rdialog.show(getChildFragmentManager(), "11");
+        rdialog.show(getChildFragmentManager(), "11");*/
     }
 
     @Override

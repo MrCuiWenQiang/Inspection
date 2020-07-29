@@ -9,9 +9,12 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
@@ -44,7 +47,34 @@ public abstract class BaseFragment extends Fragment implements BasicFragment {
         rootView = LayoutInflater.from(container.getContext()).inflate(getLayoutId(), null, false);
         return rootView;
     }
+    protected String getValue(EditText text) {
+        if (TextUtils.isEmpty(text.getText())) {
+            return null;
+        } else {
+            return text.getText().toString();
+        }
+    }
+    protected String getValue(CharSequence text) {
+        if (TextUtils.isEmpty(text)) {
+            return null;
+        } else {
+            return text.toString();
+        }
+    }
+    protected String getValue(TextView text) {
+        if (text==null||  TextUtils.isEmpty(text.getText())){
+            return null;
 
+        }
+        return text.getText().toString();
+    }
+    protected String getValue(Object text) {
+        if (text==null||  !(text instanceof String)){
+            return null;
+
+        }
+        return text.toString();
+    }
     @Override
     public void onSaveInstanceState(Bundle outState) {
 //        super.onSaveInstanceState(outState);

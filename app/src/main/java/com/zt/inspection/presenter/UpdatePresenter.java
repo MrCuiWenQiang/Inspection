@@ -35,8 +35,8 @@ public class UpdatePresenter extends BaseMVPPresenter<UpdateContract.View> imple
                 VersionBean data = JsonUtil.convertJsonToObject(datajson, VersionBean.class);
                 if (data != null) {
                     int code = VersionUtil.getApplicationVersionCode(MyApplication.getContext());
-//                    if (data.getVersion()>code){
-                    if (true){
+                    if (data.getVersion()>code){
+//                    if (true){
                         getView().showUpdateDialog(data.getURL());
                     }else {
                         getView().NOUpdate("你已是最新版本,暂时不需要升级");

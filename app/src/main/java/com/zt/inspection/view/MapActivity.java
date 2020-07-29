@@ -90,15 +90,18 @@ public class MapActivity extends BaseToolBarActivity implements
     }
 
     private void initCaseinfoMap() {
-
-        LatLng point = new LatLng(Double.valueOf(caseinfo.getY()), Double.valueOf(caseinfo.getX()));
-        BitmapDescriptor bitmap = BitmapDescriptorFactory
-                .fromResource(R.mipmap.anfapoint);
-        OverlayOptions option = new MarkerOptions()
-                .position(point)
-                .icon(bitmap);
-        mBaiduMap.addOverlay(option);
-
+        LatLng point;
+        if (Double.valueOf(caseinfo.getY())<=0||Double.valueOf(caseinfo.getX())<=0){
+            point = new LatLng(36.658576,117.12647);
+        }else {
+            point = new LatLng(Double.valueOf(caseinfo.getY()), Double.valueOf(caseinfo.getX()));
+            BitmapDescriptor bitmap = BitmapDescriptorFactory
+                    .fromResource(R.mipmap.anfapoint);
+            OverlayOptions option = new MarkerOptions()
+                    .position(point)
+                    .icon(bitmap);
+            mBaiduMap.addOverlay(option);
+        }
         MapStatus mMapStatus = new MapStatus.Builder()
                 .target(point)
                 .zoom(19)

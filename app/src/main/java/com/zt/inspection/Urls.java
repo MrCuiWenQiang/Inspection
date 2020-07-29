@@ -16,6 +16,8 @@ public class Urls {
 //    public static final int port = 8111;
     public static final String ip = "http://119.3.165.194";
     public static final int port = 8011;
+
+    public static final String msgip = "119.3.165.194";
     public static final int msgPort = 8012;
     //    private static final String URL = "http://192.168.2.7:8087/";
     public static final String GETNOTICELIST = URL + "/NoticeApi/GetNoticeList";

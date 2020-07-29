@@ -3,6 +3,7 @@ package com.zt.inspection.view.adapter;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,9 @@ public class HistoryWorkAdapter extends RecyclerView.Adapter<HistoryWorkAdapter.
         viewHolder.tvTitle.setText(data.getTYPENAME());
         viewHolder.tvCasenumber.setText(data.getCASENUMBER());
         viewHolder.tvCdatetime.setText(data.getCDATETIME());
-        viewHolder.tvRemarks.setText(data.getFEEDBACKCONTENT());
+        if (!TextUtils.isEmpty(data.getFEEDBACKCONTENT())){
+            viewHolder.tvRemarks.setText("备注: "+data.getFEEDBACKCONTENT());
+        }
         viewHolder.tvCaddress.setText(data.getCADDRESS());
 
         List<String> paths = ResurltUtil.toPaths(data.getSGQIMAGES(),data.getUrl());

@@ -21,6 +21,8 @@ import cn.faker.repaymodel.net.json.JsonUtil;
 import cn.faker.repaymodel.net.okhttp3.HttpHelper;
 import cn.faker.repaymodel.net.okhttp3.callback.HttpCallback;
 import cn.faker.repaymodel.net.okhttp3.callback.HttpResponseCallback;
+import cn.faker.repaymodel.util.DateUtils;
+import cn.faker.repaymodel.widget.view.date.DateUtil;
 
 public class MapFragmentPresenter extends BaseMVPPresenter<MapFragmentContract.View> implements MapFragmentContract.Presenter {
 
@@ -51,7 +53,9 @@ public class MapFragmentPresenter extends BaseMVPPresenter<MapFragmentContract.V
 
     @Override
     public void startLine(double x,double y)  {
-        HashMap<String, Object> params = new HashMap<>();
+        getView().showEditDialog(MyApplication.loginUser.getPATROLNAME()+" "+DateUtils.getCurrentDateTime(DateUtils.DATE_FORMAT));
+
+/*        HashMap<String, Object> params = new HashMap<>();
         params.put("ak", Params.BAIDU_AK);
         params.put("output", "json");
         params.put("coordtype", "wgs84ll");
@@ -79,7 +83,7 @@ public class MapFragmentPresenter extends BaseMVPPresenter<MapFragmentContract.V
                 getView().startLine_Fail("暂时没有地址描述");
 
             }
-        });
+        });*/
 
 
 

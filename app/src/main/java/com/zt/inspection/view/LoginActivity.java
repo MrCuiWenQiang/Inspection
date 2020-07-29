@@ -61,15 +61,15 @@ public class LoginActivity extends BaseMVPAcivity<LoginContract.View, LoginPrese
         cb_pw = findViewById(R.id.cb_pw);
         bt_login = findViewById(R.id.bt_login);
 
-        et_name.setHintTextColor(ContextCompat.getColor(getContext(),R.color.white));
-        et_password.setHintTextColor(ContextCompat.getColor(getContext(),R.color.white));
+        et_name.setHintTextColor(ContextCompat.getColor(getContext(),R.color.color_gray_close));
+        et_password.setHintTextColor(ContextCompat.getColor(getContext(),R.color.color_gray_close));
 
-        findViewById(R.id.tv_setting).setOnClickListener(new View.OnClickListener() {
+  /*      findViewById(R.id.tv_setting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toAcitvity(SettingActivity.class);
             }
-        });
+        });*/
     }
 
     @Override

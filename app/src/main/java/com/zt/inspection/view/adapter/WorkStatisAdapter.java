@@ -45,7 +45,8 @@ public class WorkStatisAdapter extends RecyclerView.Adapter<WorkStatisAdapter.Wo
         WorkUserBean workItem = data.get(i);
         String typeName = WorkUtil.typeName(workItem.getType());
         viewHloder.tv_status.setText(typeName);
-        viewHloder.tv_sum.setText(workItem.getSum() + "次,共" + workItem.getSum() + "分钟");
+//        viewHloder.tv_sum.setText(workItem.getSum() + "次,共" + workItem.getSum() + "分钟");
+        viewHloder.tv_sum.setText(workItem.getSum() + "次");
         WorkStatisDetailsAdapter adapter = new WorkStatisDetailsAdapter();
         adapter.setData(workItem.getList());
         viewHloder.ll_t.setOnClickListener(new View.OnClickListener() {

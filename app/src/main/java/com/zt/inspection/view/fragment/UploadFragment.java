@@ -1,4 +1,4 @@
-package com.zt.inspection.view;
+package com.zt.inspection.view.fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,6 +33,7 @@ import com.zt.inspection.model.entity.request.WorkUpdateBean;
 import com.zt.inspection.model.entity.response.CtypeBean;
 import com.zt.inspection.presenter.UploadPresenter;
 import com.zt.inspection.util.ImageUtil;
+import com.zt.inspection.view.CameraActivity;
 import com.zt.inspection.view.adapter.ResourceAdapter;
 import com.zt.inspection.view.dialog.PhotoDialog;
 import com.zt.inspection.view.dialog.VideoDialog;
@@ -42,9 +43,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import cn.faker.repaymodel.mvp.BaseMVPAcivity;
+import cn.faker.repaymodel.mvp.BaseMVPFragment;
 import cn.faker.repaymodel.util.LocImageUtility;
 import cn.faker.repaymodel.util.ToastUtility;
 
+import static android.os.Looper.getMainLooper;
 import static com.zt.inspection.view.adapter.ResourceAdapter.ADAPTER_TYPR_SHOW_PHOTO;
 import static com.zt.inspection.view.adapter.ResourceAdapter.ADAPTER_TYPR_SHOW_VIDEO;
 import static com.zt.inspection.view.adapter.ResourceAdapter.TYPE_ADD;
@@ -53,30 +56,8 @@ import static com.zt.inspection.view.adapter.ResourceAdapter.TYPE_PHOTO;
 /**
  * 案件上报
  */
-public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, UploadPresenter>
+public class UploadFragment extends BaseMVPFragment<UploadActivityContract.View, UploadPresenter>
         implements UploadActivityContract.View {
-
-    private static final String INTENT_KEY_ID = "INTENT_KEY_ID";
-    private static final String INTENT_KEY_LAT = "INTENT_KEY_LAT";
-    private static final String INTENT_KEY_LON = "INTENT_KEY_LON";
-    private static final String INTENT_KEY_BDLON = "INTENT_KEY_BDLON";
-
-    public static Intent toIntent(Context context, String id, BDLocation location) {
-        Intent intent = new Intent();
-        intent.setClass(context, UploadActivity.class);
-        intent.putExtra(INTENT_KEY_ID, id);
-        intent.putExtra(INTENT_KEY_BDLON, location);
-        return intent;
-    }
-
-    public static Intent toIntent(Context context, String id, double lat, double lon) {
-        Intent intent = new Intent();
-        intent.setClass(context, UploadActivity.class);
-        intent.putExtra(INTENT_KEY_ID, id);
-        intent.putExtra(INTENT_KEY_LAT, lat);
-        intent.putExtra(INTENT_KEY_LON, lon);
-        return intent;
-    }
 
     private RecyclerView rv_photo;
     private RecyclerView rv_video;
@@ -99,26 +80,27 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
     private List<String> video_photo_paths = new ArrayList<>();//视频第一帧地址
     private List<String> video_paths = new ArrayList<>();//视频地址
 
-    private String id;
-    private double x;
-    private double y;
 
     private String[] typeIds;
     private String[] typeNames;
     private String[] levels = new String[]{"A", "B", "C", "D"};
 
 
-    @Override
-    protected int getLayoutContentId() {
-        return R.layout.ac_upload;
+    public static UploadFragment newInstance() {
+        Bundle args = new Bundle();
+        UploadFragment fragment = new UploadFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
 
     @Override
-    protected void initContentView() {
-        setStatusBar(R.color.select_color);
-        setTitle("上报案件", R.color.white);
-        setToolBarBackgroundColor(R.color.select_color);
+    public int getLayoutId() {
+        return R.layout.fg_upload;
+    }
+
+    @Override
+    public void initview(View v) {
 
         rv_photo = findViewById(R.id.rv_photo);
         rv_video = findViewById(R.id.rv_video);
@@ -143,16 +125,8 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
         rv_video.setAdapter(adapter_video);
     }
 
-    BDLocation bdLocation;
-
     @Override
     public void initData(Bundle savedInstanceState) {
-        id = getIntent().getStringExtra(INTENT_KEY_ID);
-        bdLocation = getIntent().getParcelableExtra(INTENT_KEY_BDLON);
-        if (bdLocation == null) {
-            x = getIntent().getDoubleExtra(INTENT_KEY_LAT, -1);
-            y = getIntent().getDoubleExtra(INTENT_KEY_LON, -1);
-        }
         showLoading();
         mPresenter.getCtype();
     }
@@ -171,7 +145,7 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             if (which == 0) {
-                                selectLocal(REQUESTCODE_LOCAL_PHOTO,PickerConfig.PICKER_IMAGE);
+                                selectLocal(REQUESTCODE_LOCAL_PHOTO, PickerConfig.PICKER_IMAGE);
                             } else {
                                 intent.setClass(getContext(), CameraActivity.class);
                                 intent.putExtra(CameraActivity.CAMERA_TAG, CameraActivity.CAMERA_TAG_PHOTO);
@@ -185,7 +159,7 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
                     String videoPaths = photo_paths.get(postoin);
                     PhotoDialog videoDialog = new PhotoDialog();
                     videoDialog.setUrl(videoPaths);
-                    videoDialog.show(getSupportFragmentManager(), "s");
+                    videoDialog.show(getChildFragmentManager(), "s");
                 }
             }
         });
@@ -198,7 +172,7 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             if (which == 0) {
-                                selectLocal(REQUESTCODE_LOCAL_VIDEO,PickerConfig.PICKER_VIDEO);
+                                selectLocal(REQUESTCODE_LOCAL_VIDEO, PickerConfig.PICKER_VIDEO);
                             } else {
                                 intent.setClass(getContext(), CameraActivity.class);
                                 intent.putExtra(CameraActivity.CAMERA_TAG, CameraActivity.CAMERA_TAG_VIDEO);
@@ -212,7 +186,7 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
                     String videoPaths = video_paths.get(postoin);
                     VideoDialog videoDialog = new VideoDialog();
                     videoDialog.setUrl(videoPaths);
-                    videoDialog.show(getSupportFragmentManager(), "s");
+                    videoDialog.show(getChildFragmentManager(), "s");
                 }
             }
         });
@@ -258,10 +232,6 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
             ToastUtility.showToast("请选择事件等级");
             return;
         }
-        if (TextUtils.isEmpty(tvCaddress.getText())) {
-            ToastUtility.showToast("请填写地图位置");
-            return;
-        }
         data.setCTYPE(getValue(tvCtype));
         data.setCTID(tvCtype.getTag() == null ? null : String.valueOf(tvCtype.getTag()));
         data.setTITLE(getValue(etTitle));
@@ -271,9 +241,9 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
 /*        data.setX(String.valueOf(x));
         data.setY(String.valueOf(y));*/
 // TODO: 2020/6/18 因为后台数据库将坐标 x y倒置问题 故反过来
-        data.setX(String.valueOf(y));
-        data.setY(String.valueOf(x));
-        data.setPID(id);
+        data.setX(String.valueOf(0));
+        data.setY(String.valueOf(0));
+//        data.setPID(id);
 
         mPresenter.uploadFile(data, photo_paths, video_paths);
     }
@@ -282,12 +252,8 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
     public void getCtype_Success(String[] ids, String[] names, List<CtypeBean> datas) {
         typeIds = ids;
         typeNames = names;
-        if (bdLocation != null) {
-            dimiss();
-            tvCaddress.setText(bdLocation.getStreet());
-        } else {
-            mPresenter.queryAddress(x, y);
-        }
+        dimiss();
+
     }
 
     @Override
@@ -297,7 +263,6 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
             @Override
             public void onClick(QMUIDialog dialog, int index) {
                 dialog.dismiss();
-                finish();
             }
         });
     }
@@ -309,19 +274,19 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
 
     @Override
     public void uploadFileSuccess(String message) {
-        showLoading(message);
+        showLoading();
     }
 
     @Override
     public void uploadSuccess(String message) {
         dimiss();
-        showDialog(message, new QMUIDialogAction.ActionListener() {
-            @Override
-            public void onClick(QMUIDialog dialog, int index) {
-                dialog.dismiss();
-                finish();
-            }
-        });
+        showDialog(message);
+        video_photo_paths.clear();
+        video_paths.clear();
+        photo_paths.clear();
+        adapter_photo.setPhotoPaths(photo_paths);
+        adapter_video.setPhotoPaths(video_photo_paths);
+        tvFeedbackcontent.setText(null);
     }
 
     @Override
@@ -377,7 +342,7 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
 
     ArrayList<Media> select;
 
-    void selectLocal(int result,int mondel) {
+    void selectLocal(int result, int mondel) {
         Intent intent = new Intent(getContext(), PickerActivity.class);
 //        intent.putExtra(PickerConfig.SELECT_MODE,PickerConfig.PICKER_IMAGE_VIDEO);//设置选择类型，默认是图片和视频可一起选择(非必填参数)
         intent.putExtra(PickerConfig.SELECT_MODE, mondel);//设置选择类型，默认是图片和视频可一起选择(非必填参数)
@@ -409,23 +374,23 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
             adapter_photo.setPhotoPaths(photo_paths);
         } else if (requestCode == REQUESTCODE_LOCAL_VIDEO && resultCode == PickerConfig.RESULT_CODE) {//本地选择
             select = data.getParcelableArrayListExtra(PickerConfig.EXTRA_RESULT);//选择完后返回的list
-           new Thread(new Runnable() {
-               @Override
-               public void run() {
-                   for (Media item : select) {
-                       Bitmap bitmap = ImageUtil.getVideoThumbnail(item.path,MediaStore.Images.Thumbnails.MINI_KIND,400,400);
-                       String path = LocImageUtility.saveBitmap(getBaseContext(),bitmap);//第一帧
-                       video_photo_paths.add(path);
-                       video_paths.add(item.path);
-                   }
-                  new Handler(getMainLooper()).post(new Runnable() {
-                      @Override
-                      public void run() {
-                          adapter_video.setPhotoPaths(video_photo_paths);
-                      }
-                  });
-               }
-           }).start();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (Media item : select) {
+                        Bitmap bitmap = ImageUtil.getVideoThumbnail(item.path, MediaStore.Images.Thumbnails.MINI_KIND, 400, 400);
+                        String path = LocImageUtility.saveBitmap(getContext(), bitmap);//第一帧
+                        video_photo_paths.add(path);
+                        video_paths.add(item.path);
+                    }
+                    new Handler(getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter_video.setPhotoPaths(video_photo_paths);
+                        }
+                    });
+                }
+            }).start();
         }
     }
 }
