@@ -1,8 +1,12 @@
 package com.zt.inspection.view;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -13,6 +17,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.dmcbig.mediapicker.PickerActivity;
+import com.dmcbig.mediapicker.PickerConfig;
+import com.dmcbig.mediapicker.entity.Media;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
@@ -22,6 +29,7 @@ import com.zt.inspection.R;
 import com.zt.inspection.contract.AddHandleInfoContract;
 import com.zt.inspection.model.entity.request.AddHandleInfoEntity;
 import com.zt.inspection.presenter.AddHandleInfoPresenter;
+import com.zt.inspection.util.ImageUtil;
 import com.zt.inspection.view.adapter.ResourceAdapter;
 import com.zt.inspection.view.dialog.PhotoDialog;
 import com.zt.inspection.view.dialog.VideoDialog;
@@ -31,6 +39,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import cn.faker.repaymodel.mvp.BaseMVPAcivity;
+import cn.faker.repaymodel.util.LocImageUtility;
 
 import static com.zt.inspection.view.adapter.ResourceAdapter.ADAPTER_TYPR_SHOW_PHOTO;
 import static com.zt.inspection.view.adapter.ResourceAdapter.ADAPTER_TYPR_SHOW_VIDEO;
@@ -67,13 +76,16 @@ public class AddHandleInfoActivity extends BaseMVPAcivity<AddHandleInfoContract.
     private ResourceAdapter adapter_photo;
     private ResourceAdapter adapter_video;
     private final int REQUESTCODE = 52;
+    private final int REQUESTCODE_LOCAL_PHOTO = 63;
+    private final int REQUESTCODE_LOCAL_VIDEO = 64;
     private List<String> photo_paths = new ArrayList<>();
     private List<String> video_photo_paths = new ArrayList<>();//视频第一帧地址
     private List<String> video_paths = new ArrayList<>();//视频地址
 
     private String[] levels = new String[]{"未完成", "已完成"};
     private String[] levelids = new String[]{"2", "3"};
-
+    private final String[] pts = new String[]{"图库", "拍照"};
+    private final String[] vds = new String[]{"图库", "拍视频"};
     @Override
     protected int getLayoutContentId() {
         return R.layout.ac_addhandleinfo;
@@ -112,9 +124,19 @@ public class AddHandleInfoActivity extends BaseMVPAcivity<AddHandleInfoContract.
             public void onClick(int type, int postoin, Object data) {
                 Intent intent = new Intent();
                 if (type == TYPE_ADD) {
-                    intent.setClass(getContext(), CameraActivity.class);
-                    intent.putExtra(CameraActivity.CAMERA_TAG, CameraActivity.CAMERA_TAG_PHOTO);
-                    startActivityForResult(intent, REQUESTCODE);
+                    showListDialog("", pts, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (which == 0) {
+                                selectLocal(REQUESTCODE_LOCAL_PHOTO,PickerConfig.PICKER_IMAGE);
+                            } else {
+                                intent.setClass(getContext(), CameraActivity.class);
+                                intent.putExtra(CameraActivity.CAMERA_TAG, CameraActivity.CAMERA_TAG_PHOTO);
+                                startActivityForResult(intent, REQUESTCODE);
+                            }
+                            dialog.dismiss();
+                        }
+                    });
                 } else if (type == TYPE_PHOTO) {
                     String videoPaths = photo_paths.get(postoin);
                     PhotoDialog videoDialog = new PhotoDialog();
@@ -128,9 +150,19 @@ public class AddHandleInfoActivity extends BaseMVPAcivity<AddHandleInfoContract.
             public void onClick(int type, int postoin, Object data) {
                 Intent intent = new Intent();
                 if (type == TYPE_ADD) {
-                    intent.setClass(getContext(), CameraActivity.class);
-                    intent.putExtra(CameraActivity.CAMERA_TAG, CameraActivity.CAMERA_TAG_VIDEO);
-                    startActivityForResult(intent, REQUESTCODE);
+                    showListDialog("", vds, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (which == 0) {
+                                selectLocal(REQUESTCODE_LOCAL_VIDEO,PickerConfig.PICKER_VIDEO);
+                            } else {
+                                intent.setClass(getContext(), CameraActivity.class);
+                                intent.putExtra(CameraActivity.CAMERA_TAG, CameraActivity.CAMERA_TAG_VIDEO);
+                                startActivityForResult(intent, REQUESTCODE);
+                            }
+                            dialog.dismiss();
+                        }
+                    });
                 } else if (type == TYPE_PHOTO) {
 
                     String videoPaths = video_paths.get(postoin);
@@ -163,7 +195,15 @@ public class AddHandleInfoActivity extends BaseMVPAcivity<AddHandleInfoContract.
             }
         });
     }
-
+    void selectLocal(int result,int mondel) {
+        Intent intent = new Intent(getContext(), PickerActivity.class);
+//        intent.putExtra(PickerConfig.SELECT_MODE,PickerConfig.PICKER_IMAGE_VIDEO);//设置选择类型，默认是图片和视频可一起选择(非必填参数)
+        intent.putExtra(PickerConfig.SELECT_MODE, mondel);//设置选择类型，默认是图片和视频可一起选择(非必填参数)
+        long maxSize = 188743680L;//long long long long类型
+        intent.putExtra(PickerConfig.MAX_SELECT_SIZE, maxSize); //最大选择大小，默认180M（非必填参数）
+        intent.putExtra(PickerConfig.MAX_SELECT_COUNT, 5);  //最大选择数量，默认40（非必填参数）
+        startActivityForResult(intent, result);
+    }
     private void showSelectType(TextView tv) {
         ArrayAdapter adapter = new ArrayAdapter<>(getContext(), R.layout.v_tablist, new ArrayList<>(Arrays.asList(levels)));
         final QMUIListPopup mListPopup = new QMUIListPopup(getContext(), QMUIPopup.DIRECTION_BOTTOM, adapter);
@@ -179,7 +219,7 @@ public class AddHandleInfoActivity extends BaseMVPAcivity<AddHandleInfoContract.
         mListPopup.setAnimStyle(QMUIPopup.ANIM_GROW_FROM_CENTER);
         mListPopup.show(tv);
     }
-
+    ArrayList<Media> select;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -194,6 +234,31 @@ public class AddHandleInfoActivity extends BaseMVPAcivity<AddHandleInfoContract.
                 video_paths.add(data.getStringExtra(CameraActivity.FILEVIDEO));
                 adapter_video.setPhotoPaths(video_photo_paths);
             }
+        } else if (requestCode == REQUESTCODE_LOCAL_PHOTO && resultCode == PickerConfig.RESULT_CODE) {//本地选择
+            select = data.getParcelableArrayListExtra(PickerConfig.EXTRA_RESULT);//选择完后返回的list
+            for (Media item : select) {
+                photo_paths.add(item.path);
+            }
+            adapter_photo.setPhotoPaths(photo_paths);
+        } else if (requestCode == REQUESTCODE_LOCAL_VIDEO && resultCode == PickerConfig.RESULT_CODE) {//本地选择
+            select = data.getParcelableArrayListExtra(PickerConfig.EXTRA_RESULT);//选择完后返回的list
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (Media item : select) {
+                        Bitmap bitmap = ImageUtil.getVideoThumbnail(item.path,MediaStore.Images.Thumbnails.MINI_KIND,400,400);
+                        String path = LocImageUtility.saveBitmap(getBaseContext(),bitmap);//第一帧
+                        video_photo_paths.add(path);
+                        video_paths.add(item.path);
+                    }
+                    new Handler(getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter_video.setPhotoPaths(video_photo_paths);
+                        }
+                    });
+                }
+            }).start();
         }
     }
 

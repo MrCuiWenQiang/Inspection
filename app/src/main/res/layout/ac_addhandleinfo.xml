@@ -100,7 +100,7 @@
                 android:id="@+id/rv_photo"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="100dp"/>
         </LinearLayout>
         <LinearLayout
             style="@style/ll_file_base"
@@ -131,7 +131,7 @@
                 android:id="@+id/rv_video"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="100dp"/>
         </LinearLayout>
         <Button
             android:id="@+id/bt_update"

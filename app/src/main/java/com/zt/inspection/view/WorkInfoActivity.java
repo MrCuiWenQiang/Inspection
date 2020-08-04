@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -172,7 +173,7 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         hiddenSegmentsLayer.addGraphic(graphic);*/
         bmapView.showZoomControls(false);
         LatLng point;
-        if (Double.valueOf(caseinfo.getY())<=0||Double.valueOf(caseinfo.getX())<=0){
+        if (TextUtils.isEmpty(caseinfo.getY())||TextUtils.isEmpty(caseinfo.getX())||Double.valueOf(caseinfo.getY())<=0||Double.valueOf(caseinfo.getX())<=0){
              point = new LatLng(36.658576,117.12647);
         }else {
             point = new LatLng(Double.valueOf(caseinfo.getY()), Double.valueOf(caseinfo.getX()));
