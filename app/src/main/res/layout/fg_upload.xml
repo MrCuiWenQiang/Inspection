@@ -1,227 +1,276 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@mipmap/listbb"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            style="@style/ll_base"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            style="@style/upload_group"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
 
-            <LinearLayout style="@style/edit_ll">
+            <LinearLayout
+                style="@style/ll_base"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-                <TextView
-                    style="@style/edit_title"
-                    android:text="事件类型:" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="35dp"
-                    android:layout_weight="0.6"
-                    android:gravity="center_vertical">
+                <LinearLayout style="@style/edit_ll">
 
                     <TextView
-                        android:id="@+id/tv_ctype"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        style="@style/et_back"
-                        android:drawableRight="@mipmap/next"
-                        android:gravity="center_vertical"
-                        android:hint="点击选择事件类型"
-                        android:textSize="18sp" />
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout style="@style/edit_ll"
-                android:visibility="gone">
+                        style="@style/edit_title"
+                        android:text="事件类型:" />
 
-                <TextView
-                    style="@style/edit_title"
-                    android:text="事件标题:" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="0.6"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/tv_ctype"
+                            style="@style/et_back"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:drawableRight="@mipmap/eddown"
+                            android:gravity="center_vertical"
+                            android:hint="点击选择事件类型"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:gravity="center_vertical">
-
-                    <EditText
-                        android:id="@+id/et_title"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        style="@style/et_back"
-                        android:drawableRight="@mipmap/upload_date"
-                        android:gravity="center_vertical"
-                        android:hint="请填写事件标题"
-                        android:textSize="18sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout style="@style/edit_ll">
-
-                <TextView
-                    style="@style/edit_title"
-                    android:text="事件等级:" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="35dp"
-                    android:layout_weight="0.6"
-                    android:gravity="center_vertical">
+                    style="@style/edit_ll"
+                    android:visibility="gone">
 
                     <TextView
-                        android:id="@+id/tv_worklevel"
-                        android:hint="点击选择事件等级"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        style="@style/et_back"
-                        android:drawableRight="@mipmap/next"
-                        android:textSize="18sp" />
+                        style="@style/edit_title"
+                        android:text="事件标题:" />
 
-                      </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:gravity="center_vertical">
+
+                        <EditText
+                            android:id="@+id/et_title"
+                            style="@style/et_back"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:drawableRight="@mipmap/upload_date"
+                            android:gravity="center_vertical"
+                            android:hint="请填写事件标题"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout style="@style/edit_ll">
+
+                    <TextView
+                        style="@style/edit_title"
+                        android:text="事件等级:" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="0.6"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/tv_worklevel"
+                            style="@style/et_back"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:drawableRight="@mipmap/eddown"
+                            android:hint="点击选择事件等级"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout style="@style/edit_ll"
+
+                    >
+
+                    <TextView
+                        style="@style/edit_title"
+                        android:text="地图位置:" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:gravity="center_vertical">
+
+                        <EditText
+                            android:id="@+id/et_caddress"
+                            style="@style/et_back"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:drawableRight="@mipmap/statu_e"
+                            android:textSize="18sp" />
+
+                        <ImageView
+                            android:id="@+id/im_caddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:src="@mipmap/upload_local"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout style="@style/edit_ll">
+
+                    <TextView
+                        style="@style/edit_title"
+                        android:layout_height="wrap_content"
+                        android:text="事件描述:" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:gravity="center_vertical">
+
+                        <EditText
+                            android:id="@+id/tv_feedbackcontent"
+                            style="@style/et_back"
+                            android:layout_width="match_parent"
+                            android:layout_height="125dp"
+                            android:gravity="top"
+                            android:minLines="5"
+                            android:singleLine="false" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
             </LinearLayout>
 
-            <LinearLayout style="@style/edit_ll"
+        </android.support.v7.widget.CardView>
 
-                >
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            style="@style/upload_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
 
-                <TextView
-                    style="@style/edit_title"
-                    android:text="地图位置:" />
+            <LinearLayout
+                style="@style/ll_file_base"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="0dp"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:gravity="center_vertical">
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp">
 
-                    <EditText
-                        android:id="@+id/et_caddress"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        style="@style/et_back"
-                        android:drawableRight="@mipmap/upload_local"
-                        android:textSize="18sp" />
-
-                    <ImageView
-                        android:visibility="gone"
-                        android:id="@+id/im_caddress"
+                    <TextView
+                        android:id="@+id/tv_p"
+                        style="@style/edit_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="上传图片" />
+
+                    <ImageView
+                        android:layout_toRightOf="@id/tv_p"
+                        android:layout_width="25dp"
                         android:layout_marginLeft="5dp"
-                        android:src="@mipmap/upload_local" />
-                </LinearLayout>
+                        android:layout_height="25dp"
+                        android:src="@mipmap/camera" />
+                </RelativeLayout>
+
+                <View style="@style/tab_w_view" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_photo"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="8dp" />
             </LinearLayout>
 
-            <LinearLayout style="@style/edit_ll">
+        </android.support.v7.widget.CardView>
 
-                <TextView
-                    style="@style/edit_title"
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            style="@style/upload_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                style="@style/ll_file_base"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="事件描述:" />
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:gravity="center_vertical">
+                    <TextView
+                        android:id="@+id/tv_v"
+                        style="@style/edit_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="短视频" />
 
-                    <EditText
-                        android:id="@+id/tv_feedbackcontent"
-                        android:layout_width="match_parent"
-                        android:layout_height="125dp"
-                        style="@style/et_back"
-                        android:singleLine="false"
-                        android:minLines="5"
-                        android:gravity="top"
-                         />
-                </LinearLayout>
+                    <ImageView
+                        android:layout_toRightOf="@id/tv_v"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/up_video" />
+                </RelativeLayout>
+
+                <View style="@style/tab_w_view" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_video"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="8dp" />
             </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-
-
-        </LinearLayout>
-        <LinearLayout
-            style="@style/ll_file_base"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <RelativeLayout
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    style="@style/edit_title"
-                    android:text="上传图片:"
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:src="@mipmap/camera"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp" />
-            </RelativeLayout>
-            <View
-                style="@style/tab_w_view"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_photo"
-                android:layout_marginTop="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"/>
-        </LinearLayout>
-        <LinearLayout
-            style="@style/ll_file_base"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <RelativeLayout
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    style="@style/edit_title"
-                    android:text="短视频:"
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:src="@mipmap/up_video"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp" />
-            </RelativeLayout>
-            <View
-                style="@style/tab_w_view"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_video"
-                android:layout_marginTop="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"/>
-        </LinearLayout>
         <Button
             android:id="@+id/bt_update"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="18dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginLeft="12dp"
             android:background="@drawable/bt_login_backage"
             android:text="上报"
             android:textColor="@color/white"

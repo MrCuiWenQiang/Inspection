@@ -53,7 +53,11 @@ public class HistoryWorkAdapter extends RecyclerView.Adapter<HistoryWorkAdapter.
 
         List<String> paths = ResurltUtil.toPaths(data.getSGQIMAGES(),data.getUrl());
         if (paths!=null&&paths.size()>0){
+            viewHolder.im_sgq.setVisibility(View.VISIBLE);
             ImageLoadHelper.loadImage(viewHolder.itemView.getContext(), viewHolder.im_sgq, paths.get(0));
+        }else{
+            viewHolder.im_sgq.setImageBitmap(null);
+            viewHolder.im_sgq.setVisibility(View.GONE);
         }
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

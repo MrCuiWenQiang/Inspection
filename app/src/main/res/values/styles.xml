@@ -9,7 +9,12 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
+    <style name="upload_group" >
+        <item name="android:layout_marginRight">12dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <!--<item name="android:layout_marginBottom">6dp</item>-->
+        <item name="android:layout_marginLeft">12dp</item>
+    </style>
     <style name="main_tab_d_view">
         <item name="android:background">@color/d_rule</item>
         <item name="android:layout_width">match_parent</item>

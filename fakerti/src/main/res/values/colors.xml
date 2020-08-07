@@ -42,6 +42,7 @@
     <color name="addcredit_name">#323232</color>
     <!--<color name="select_color">#5FB878</color>-->
     <color name="select_color">#4688f8</color>
+    <color name="stdf_color">#278BE9</color>
     <color name="select_ddcolor">#C95FB878</color>
     <color name="windowBackground">#00FFFFFF</color>
 </resources>

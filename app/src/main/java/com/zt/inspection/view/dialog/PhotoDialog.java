@@ -1,17 +1,19 @@
 package com.zt.inspection.view.dialog;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.zt.inspection.R;
+import com.zt.inspection.view.group.TouchImageView;
 
 import cn.faker.repaymodel.net.loadimage.ImageLoadHelper;
 import cn.faker.repaymodel.util.ScreenUtil;
 import cn.faker.repaymodel.widget.view.dialog.BasicDialog;
 
 public class PhotoDialog extends BasicDialog {
-    private ImageView vd_model;
+    private TouchImageView vd_model;
     private String url;
     @Override
     public int getLayoutId() {
@@ -28,9 +30,16 @@ public class PhotoDialog extends BasicDialog {
     @Override
     public void initData(Bundle savedInstanceState) {
         ImageLoadHelper.loadImage(getContext(), vd_model, url);
+        vd_model.initImageView(getDialogWidth(), getDialogHeght());
         vd_model.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dismiss();
+            }
+        });
+        vd_model.setOnEventClick(new TouchImageView.OnEventClick() {
+            @Override
+            public void onClick() {
                 dismiss();
             }
         });

@@ -29,7 +29,7 @@ public class HistoryRouteAdapter extends RecyclerView.Adapter<HistoryRouteAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         SectionBean data = datas.get(i);
-        viewHolder.tvPatrolsectionname.setText(data.getPATROLSECTIONNAME());
+        viewHolder.tvPatrolsectionname.setText("管理员:"+data.getUSERID());
         viewHolder.tvUserid.setText("由"+data.getUSERID()+"创建");
         viewHolder.tvSigntime.setText(data.getSIGNTIME());
         viewHolder.tvOuttime.setText(data.getOUTTIME());

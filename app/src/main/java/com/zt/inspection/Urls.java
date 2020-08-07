@@ -12,10 +12,10 @@ public class Urls {
     private static final String URL = HttpUtil.getHttpSetting();
     //    public static final String ip = "http://60.208.82.3";
 //    public static final int port = 8011;
-//public static final String ip = "http://192.168.2.16";
+//public static final String ip = "http://192.168.2.7";
 //    public static final int port = 8111;
-    public static final String ip = "http://60.208.82.3";//正式
-//    public static final String ip = "http://119.3.165.194";//测试
+//    public static final String ip = "http://60.208.82.3";//正式
+    public static final String ip = "http://119.3.165.194";//测试
     public static final int port = 8011;
 
     public static final String msgip = "60.208.82.3";

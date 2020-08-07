@@ -162,6 +162,24 @@ public class UploadFragment extends BaseMVPFragment<UploadActivityContract.View,
                     videoDialog.show(getChildFragmentManager(), "s");
                 }
             }
+
+            @Override
+            public void onLongClick(int type, int postoin, Object data) {
+                new QMUIDialog.MessageDialogBuilder(getContext()).setMessage("是否删除该图片?")
+                        .addAction("删除", new QMUIDialogAction.ActionListener() {
+                            @Override
+                            public void onClick(QMUIDialog dialog, int index) {
+                                dialog.dismiss();
+//                                photo_paths.remove(postoin);
+                                adapter_photo.removeItem(postoin);
+                            }
+                        }).addAction("取消", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                    }
+                }).show();
+            }
         });
         adapter_video.setOnPhotoListener(new ResourceAdapter.OnPhotoListener() {
             @Override
@@ -188,6 +206,25 @@ public class UploadFragment extends BaseMVPFragment<UploadActivityContract.View,
                     videoDialog.setUrl(videoPaths);
                     videoDialog.show(getChildFragmentManager(), "s");
                 }
+            }
+
+            @Override
+            public void onLongClick(int type, int postoin, Object data) {
+                new QMUIDialog.MessageDialogBuilder(getContext()).setMessage("是否删除该视频?")
+                        .addAction("删除", new QMUIDialogAction.ActionListener() {
+                            @Override
+                            public void onClick(QMUIDialog dialog, int index) {
+                                dialog.dismiss();
+//                                video_photo_paths.remove(postoin);
+                                video_paths.remove(postoin);
+                                adapter_video.removeItem(postoin);
+                            }
+                        }).addAction("取消", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                    }
+                }).show();
             }
         });
         imCaddress.setOnClickListener(new View.OnClickListener() {

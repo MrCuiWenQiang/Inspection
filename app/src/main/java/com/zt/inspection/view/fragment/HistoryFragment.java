@@ -39,8 +39,8 @@ public class HistoryFragment extends BaseViewPagerFragment {
         mContentViewPager = v.findViewById(R.id.contentViewPager);
         mTabSegment = v.findViewById(R.id.tabs);
 
-        mTabSegment.setDefaultNormalColor(ContextCompat.getColor(getContext(), R.color.black));
-        mTabSegment.setDefaultSelectedColor(ContextCompat.getColor(getContext(), R.color.select_color));
+        mTabSegment.setDefaultNormalColor(ContextCompat.getColor(getContext(), R.color.bg_gray));
+        mTabSegment.setDefaultSelectedColor(ContextCompat.getColor(getContext(), R.color.white));
         mTabSegment.setHasIndicator(true);
         mTabSegment.setIndicatorPosition(false);
         mTabSegment.setIndicatorWidthAdjustContent(true);

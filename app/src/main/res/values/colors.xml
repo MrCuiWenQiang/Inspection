@@ -8,6 +8,7 @@
     <color name="white">#ffffffff</color>
     <color name="win_start">#00529B</color>
     <color name="win_end">#B4005099</color>
+    <color name="win_ss">#048FD9</color>
     <color name="transparent">#00000000</color>
     <color name="demo_title">#ff0d0d0d</color>
     <color name="demo_desc">#ff636363</color>

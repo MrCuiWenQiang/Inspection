@@ -7,10 +7,11 @@
     <com.qmuiteam.qmui.widget.QMUITabSegment
         android:id="@+id/tabs"
         android:textSize="12sp"
-        android:background="?attr/qmui_list_item_bg_with_border_top"
+        android:background="@drawable/ll_top_b"
         app:qmui_tab_icon_position="top"
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="50dp"
+        />
     <cn.faker.repaymodel.widget.viewgroup.CurrentViewPager
         android:id="@+id/contentViewPager"
         android:layout_width="match_parent"

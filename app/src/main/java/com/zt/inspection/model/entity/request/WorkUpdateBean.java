@@ -25,6 +25,7 @@ public class WorkUpdateBean {
     private String X;
     private String Y;
     private String DEPTID;
+    private String UPUNAME;
     private String WORKLEVEL;
     private String PID;
     private String SGQIMAGES;
@@ -77,6 +78,14 @@ public class WorkUpdateBean {
 
     public void setUPUID(String UPUID) {
         this.UPUID = UPUID;
+    }
+
+    public String getUPUNAME() {
+        return UPUNAME;
+    }
+
+    public void setUPUNAME(String UPUNAME) {
+        this.UPUNAME = UPUNAME;
     }
 
     public String getX() {

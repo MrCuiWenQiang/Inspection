@@ -93,9 +93,10 @@ public class AddHandleInfoActivity extends BaseMVPAcivity<AddHandleInfoContract.
 
     @Override
     protected void initContentView() {
-        setStatusBar(R.color.select_color);
+        isShowCut(false);
+        setStatusBar(R.color.stdf_color);
         setTitle("上报记录", R.color.white);
-        setToolBarBackgroundColor(R.color.select_color);
+        setToolBarBackgroundColor(R.drawable.ll_top_b);
 
         tvCstate = findViewById(R.id.tv_cstate);
         tvFeedbackcontent = findViewById(R.id.tv_feedbackcontent);
@@ -144,6 +145,24 @@ public class AddHandleInfoActivity extends BaseMVPAcivity<AddHandleInfoContract.
                     videoDialog.show(getSupportFragmentManager(), "s");
                 }
             }
+
+            @Override
+            public void onLongClick(int type, int postoin, Object data) {
+                new QMUIDialog.MessageDialogBuilder(getContext()).setMessage("是否删除该图片?")
+                        .addAction("删除", new QMUIDialogAction.ActionListener() {
+                            @Override
+                            public void onClick(QMUIDialog dialog, int index) {
+                                dialog.dismiss();
+//                                photo_paths.remove(postoin);
+                                adapter_photo.removeItem(postoin);
+                            }
+                        }).addAction("取消", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                    }
+                }).show();
+            }
         });
         adapter_video.setOnPhotoListener(new ResourceAdapter.OnPhotoListener() {
             @Override
@@ -170,6 +189,25 @@ public class AddHandleInfoActivity extends BaseMVPAcivity<AddHandleInfoContract.
                     videoDialog.setUrl(videoPaths);
                     videoDialog.show(getSupportFragmentManager(), "s");
                 }
+            }
+
+            @Override
+            public void onLongClick(int type, int postoin, Object data) {
+                new QMUIDialog.MessageDialogBuilder(getContext()).setMessage("是否删除该视频?")
+                        .addAction("删除", new QMUIDialogAction.ActionListener() {
+                            @Override
+                            public void onClick(QMUIDialog dialog, int index) {
+                                dialog.dismiss();
+//                                video_photo_paths.remove(postoin);
+                                video_paths.remove(postoin);
+                                adapter_video.removeItem(postoin);
+                            }
+                        }).addAction("取消", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                    }
+                }).show();
             }
         });
         tvCstate.setOnClickListener(new View.OnClickListener() {

@@ -1,9 +1,11 @@
 package com.zt.inspection.view.adapter;
 
+import android.app.ActionBar;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +72,12 @@ public class ResourceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         RecyclerView.ViewHolder viewHolder = null;
         switch (type) {
             case TYPE_ADD: {
-                viewHolder = new AddViewHolder(new LinearLayout(viewGroup.getContext()));
+                LinearLayout ll_g = new LinearLayout(viewGroup.getContext());
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(120,LinearLayout.LayoutParams.MATCH_PARENT);
+                layoutParams.leftMargin=6;
+                ll_g.setLayoutParams(layoutParams);
+                ll_g.setGravity(Gravity.CENTER);
+                viewHolder = new AddViewHolder(ll_g);
                 break;
             }
             case TYPE_PHOTO: {
@@ -82,7 +89,12 @@ public class ResourceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         return viewHolder;
     }
-
+    public void removeItem(int p){
+        if (p<photoPaths.size()){
+            photoPaths.remove(p);
+            notifyDataSetChanged();
+        }
+    }
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         if (viewHolder instanceof AddViewHolder) {
@@ -106,6 +118,13 @@ public class ResourceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     }
                 }
             });
+            photoViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    onPhotoListener.onLongClick(TYPE_PHOTO,i,photoPaths.get(i));
+                    return false;
+                }
+            });
         }
     }
 
@@ -113,6 +132,7 @@ public class ResourceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public interface OnPhotoListener{
         void onClick(int type,int postoin,Object data);
+        void onLongClick(int type,int postoin,Object data);
     }
 
     @Override

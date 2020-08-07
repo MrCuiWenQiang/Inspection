@@ -98,6 +98,7 @@ public class UploadPresenter extends BaseMVPPresenter<UploadActivityContract.Vie
                     }
                 }
                 if (isError){
+                    clearUrl();
                     sendMessage(400,"上传图片失败,请检查网络连接");
                 }else {
                     uploadTxt(workUpdateBean);
@@ -108,21 +109,30 @@ public class UploadPresenter extends BaseMVPPresenter<UploadActivityContract.Vie
     }
 
 
+    private void clearUrl(){
+        updateUrl.clear();
+        updateVideoUrl.clear();
+    }
+
     private void uploadTxt(WorkUpdateBean workUpdateBean){
         workUpdateBean.setCSTATE("0");
         workUpdateBean.setUPUID(MyApplication.loginUser.getPATROLCODE());
         workUpdateBean.setDEPTID(MyApplication.loginUser.getDEPARTID());
+        workUpdateBean.setUPUNAME(MyApplication.loginUser.getPATROLNAME());
         workUpdateBean.setSGQIMAGES(listtoString(updateUrl));
         workUpdateBean.setSGQVIDEO(listtoString(updateVideoUrl));
         HttpHelper.post(Urls.ADDINFO, workUpdateBean, new HttpResponseCallback() {
             @Override
             public void onSuccess(String datajson) {
+                clearUrl();
                 getView().uploadSuccess("上报成功");
             }
 
             @Override
             public void onFailed(int status, String message) {
+                clearUrl();
                 getView().uploadFail(message);
+
             }
         });
     }
