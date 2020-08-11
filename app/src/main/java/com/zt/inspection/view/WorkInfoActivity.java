@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /*import com.esri.android.map.GraphicsLayer;
@@ -47,6 +48,7 @@ import com.zt.inspection.view.dialog.PhotoDialog;
 import java.util.List;
 
 import cn.faker.repaymodel.mvp.BaseMVPAcivity;
+import cn.faker.repaymodel.net.loadimage.ImageLoadHelper;
 import cn.faker.repaymodel.util.ToastUtility;
 
 /**
@@ -84,6 +86,8 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
     private RecyclerView rvSghPhoto;
     private RecyclerView rvSghVideo;
 
+    private ImageView im_us;
+    private TextView tv_us;
     private TextView tvCtid;
     private TextView tvCstate;
     private TextView tvWorklevel;
@@ -106,13 +110,15 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
 
     @Override
     protected void initContentView() {
-        setStatusBar(R.color.select_color);
+        setStatusBar(R.color.stdf_color);
         setTitle("案件记录", R.color.white);
-        setToolBarBackgroundColor(R.color.select_color);
-
+        setToolBarBackgroundColor(R.drawable.ll_top_b);
+        isShowCut(false);
         bmapView = findViewById(R.id.bmapView);
         mBaiduMap = bmapView.getMap();
 
+        im_us = findViewById(R.id.im_us);
+        tv_us = findViewById(R.id.tv_us);
         rvSgqPhoto = findViewById(R.id.rv_sgq_photo);
         rvSgqVideo = findViewById(R.id.rv_sgq_video);
         rvSghPhoto = findViewById(R.id.rv_sgh_photo);
@@ -267,6 +273,10 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
     }
 
     private void settingData() {
+        if (!TextUtils.isEmpty(caseinfo.getImages())){
+            ImageLoadHelper.loadImage(getContext(),im_us,  caseinfo.getImages());
+        }
+        tv_us.setText(caseinfo.getUPUNAME() );
         tvCtid.setText(caseinfo.getTYPENAME());
         tvCstate.setText(StatusUtil.getName(caseinfo.getCSTATE()));
         tvWorklevel.setText(caseinfo.getWORKLEVEL());

@@ -49,6 +49,7 @@ public class CaseInfoBean implements Serializable {
     private String CSTATE;
     private String CTYPE;
     private String UPUID;
+    private String Images;
     private String SENDUID;
     private String UPUNAME;
     private String SENDUNAME;
@@ -70,6 +71,14 @@ public class CaseInfoBean implements Serializable {
     private String SGHIMAGES;
     private String SGHVIDEO;
     private String url;
+
+    public String getImages() {
+        return Images;
+    }
+
+    public void setImages(String images) {
+        Images = images;
+    }
 
     public String getTYPENAME() {
         return TYPENAME;
