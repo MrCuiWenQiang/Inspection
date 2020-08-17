@@ -1,24 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/dsdasd"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/listbb"
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                style="@style/imtop"
+                android:src="@mipmap/carf" />
+            <ImageView
+                android:id="@+id/im_back"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:background="@mipmap/fanhui"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
 
+            <View style="@style/tab_s_view" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="案件记录"
+                android:textColor="@color/sds"
+                android:textSize="18sp" />
+        </LinearLayout>
         <android.support.v7.widget.CardView
             style="@style/upload_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="0dp">
 
             <LinearLayout
+                android:background="@color/dsdasd"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -26,21 +56,22 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:visibility="gone">
 
                     <cn.faker.repaymodel.widget.view.CircleImageView
                         android:id="@+id/im_us"
-                        android:src="@mipmap/ic_launcher"
                         android:layout_width="45dp"
-                        android:layout_height="45dp" />
+                        android:layout_height="45dp"
+                        android:src="@mipmap/ic_launcher" />
 
                     <TextView
                         android:id="@+id/tv_us"
-                        android:layout_marginLeft="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -135,10 +166,10 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:visibility="gone"
                         style="@style/info_gg"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
 
                         <TextView
                             style="@style/info_key"
@@ -186,40 +217,34 @@
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            style="@style/upload_group"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <View style="@style/tab_s_view" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="案件地图"
+                android:textColor="@color/sds"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="案件地图"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
                 <com.baidu.mapapi.map.MapView
                     android:id="@+id/bmapView"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp" />
+                    android:layout_height="150dp" />
                 <!--        <com.esri.android.map.MapView
                             android:id="@+id/mapview"
                             android:layout_marginLeft="8dp"
@@ -227,8 +252,23 @@
                             android:layout_width="match_parent"
                             android:layout_height="150dp"/>-->
             </LinearLayout>
-        </android.support.v7.widget.CardView>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <View style="@style/tab_s_view" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="施工前"
+                android:textColor="@color/sds"
+                android:textSize="18sp" />
+        </LinearLayout>
 
         <android.support.v7.widget.CardView
             style="@style/upload_group"
@@ -238,26 +278,11 @@
             app:cardElevation="8dp">
 
             <LinearLayout
+                android:background="#F0F6FE"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp">
-
-                    <View style="@style/tab_s_view" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="施工前"
-                        android:textColor="@color/select_color"
-                        android:textSize="18sp" />
-                </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_sgq_photo"
@@ -275,6 +300,22 @@
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <View style="@style/tab_s_view" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="施工后"
+                android:textColor="@color/sds"
+                android:textSize="18sp" />
+        </LinearLayout>
 
         <android.support.v7.widget.CardView
             style="@style/upload_group"
@@ -284,26 +325,11 @@
             app:cardElevation="8dp">
 
             <LinearLayout
+                android:background="#F0F6FE"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp">
-
-                    <View style="@style/tab_s_view" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="施工后"
-                        android:textColor="@color/select_color"
-                        android:textSize="18sp" />
-                </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_sgh_photo"
@@ -319,6 +345,22 @@
                     android:layout_marginTop="8dp" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <View style="@style/tab_s_view" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="案件流程"
+                android:textColor="@color/sds"
+                android:textSize="18sp" />
+        </LinearLayout>
 
         <android.support.v7.widget.CardView
             style="@style/upload_group"
@@ -328,26 +370,10 @@
             app:cardElevation="8dp">
 
             <LinearLayout
+                android:background="#F0F6FE"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="案件流程"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_list"
                     android:layout_width="match_parent"

@@ -4,14 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <com.qmuiteam.qmui.widget.QMUITabSegment
-        android:id="@+id/tabs"
-        android:textSize="12sp"
-        android:background="@drawable/ll_top_b"
-        app:qmui_tab_icon_position="top"
+
+    <ImageView
+        android:id="@+id/im_icon"
+        style="@style/imtop"
+        android:src="@mipmap/workicc" />
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="-30dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/white"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+        <com.qmuiteam.qmui.widget.QMUITabSegment
+            android:id="@+id/tabs"
+            android:textSize="12sp"
+            android:background="@color/white"
+            app:qmui_tab_icon_position="top"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            />
+    </RelativeLayout>
+
     <cn.faker.repaymodel.widget.viewgroup.CurrentViewPager
         android:id="@+id/contentViewPager"
         android:layout_width="match_parent"

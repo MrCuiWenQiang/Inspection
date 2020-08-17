@@ -47,7 +47,7 @@ public class HistoryWorkAdapter extends RecyclerView.Adapter<HistoryWorkAdapter.
         viewHolder.tvCasenumber.setText(data.getCASENUMBER());
         viewHolder.tvCdatetime.setText(data.getCDATETIME());
         if (!TextUtils.isEmpty(data.getFEEDBACKCONTENT())){
-            viewHolder.tvRemarks.setText("备注: "+data.getFEEDBACKCONTENT());
+            viewHolder.tvRemarks.setText("问题描述: "+data.getFEEDBACKCONTENT());
         }
         viewHolder.tvCaddress.setText(data.getCADDRESS());
 

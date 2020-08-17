@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.zt.inspection.R;
@@ -21,6 +22,7 @@ public class HistoryFragment extends BaseViewPagerFragment {
 
     private ViewPager mContentViewPager;
     private QMUITabSegment mTabSegment;
+    private ImageView im_icon;
 
     public static HistoryFragment newInstance() {
         Bundle args = new Bundle();
@@ -38,9 +40,10 @@ public class HistoryFragment extends BaseViewPagerFragment {
     public void initview(View v) {
         mContentViewPager = v.findViewById(R.id.contentViewPager);
         mTabSegment = v.findViewById(R.id.tabs);
+        im_icon = v.findViewById(R.id.im_icon);
 
-        mTabSegment.setDefaultNormalColor(ContextCompat.getColor(getContext(), R.color.bg_gray));
-        mTabSegment.setDefaultSelectedColor(ContextCompat.getColor(getContext(), R.color.white));
+        mTabSegment.setDefaultNormalColor(ContextCompat.getColor(getContext(), R.color.passw_changing));
+        mTabSegment.setDefaultSelectedColor(ContextCompat.getColor(getContext(), R.color.blue_5));
         mTabSegment.setHasIndicator(true);
         mTabSegment.setIndicatorPosition(false);
         mTabSegment.setIndicatorWidthAdjustContent(true);
@@ -60,5 +63,26 @@ public class HistoryFragment extends BaseViewPagerFragment {
         mTabSegment.setupWithViewPager(mContentViewPager, false);
         mTabSegment.notifyDataChanged();
         mContentViewPager.setCurrentItem(0);
+        mContentViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                int n = i+1;
+                if (n==1){
+                    im_icon.setImageResource(R.mipmap.workicc);
+                }else {
+                    im_icon.setImageResource(R.mipmap.routrww);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
     }
 }

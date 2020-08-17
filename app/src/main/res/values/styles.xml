@@ -116,7 +116,7 @@
         <item name="android:orientation">horizontal</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginTop">10dp</item>
     </style>
 
     <style name="edit_title">
@@ -193,7 +193,7 @@
     </style>
 
     <style name="tab_s_view">
-        <item name="android:background">@color/select_color</item>
+        <item name="android:background">@color/sds</item>
         <item name="android:layout_width">3dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_marginRight">10dp</item>
@@ -228,6 +228,7 @@
     <style name="et_back">
         <item name="android:background">@drawable/ed_back</item>
         <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="list_item_group">
@@ -290,5 +291,11 @@
 
     <style name="customcheckboxtheme" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox_style</item>
+    </style>
+
+    <style name="imtop">
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">200dp</item>
     </style>
 </resources>

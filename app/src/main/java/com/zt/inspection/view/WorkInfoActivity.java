@@ -111,9 +111,10 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
     @Override
     protected void initContentView() {
         setStatusBar(R.color.stdf_color);
-        setTitle("案件记录", R.color.white);
-        setToolBarBackgroundColor(R.drawable.ll_top_b);
+//        setTitle("案件记录", R.color.white);
+//        setToolBarBackgroundColor(R.drawable.ll_top_b);
         isShowCut(false);
+        isShowToolView(false);
         bmapView = findViewById(R.id.bmapView);
         mBaiduMap = bmapView.getMap();
 
@@ -146,6 +147,13 @@ public class WorkInfoActivity extends BaseMVPAcivity<WorkInfoContract.View, Work
         rvSgqVideo.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         rvSghPhoto.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         rvSghVideo.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        findViewById(R.id.im_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
