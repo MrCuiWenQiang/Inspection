@@ -190,7 +190,7 @@ public class UploadPresenter extends BaseMVPPresenter<UploadActivityContract.Vie
         HashMap<String, Object> params = new HashMap<>();
         params.put("ak", Params.BAIDU_AK);
         params.put("output", "json");
-        params.put("coordtype", "wgs84ll");
+        params.put("coordtype", "BD09ll");
         params.put("location", x+","+y);
         HttpHelper.get(Urls.BAIDUREVERSE_GEOCODING, params, new HttpCallback() {
 
