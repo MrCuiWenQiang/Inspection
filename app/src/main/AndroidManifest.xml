@@ -104,6 +104,7 @@
         <activity android:name=".view.MapActivity" />
         <activity android:name=".view.PassWordActivity" />
         <activity android:name=".view.UpdateActivity" />
+        <activity android:name=".view.SelectPointActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

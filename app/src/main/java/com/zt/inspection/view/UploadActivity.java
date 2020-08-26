@@ -107,7 +107,7 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
     private String[] typeNames;
     private String[] levels = new String[]{"A", "B", "C", "D"};
 
-
+    private final  int reqcode_map = 523;
     @Override
     protected int getLayoutContentId() {
         return R.layout.ac_upload;
@@ -259,6 +259,8 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
             public void onClick(View v) {
 //map point ,let select
                 // TODO: 2020/6/17 地图选点
+                Intent intent = SelectPointActivity.toIntent(getContext(),x,y);
+                startActivityForResult(intent,reqcode_map);
             }
         });
         tvCtype.setOnClickListener(new View.OnClickListener() {
@@ -288,10 +290,10 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
             ToastUtility.showToast("请选择事件类型");
             return;
         }
-  /*      if (TextUtils.isEmpty(etTitle.getText())) {
-            ToastUtility.showToast("请填写事件标题");
+        if (TextUtils.isEmpty(tvCaddress.getText())) {
+            ToastUtility.showToast("请填写地图位置");
             return;
-        }*/
+        }
         if (TextUtils.isEmpty(tvWorklevel.getText())) {
             ToastUtility.showToast("请选择事件等级");
             return;
@@ -464,6 +466,10 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
                   });
                }
            }).start();
+        }else if (requestCode==reqcode_map&&resultCode==200){
+            String address = data.getStringExtra(SelectPointActivity.INTENT_RESULT_KEY_ADDRESS);
+            tvCaddress.setText(address);
         }
     }
+
 }

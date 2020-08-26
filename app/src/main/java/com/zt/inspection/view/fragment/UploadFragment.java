@@ -34,6 +34,7 @@ import com.zt.inspection.model.entity.response.CtypeBean;
 import com.zt.inspection.presenter.UploadPresenter;
 import com.zt.inspection.util.ImageUtil;
 import com.zt.inspection.view.CameraActivity;
+import com.zt.inspection.view.SelectPointActivity;
 import com.zt.inspection.view.adapter.ResourceAdapter;
 import com.zt.inspection.view.dialog.PhotoDialog;
 import com.zt.inspection.view.dialog.VideoDialog;
@@ -232,6 +233,8 @@ public class UploadFragment extends BaseMVPFragment<UploadActivityContract.View,
             public void onClick(View v) {
 //map point ,let select
                 // TODO: 2020/6/17 地图选点
+                Intent intent = SelectPointActivity.toIntent(getContext(),-1,-1);
+                startActivityForResult(intent,reqcode_map);
             }
         });
         tvCtype.setOnClickListener(new View.OnClickListener() {
@@ -261,10 +264,10 @@ public class UploadFragment extends BaseMVPFragment<UploadActivityContract.View,
             ToastUtility.showToast("请选择事件类型");
             return;
         }
-  /*      if (TextUtils.isEmpty(etTitle.getText())) {
-            ToastUtility.showToast("请填写事件标题");
+        if (TextUtils.isEmpty(tvCaddress.getText())) {
+            ToastUtility.showToast("请填写地图位置");
             return;
-        }*/
+        }
         if (TextUtils.isEmpty(tvWorklevel.getText())) {
             ToastUtility.showToast("请选择事件等级");
             return;
@@ -388,6 +391,7 @@ public class UploadFragment extends BaseMVPFragment<UploadActivityContract.View,
         intent.putExtra(PickerConfig.MAX_SELECT_COUNT, 5);  //最大选择数量，默认40（非必填参数）
         startActivityForResult(intent, result);
     }
+    private final  int reqcode_map = 523;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -428,6 +432,9 @@ public class UploadFragment extends BaseMVPFragment<UploadActivityContract.View,
                     });
                 }
             }).start();
+        }else if (requestCode==reqcode_map&&resultCode==200){
+            String address = data.getStringExtra(SelectPointActivity.INTENT_RESULT_KEY_ADDRESS);
+            tvCaddress.setText(address);
         }
     }
 }

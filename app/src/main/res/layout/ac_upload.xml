@@ -126,7 +126,6 @@
                 </LinearLayout>
 
                 <LinearLayout style="@style/edit_ll"
-
                     >
 
                     <TextView
@@ -136,7 +135,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="0.6"
                         android:gravity="center_vertical">
 
@@ -144,9 +143,8 @@
                             android:id="@+id/et_caddress"
                             style="@style/et_back"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="32dp"
                             android:layout_weight="1"
-                            android:drawableRight="@mipmap/statu_e"
                             android:textSize="14sp" />
 
                         <ImageView
@@ -154,8 +152,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:src="@mipmap/upload_local"
-                            android:visibility="gone" />
+                            android:src="@mipmap/statu_e"
+                            android:visibility="visible" />
                     </LinearLayout>
                 </LinearLayout>
 
