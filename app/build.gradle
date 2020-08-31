@@ -7,8 +7,8 @@ android {
         applicationId "com.zt.inspection"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 4
-        versionName "2.2"
+        versionCode 5
+        versionName "2.2.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         externalNativeBuild {

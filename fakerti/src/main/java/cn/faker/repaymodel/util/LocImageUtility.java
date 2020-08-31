@@ -298,8 +298,8 @@ public class LocImageUtility {
                         filePath = file.getAbsolutePath();
                         ls_filePath.add(filePath);
                     }
+                    bit.recycle();
                 }
-                bit.recycle();
                 }
                 return ls_filePath;
             }
@@ -323,7 +323,8 @@ public class LocImageUtility {
         if (!folder.exists()) {
             folder.mkdirs();
         }
-        String fileName = folderPath + "/" + name + ".png";
+//        String fileName = folderPath + "/" + name + ".png";
+        String fileName = folderPath + "/" + name + "";
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             ToastUtility.showToast("内存卡未加载");
             return null;

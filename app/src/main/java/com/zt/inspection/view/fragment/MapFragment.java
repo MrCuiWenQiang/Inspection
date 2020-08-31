@@ -1,11 +1,14 @@
 package com.zt.inspection.view.fragment;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -35,6 +38,7 @@ import com.zt.inspection.presenter.MapFragmentPresenter;
 import com.zt.inspection.util.LBS.LBSUtil;
 import com.zt.inspection.view.UploadActivity;
 import com.zt.inspection.view.dialog.RoleDialog;
+import com.zt.inspection.view.service.UploadLocalService;
 
 import cn.faker.repaymodel.mvp.BaseMVPFragment;
 import cn.faker.repaymodel.util.DateUtils;
@@ -59,13 +63,16 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
 
 //    private LocationDisplayManager locationDisplayManager;
 
-    private boolean isUpload = false;//是否上传坐标
+//    private boolean isUpload = false;//是否上传坐标
     private double lat;
     private double lon;
 
 
     private MapView bmapView;
     private BaiduMap mBaiduMap;
+
+    ServiceConnection connection;
+
 
     public static MapFragment newInstance() {
         Bundle args = new Bundle();
@@ -249,7 +256,24 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
         dimiss();
         show();
         roleId = data.getId();
-        isUpload = true;
+        initConnection();
+        Intent intent = new Intent(getContext(),UploadLocalService.class);
+        intent.putExtra(UploadLocalService.KEY_ROLEID,roleId);
+        getActivity().bindService(intent, connection, getContext().BIND_AUTO_CREATE);
+    }
+
+    private void initConnection(){
+        connection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+
+            }
+        };
     }
 
     @Override
@@ -262,7 +286,8 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
     public void endLine_Success() {
         dimiss();
         end();
-        isUpload = false;
+        getActivity().unbindService(connection);
+        connection = null;
     }
 
     @Override
@@ -315,6 +340,9 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
         LBSUtil.removeListener(this);
 //        mMapView.destroyDrawingCache();
 //        locationDisplayManager.stop();
+        if (connection!=null){
+            getActivity().unbindService(connection);
+        }
     }
 
     boolean isOne = false;
@@ -335,7 +363,7 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
         mBaiduMap.setMyLocationData(locData);
         lat = location.getLatitude();//纬度
         lon = location.getLongitude();//经度
-        if (!isOne || isUpload) {
+        if (!isOne  ) {
             MapStatus mMapStatus = new MapStatus.Builder()
                     .target(new LatLng(lat, lon))
                     .zoom(17)
@@ -345,8 +373,6 @@ public class MapFragment extends BaseMVPFragment<MapFragmentContract.View, MapFr
             isOne = true;
         }
 
-        if (isUpload) {
-            mPresenter.uploadLocal(lat, lon, roleId);
-        }
+
     }
 }

@@ -200,7 +200,6 @@ public class HttpHelper {
         Request request = new Request.Builder().url(path).post(multipartBuider.build()).header("Connection", "Keep-Alive")
                 .build();
 
-
         if (httpHelper == null) {
             httpHelper = new HttpHelper();
         }

@@ -95,7 +95,9 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
     private final int REQUESTCODE_LOCAL_PHOTO = 63;
     private final int REQUESTCODE_LOCAL_VIDEO = 64;
 
-    private List<String> photo_paths = new ArrayList<>();
+    private ArrayList<String> photo_true_paths = new ArrayList();//压缩前
+    private List<String> photo_paths = new ArrayList<>();//压缩后文件
+
     private List<String> video_photo_paths = new ArrayList<>();//视频第一帧地址
     private List<String> video_paths = new ArrayList<>();//视频地址
 
@@ -198,6 +200,7 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
                                 dialog.dismiss();
 //                                photo_paths.remove(postoin);
                                 adapter_photo.removeItem(postoin);
+                                photo_true_paths.remove(index);
                             }
                         }).addAction("取消", new QMUIDialogAction.ActionListener() {
                     @Override
@@ -315,7 +318,7 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
         data.setY(String.valueOf(x));
         data.setPID(id);
 
-        mPresenter.uploadFile(data, photo_paths, video_paths);
+        mPresenter.uploadFile(data, photo_true_paths, video_paths);
     }
 
     @Override
@@ -344,6 +347,7 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
 
     @Override
     public void uploadFileFail(String message) {
+        dimiss();
         showDialog(message);
     }
 
@@ -443,10 +447,22 @@ public class UploadActivity extends BaseMVPAcivity<UploadActivityContract.View, 
             }
         } else if (requestCode == REQUESTCODE_LOCAL_PHOTO && resultCode == PickerConfig.RESULT_CODE) {//本地选择
             select = data.getParcelableArrayListExtra(PickerConfig.EXTRA_RESULT);//选择完后返回的list
+            ArrayList<String> oldFiles = new ArrayList();
             for (Media item : select) {
-                photo_paths.add(item.path);
+//                photo_paths.add(item.path);
+                oldFiles.add(item.path);
             }
-            adapter_photo.setPhotoPaths(photo_paths);
+            LocImageUtility.getCompressBitmapPath(oldFiles,1,new LocImageUtility.PictureCompressLs(){
+
+                @Override
+                public void CompressPath(ArrayList<String> ls_path) {
+                    for (String item : ls_path) {
+                        photo_paths.add(item);
+                    }
+                    photo_true_paths.addAll(oldFiles);
+                    adapter_photo.setPhotoPaths(photo_paths);
+                }
+            } );
         } else if (requestCode == REQUESTCODE_LOCAL_VIDEO && resultCode == PickerConfig.RESULT_CODE) {//本地选择
             select = data.getParcelableArrayListExtra(PickerConfig.EXTRA_RESULT);//选择完后返回的list
            new Thread(new Runnable() {

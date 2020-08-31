@@ -1,13 +1,17 @@
 package cn.faker.repaymodel.net.loadimage;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import java.io.File;
 
@@ -18,16 +22,19 @@ import java.io.File;
 public class ImageLoadHelper {
     /**
      * 正常加载图片
+     *
      * @param context
      * @param imageView
      * @param url
      */
     public static void loadImage(Context context, ImageView imageView, String url) {
-        if (TextUtils.isEmpty(url)){
+        loadImage(context, imageView, url, null);
+    }
+
+    public static void loadImage(Context context, ImageView imageView, String url, Callback callback) {
+        if (TextUtils.isEmpty(url)) {
             return;
         }
-//        Picasso.with(context).load(url).into(imageView);
-
         Uri loadUri = null;
         if (url.startsWith("http")) {
             //网络图片
@@ -55,24 +62,35 @@ public class ImageLoadHelper {
                 loadUri = Uri.parse(url);
             }
         }
-        Picasso.with(context).load(loadUri).into(imageView);
+        RequestCreator creator = Picasso.with(context).load(loadUri);
+              /*  .fit()
+                .centerCrop()
+                .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                .config(Bitmap.Config.RGB_565);*/
+        if (callback != null) {
+            creator.into(imageView, callback);
+        } else {
+            creator.into(imageView);
+        }
     }
 
     /**
-     *  设置宽高 减少内存开支
+     * 设置宽高 减少内存开支
+     *
      * @param context
      * @param imageView
      * @param width
      * @param height
      * @param url
      */
-    public static void loadImage(Context context, ImageView imageView,int width,int height, String url) {
-        Picasso.with(context).load(url).resize(width,height).centerCrop().into(imageView);
+    public static void loadImage(Context context, ImageView imageView, int width, int height, String url) {
+        Picasso.with(context).load(url).resize(width, height).centerCrop().into(imageView);
     }
 
 
     /**
      * 设置图片加载中和加载失败的提示图片
+     *
      * @param context
      * @param imageView
      * @param url
